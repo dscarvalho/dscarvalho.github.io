@@ -116,9 +116,52 @@
       <div class="container content">
         <div class="page">
   <h1 class="page-title">Projects</h1>
-  <p class="message">
-  Projects
-</p>
+  <h2 id="easyesa"><u>EasyESA</u></h2>
+
+<p>EasyESA is an implementation of Explicit Semantic Analysis (ESA) based on the Wikiprep-ESA code from Çağatay Çallı <a href="https://github.com/faraday/wikiprep-esa">https://github.com/faraday/wikiprep-esa</a>. It runs as a JSON webservice which can be queried for the semantic relatedness measure, concept vectors or the context windows.</p>
+
+<p>Explicit Semantic Analysis (ESA) is a technique for text representation that uses Wikipedia commonsense knowledge base using the co-occurrence of words in the text. The articles’ words are associated with its concept using TF-IDF scoring, and a word can be represented as a vector of its associations to each concept and thus “semantic relatedness” between any two words can be measured by means of cosine similarity. A document containing a string of words is represented as the centroid of the vectors representing its words.</p>
+
+<p><strong>Project repo</strong>: <a href="https://github.com/dscarvalho/easyesa">https://github.com/dscarvalho/easyesa</a></p>
+
+<p><strong>Publication</strong>:
+Danilo Carvalho, Çağatay Çallı, André Freitas, Edward Curry, EasyESA: <em><a href="/publications/papers/easyesa_demo_2014.pdf">A Low-effort Infrastructure for Explicit Semantic Analysis</a></em>, In Proceedings of the 13th International Semantic Web Conference (ISWC), Rival del Garda, 2014. (Demonstration Paper in Proceedings).</p>
+
+<hr />
+
+<p><img src="/public/img/graphia-logo.png" alt="Graphia" /></p>
+
+<p>Graphia is a framework which extracts structured data graphs from factual unstructured texts. Instead of extracting simple relations, or committing to a specific conceptual model, Graphia aims at the extraction of graphs which can represent the complexity of contexts present in texts.</p>
+
+<p>The graph representation adopted by the framework (SDGs – Structured Discourse Graphs) can be naturally serialized as an entity-centric RDF graph, which facilitates the integration and the use of the graph with other resources and applications. Additionally, the graph representation supports a pay-as-you-go / semantic best-effort extraction, where a comprehensive extraction is prioritized over accuracy and where the quality of the extracted graph evolves over time.</p>
+
+<p>Features included in the framework:</p>
+
+<ol>
+  <li>Structured Discourse Graph extraction and visualization.</li>
+  <li>Named entity resolution to DBpedia entities.</li>
+  <li>Co-reference resolution.</li>
+  <li>Serialization as RDF.</li>
+</ol>
+
+<p><strong>Project page</strong>: <a href="graphia.dcc.ufrj.br">graphia.dcc.ufrj.br</a>
+<strong>Online demo</strong>: <a href="graphia.dcc.ufrj.br/OnlineDemo">graphia.dcc.ufrj.br/OnlineDemo</a></p>
+
+<p><strong>Related publications:</strong>:</p>
+<ul>
+  <li>
+    <p><em><a href="/publications/papers/0de7e5deb2e08fb0db89debf95f58bbccc7f.pdf">A Semantic Best-Effort Approach for Extracting Structured Discourse Graphs from Wikipedia</a></em><br />
+  In Proceedings of the 1st Workshop on the Web of Linked Entities (WoLE 2012) at the 11th International Semantic Web Conference (ISWC), 2012 (Workshop Full Paper)</p>
+  </li>
+  <li>
+    <p><em><a href="/publications/papers/Carvalho2013_Chapter_GraphiaExtractingContextualRel.pdf">Graphia: Extracting Contextual Relation Graphs from Text</a></em><br />
+  In Proceedings of the 10th Extended Semantic Web Conference (ESWC), Montpellier, France, 2013. (Demonstration Paper in Proceedings).</p>
+  </li>
+  <li>
+    <p><em><a href="/publications/papers/entity_centric_linked_data_graphs_webs_2013.pdf">Representing Texts as Contextualized Entity-Centric Linked Data Graphs</a></em><br />
+  In Proceedings of the 12th International Workshop on Web Semantics and Web Intelligence (WebS 2013), 24th International Conference on Database and Expert Systems Applications (DEXA), Prague, 2013. (Workshop Full Paper)</p>
+  </li>
+</ul>
 
 </div>
 
