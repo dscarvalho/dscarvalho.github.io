@@ -27,6 +27,7 @@
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 
 
@@ -136,7 +137,35 @@
   </li>
   <li>
     <p>Provas:
-  À marcar.</p>
+  A marcar.</p>
+  </li>
+  <li>
+    <p>Avaliação:</p>
+
+    <p>A avaliação do curso é feita através de provas, e de trabalhos pedidos ao fim de algumas das aulas de laboratório.
+  As notas são:</p>
+
+    <ul>
+      <li>P1: Nota da primeira prova.</li>
+      <li>P2: Nota da segunda prova.</li>
+      <li>T1: Média dos trabalhos até a primeira prova.</li>
+      <li>T2: Média dos trabalhos até a segunda prova.</li>
+      <li>PF: Prova Final.</li>
+    </ul>
+
+    <p>O cálculo das notas é feito da seguinte maneira:</p>
+
+    <script type="math/tex; mode=display">NotaParcial = \frac{(0.8 \times P1 + 0.2 \times T1) + (0.8 \times P2 + 0.2 \times T2)}{2}</script>
+
+    <p>Se <script type="math/tex">NotaParcial >= 7.0</script>, a NotaFinal = NotaParcial e o aluno estará aprovado.
+  Se <script type="math/tex">% <![CDATA[
+NotaParcial < 7.0 %]]></script>, então:</p>
+
+    <script type="math/tex; mode=display">NotaFinal = \frac{NotaParcial + PF}{2}</script>
+
+    <p>Se <script type="math/tex">NotaFinal >= 5.0</script>, o aluno estará aprovado com NotaFinal.
+  Se <script type="math/tex">% <![CDATA[
+NotaFinal < 5.0 %]]></script>, o aluno estará reprovado.</p>
   </li>
   <li>Material de apoio
     <ul>
@@ -158,6 +187,8 @@
 <p><br /></p>
 
 <h2 id="ementa">Ementa:</h2>
+
+<h3 id="atenção-com-a-suspensão-das-aulas-devido-a-epidemia-de-covid-19-coronavírus-as-aulas-serão-adiadas-de-acordo-com-a-determinação-da-universidade-a-data-das-aulas-será-ajustada"><span style="color: red;"><strong>Atenção</strong></span>: Com a suspensão das aulas devido a epidemia de COVID-19 (Coronavírus), as aulas serão adiadas de acordo com a determinação da universidade. A data das aulas será ajustada.</h3>
 
 <h3 id="0903-slides">09/03 [<a href="aula1.pdf">slides</a>]</h3>
 <ul>
