@@ -11,7 +11,7 @@
 
   <title>
     
-      Errata - Aula 2 - Computação II (DCC - UFRJ) &middot; Danilo S. Carvalho, Ph.D.
+      Exercícios 2 - Aula 3 - Comp II (DCC - UFRJ) &middot; Danilo S. Carvalho, Ph.D.
     
   </title>
 
@@ -124,19 +124,52 @@
 
       <div class="container content">
         <div class="page">
-  <h1 class="page-title">Errata - Aula 2 - Computação II (DCC - UFRJ)</h1>
-  <p>O compilador java (testado na versão 12.0.1) não faz verificação estática de limite de arrays.
-Portanto, o código que foi mostrado em aula:</p>
+  <h1 class="page-title">Exercícios 2 - Aula 3 - Comp II (DCC - UFRJ)</h1>
+  <h3 id="atenção-escrever-javadoc-para-todos-os-programas"><strong>Atenção</strong>: Escrever Javadoc para todos os programas.</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LimiteArray</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">v</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">100</span><span class="o">];</span>
-        <span class="n">v</span><span class="o">[</span><span class="mi">100</span><span class="o">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<ol>
+  <li>
+    <p>Analise o trecho de código abaixo.</p>
 
-<p>Compilará sem erros, mas causará uma exceção (java.lang.ArrayIndexOutOfBoundsException) quando for executado.</p>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kt">float</span> <span class="n">perc</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="o">;</span>
+            
+ <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+     <span class="c1">// Faz operação demorada aqui usando o índice...</span>
+        
+     <span class="n">perc</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="o">;</span>
+     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"%d completado \n"</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">perc</span> <span class="o">*</span> <span class="mi">100</span><span class="o">));</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>Responda:</p>
+
+    <p>a) Qual é o objetivo do código que podemos inferir a partir de sua análise?</p>
+
+    <p>b) O código realiza o objetivo corretamente? Porquê?</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p>Implemente um programa que receba da entrada padrão dois vetores de números reais (um vetor port linha, em Rn), calcule o ângulo entre eles e escreva o ângulo, em graus, na saída padrão. <br />
+(Dica: Usar o método nextDouble(), da classe Scanner)<br /><br /></p>
+  </li>
+  <li>
+    <p>Consulte a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/index.html">documentação da linguagem java</a> e outros sites, como o <a href="https://docs.oracle.com/javase/tutorial/">tutorial oficial da linguagem</a> e responda:</p>
+
+    <p>a) Qual classe representa a exceção disparada quando:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> I. Tentamos alocar mais memória que o disponível.
+
+ II. Tentamos instanciar um array passando como tamanho uma variável que contém um valor negativo.
+</code></pre></div>    </div>
+
+    <p>b) Que classes podemos utilizar para representar o tempo (data, hora)? Como podemos utilizá-las?</p>
+
+    <p>c) Como podemos implementar uma pilha de números em um programa Java? Escreva um exemplo. <br />
+ (Dica: A pilha é uma estrutura onde ultimo elemento a ser colocado nela é o primeiro a ser acessado)</p>
+  </li>
+</ol>
+
 
 </div>
 
