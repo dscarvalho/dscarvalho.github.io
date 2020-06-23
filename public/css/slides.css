@@ -1,0 +1,69 @@
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal ul {
+    color: black;
+    text-shadow: -1px 0 #ccccff, 0 1px #ccccff, 1px 0 #ccccff, 0 -1px #ccccff;
+}
+
+.header {
+    position: absolute;
+    top: -3%;
+    left: -6%;
+    width: 1680px;
+    height: 60px;
+    background-color: rgba(108, 125, 255, 0.8);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.header h3 {
+    margin-left: 80px;
+}
+
+.header-spacing {
+    height: 30px;
+}
+
+.list-spacing-short li {
+    margin-bottom: 10px; 
+}
+
+.list-spacing-medium li {
+    margin-bottom: 15px;
+}
+
+.list-spacing-long li {
+    margin-bottom: 25px;
+}
+
+.list-spacing-longer li {
+    margin-bottom: 35px;
+}
+
+.paperhl li {
+    font-size: 22pt;
+}
+
+.paperhl li a {
+    color: #002;
+}
+
+.paperhl ul li {
+    font-size: 18pt;
+    color: #333333;
+}
+
+.fragment.current-visible.visible:not(.current-fragment) {
+    animation: removed-item-animation 1s cubic-bezier(0.6, -0.05, 0.9, 0.9) forwards;
+}
+@keyframes removed-item-animation {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        line-height: 0px;
+        font-size: 0px;
+        height: 0px;
+        display: none;
+    }
+}
