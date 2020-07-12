@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/public/css/poole.css">
   <link rel="stylesheet" href="/public/css/syntax.css">
   <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="/public/css/site.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
 
   <!-- Icons -->
@@ -131,7 +132,21 @@
       <div class="container content">
         <div class="page">
   <h1 class="page-title">Projects</h1>
-  <h2 id="easyesa"><u>EasyESA</u></h2>
+  <h2 id="term-definition-vectors-tdv"><u id="TDV">Term Definition Vectors (TDV)</u></h2>
+
+<p>TDV is a <i>high dimensional, sparse</i> vector representation of lexical items (terms) ranging from morphemes to phrases, based on the definitions of their meanings as presented in <a href="https://www.wiktionary.org/">Wiktionary</a>. It contrasts with distributional representation methods, such as <a href="https://code.google.com/archive/p/word2vec/">word2vec</a> and <a href="https://github.com/stanfordnlp/GloVe/">GloVe</a>, which define term meanings from their usage patterns (context windows). Compared to distributional methods, TDV performs better at semantic similarity computation, where the former perform better at semantic relatedness. It provides interesting features for Natural Language Processing, such as sense polarity between terms, multi-language representation, and the ability to disambiguate senses using Part of Speech (POS) information.</p>
+
+<p><strong>Project repo</strong>: <a href="https://github.com/dscarvalho/tdv">https://github.com/dscarvalho/tdv</a></p>
+
+<p><strong>Related publications</strong>:</p>
+<ul>
+  <li>Danilo S. Carvalho and Minh Le Nguyen. <em><a href="https://www.aclweb.org/anthology/E/E17/E17-1085.pdf">Building Lexical Vector Representations from Concept Definitions</a></em>. <a href="https://aclweb.org/anthology/E/E17/E17-1085.bib">bib</a></li>
+  <li>Danilo S. Carvalho and Minh Le Nguyen. <em><a href="/publications/papers/08119465.pdf">WikTDV: Data extraction and vector representation resource for Wiktionary senses</a></em></li>
+</ul>
+
+<hr />
+
+<h2 id="easyesa"><u id="EasyESA">EasyESA</u></h2>
 
 <p>EasyESA is an implementation of Explicit Semantic Analysis (ESA) based on the Wikiprep-ESA code from Çağatay Çallı <a href="https://github.com/faraday/wikiprep-esa">https://github.com/faraday/wikiprep-esa</a>. It runs as a JSON webservice which can be queried for the semantic relatedness measure, concept vectors or the context windows.</p>
 
@@ -144,7 +159,8 @@ Danilo Carvalho, Çağatay Çallı, André Freitas, Edward Curry, EasyESA: <em><
 
 <hr />
 
-<p><img src="/public/img/graphia-logo.png" alt="Graphia" /></p>
+<p><u id="Graphia"></u>
+<img src="/public/img/graphia-logo.png" alt="Graphia" /></p>
 
 <p>Graphia is a framework which extracts structured data graphs from factual unstructured texts. Instead of extracting simple relations, or committing to a specific conceptual model, Graphia aims at the extraction of graphs which can represent the complexity of contexts present in texts.</p>
 
@@ -159,8 +175,8 @@ Danilo Carvalho, Çağatay Çallı, André Freitas, Edward Curry, EasyESA: <em><
   <li>Serialization as RDF.</li>
 </ol>
 
-<p><strong>Project page</strong>: <a href="graphia.dcc.ufrj.br">graphia.dcc.ufrj.br</a>
-<strong>Online demo</strong>: <a href="graphia.dcc.ufrj.br/OnlineDemo">graphia.dcc.ufrj.br/OnlineDemo</a></p>
+<p><strong>Project page</strong>: <a href="http://graphia.dcc.ufrj.br">graphia.dcc.ufrj.br</a>
+<strong>Online demo</strong>: <a href="http://graphia.dcc.ufrj.br/OnlineDemo">graphia.dcc.ufrj.br/OnlineDemo</a></p>
 
 <p><strong>Related publications:</strong>:</p>
 <ul>
