@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Audio slideshows with Reveal.js</title>
+
+	<meta name="description" content="A plugin for reveal.js">
+	<meta name="author" content="Asvin Goel">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Programação Orientada a Objetos
+                            <br/>
+                            [Classes]
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 280px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Esse é o curso de Computação II do Departamento de Ciência da Computação da UFRJ
+                    e hoje vamos começar a aprender sobre Programação Orientada a Objetos.
+                </aside>
+            </section>
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p>
+                    Antes de entender como programar orientado a objetos
+                </p>
+                <br />
+                <p class="fragment">
+                    Vamos primeiro entender como orientar nossa forma de pensar aos objetos...
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1">
+                        Imagine que queremos construir um sistema que vai ajudar na organização de uma biblioteca.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="1">
+                        Primeiramente, precisamos identificar os "objetos" que fazem parte do "mundo" da biblioteca,
+                        tal que possamos representá-los no campo das ideias.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
+                        Observamos inicialmente que a biblioteca possui livros e pessoas que a frequentam.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
+                        Anotamos então os livros como um conceito geral de "Livro", representando um livro qualquer.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        Fazemos a mesma coisa com as pessoas, anotando um conceito geral para "Pessoa".
+                    </p>
+                    <!--<p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        Notamos nesse momento que as pessoas podem ser divididas em dois grupos: 
+                        os frequentadores e os funcionários da biblioteca.
+                    </p>-->
+                </div>
+                
+                <div class="r-stack" style="float: left;">
+                    <img class="fragment" src="media/books.jpg" style="height: 500px;" data-fragment-index="1" />
+                    <img class="fragment current-visible" src="media/library_user_cut.jpg" style="height: 500px;" data-fragment-index="2" />
+                    <img class="fragment" src="media/library_user_cut.jpg" style="height: 500px;" data-fragment-index="4" />
+                </div>
+
+                <div class="r-stack">
+                    <img class="fragment" src="media/classes_1.svg" style="height: 500px;" data-fragment-index="3" />
+                    <img class="fragment" src="media/classes_2.svg" style="height: 500px;" data-fragment-index="4" />
+                    <!--<img class="fragment" src="media/classes_3.svg" style="height: 500px;" data-fragment-index="5" />-->
+                </div>
+                
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" style="font-size: smaller;">
+                        Chamamos os conceitos que obtemos das nossas anotações de <b>classes</b>. 
+                        
+                        São elas que vão determinar os tipos de dados que iremos manipular em nosso programa. 
+                        Começaremos pela classe <i>Livro</i>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="1" style="font-size: smaller;">
+                        Para cada classe, determinamos os atributos que distinguem o respectivo conceito das outras coisas 
+                        que encontramos nesse mesmo "mundo" (no caso, a biblioteca).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
+                        Por exemplo: um livro possui um título, um autor, num. de páginas, um assunto, etc.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
+                        Da mesma forma, a classe <i>Pessoa</i> pode ser definida.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        Uma pessoa possui um documento de identificação (ex: CPF), nome, data de nascimento, endereço, telefone, etc.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        Assim, acabamos de criar duas classes de objetos que fazem parte da organização da nossa biblioteca. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6">
+                        Vamos ver como colocamos isso no código Java?
+                    </p>
+                </div>
+                
+                <div class="r-stack" style="float: left;">
+                    <img class="fragment" src="media/book_class_1.svg" style="height: 500px;" data-fragment-index="1" />
+                    <img class="fragment" src="media/book_class_2.svg" style="height: 500px;" data-fragment-index="2" />
+                </div>
+
+                <div class="r-stack" style="margin-left: 40px;">
+                    <img class="fragment" src="media/person_class_1.svg" style="height: 500px;" data-fragment-index="3" />
+                    <img class="fragment" src="media/person_class_2.svg" style="height: 500px;" data-fragment-index="4" />
+                </div>
+                
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<pre data-id="code-animation" style="width: 110%;">
+                    <code class="hljs java" data-trim data-line-numbers>
+                    public class Livro {  // Declara classe com visibilidade global
+                        String titulo;  // Atributo da classe
+                        String autor;
+                        int numPaginas;
+                        String assunto;
+                    }
+                    </code>
+                </pre>
+                <br />
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" style="font-size: smaller;">
+                        Usamos a palavra chave <i style="color: mediumvioletred;">class</i> para declarar uma classe. <br />
+                        A palavra chave <i style="color: mediumvioletred;">public</i> significa que a classe é acessível em qualquer parte do programa.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="1" style="font-size: smaller;">
+                        Cada atributo é declarado em uma linha, com seu respectivo tipo, tal qual uma variável.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
+                        Nosso livro possui um título, autor, num. de páginas, e assunto.
+                    </p>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<pre data-id="code-animation" style="width: 110%;">
+                    <code class="hljs java" data-trim data-line-numbers>
+                    public class Pessoa {  // Declara classe com visibilidade global
+                        String cpf;
+                        String nome;
+                        LocalDateTime dataNascimento; // Atributos podem ser de qualquer tipo
+                        String endereço;
+                        String telefone;
+                    }
+                    </code>
+                </pre>
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" style="font-size: smaller;">
+                        A classe <i>Pessoa</i> é declarada da mesma maneira.<br />
+                        Apenas os atributos mudam.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="1" style="font-size: smaller;">
+                        Os atributos podem ser de qualquer tipo permitido na linguagem Java.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
+                        A nossa classe torna-se então um novo tipo, que podemos usar como os demais tipos não primitivos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
+                        Criamos uma pessoa assim como criamos uma <i>String</i>, e acessamos os atributos usando um ponto "." 
+                        e o nome do atributo.
+                    </p>
+                </div>
+
+                <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                    <code class="hljs java" data-trim data-line-numbers>
+                    pessoa1 = new Pessoa();
+                    pessoa.nome = "Albert Einstein";
+                    </code>
+                </pre>
+            </section>
+
+            <!--<section data-background="media/bg.png" data-transition="fade-out">
+				<p>
+                    Mas e os frequentadores e funcionários?
+                </p>
+                <br />
+                <p class="fragment">
+                    Vamos falar deles na próxima aula.
+                </p>
+            </section>-->
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+
+			<!--<section data-background="audio-slideshow/jungle.jpg" data-audio-text="With audio slideshows you can add recorded audio to whatever you want to deliver to your audience">
+				<p>
+					With audio slideshows you can add recorded audio to whatever you want to deliver to your audience. 
+				</p>
+				<p class ="fragment" data-audio-src='audio-slideshow/birds.ogg'>
+					Listen to the birds.
+				</p>
+			</section>-->
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 5,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+

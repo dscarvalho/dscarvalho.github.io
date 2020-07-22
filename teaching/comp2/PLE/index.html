@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Computação II (DCC - UFRJ) &middot; Danilo S. Carvalho, Ph.D.
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="/public/css/site.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Danilo S. Carvalho, Ph.D.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About</a>
+        
+      
+    
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/projects/">Projects</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/publications/">Publications</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/teaching/">Teaching</a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    <!--<a class="sidebar-nav-item" href="/archive/v1.1.0.zip">Download</a>
+    <a class="sidebar-nav-item" href="">GitHub project</a>-->
+    <span class="sidebar-nav-item">Currently v1.1.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2020. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Danilo S. Carvalho, Ph.D.</a><span style="margin-left: 20px;"></span>
+            <small>Assistant Professor - Computer Programming / AI / NLP</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">Computação II (DCC - UFRJ)</h1>
+  <p class="message">
+  Curso de Computação II do Departamento de Ciência da Computação - UFRJ
+</p>
+
+<h2 id="informações">Informações:</h2>
+
+<ul>
+  <li>Professor: Danilo Carvalho (danilosc .at. dcc.ufrj.br )</li>
+  <li>Local: Google Meet [].</li>
+  <li>Horário: 2ª e 4ª-feira de 08h - 09h, 6ª-feira de 08h - 10h (“laboratório”).</li>
+  <li>
+    <p>Início: 10 de agosto de 2020.</p>
+  </li>
+  <li>
+    <p>Avaliação:</p>
+
+    <p>A avaliação do curso é feita através de listas de exercícios e um projeto final de disciplina.
+  As listas de exercícios consistem de problemas de programação que devem ser resolvidos e entregues em um certo tempo, e de um questionário discursivo à respeito das soluções elaboradas, que deve ser respondido e entregue juntamente com as soluções dos problemas. As listas serão passadas em princípio nas aulas de “laboratório” de número par (2ª, 4ª, …).</p>
+
+    <p>O projeto final consiste em um problema mais elaborado, a ser resolvido em grupos, e um questionário sobre as soluções elaboradas, a ser respondido individualmente. O tema do projeto será apresentado à turma no último laboratório regular, sendo o tempo restante do curso parcialmente dedicado ao desenvolvimento do projeto.</p>
+
+    <p>As notas são:</p>
+
+    <ul>
+      <li>L[1-4]: Notas das listas de exercícios. Serão 4 listas.</li>
+      <li>PFS: Nota do projeto final (grupo).</li>
+      <li>PFQ: Nota do questionário do projeto final (individual).</li>
+    </ul>
+
+    <p>O cálculo das notas é feito da seguinte maneira:</p>
+
+    <script type="math/tex; mode=display">NotaLista = \frac{\sum_{i=1}^4{L[i]}}{4}</script>
+
+    <script type="math/tex; mode=display">NotaProjeto = PFS * PFQ * 0.1</script>
+
+    <script type="math/tex; mode=display">NotaFinal = 0.4 * NotaLista + 0.6 * NotaProjeto</script>
+
+    <p>Se <script type="math/tex">NotaFinal >= 5.0</script>, o aluno estará aprovado com NotaFinal.
+  Se <script type="math/tex">% <![CDATA[
+NotaFinal < 5.0 %]]></script>, o aluno estará reprovado.</p>
+  </li>
+  <li>Material de apoio
+    <ul>
+      <li><a href="https://www.caelum.com.br/apostila-java-orientacao-objetos/">Apostila da Caelum</a></li>
+    </ul>
+  </li>
+  <li>Bibliografia:
+    <ul>
+      <li>Ogihara M.: <em>Fundamentals of Java Programming</em> (2018). <a href="https://doi.org/10.1007/978-3-319-89491-1">[https://doi.org/10.1007/978-3-319-89491-1]</a></li>
+      <li>Barnes D.J., Kolling M.: <em>Programação Orientada a Objetos com JAVA</em> (2004). [ISBN 9788576050124]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="objetivo">Objetivo:</h2>
+<ul>
+  <li>Habilitar o aluno à aplicação de conceitos de Programação Orientada a Objetos, para produção de código compreensível e escalável.</li>
+  <li>Capacitar o aluno ao desenvolvimento de programas usando a linguagem Java, usando das boas práticas apropriadas à linguagem.</li>
+  <li>Estimular a competência na leitura da documentação da linguagem, bem como a criação da documentação própria para os programas.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="ementa">Ementa:</h2>
+
+<h3 id="1ª-aula">1ª aula</h3>
+<ul>
+  <li>Introdução ao curso. [<a href="audioslides/1-Intro/01-Inicio">audioslides</a>]</li>
+  <li>Apresentação à linguagem Java. [<a href="audioslides/1-Intro/01-Inicio">audioslides</a>]</li>
+  <li>Estrutura básica da linguagem. [<a href="audioslides/1-Intro/02-EstruturaBasica">audioslides</a>]</li>
+  <li>Observações sobre a sintaxe, boas práticas. [<a href="audioslides/1-Intro/03-Sintaxe">audioslides</a>]</li>
+</ul>
+
+<h3 id="2ª-aula">2ª aula</h3>
+<ul>
+  <li>Pacotes. [<a href="audioslides/1-Intro/04-Pacotes">audioslides</a>]</li>
+  <li>Erros de compilação e execução; Exceções. [<a href="audioslides/1-Intro/05-Excecoes">audioslides</a>]</li>
+  <li>E/S básica no terminal e uso da classe System. [<a href="audioslides/1-Intro/06-ES-Basica">audioslides</a>]</li>
+</ul>
+
+<h3 id="3ª-aula-1º-laboratório">3ª aula [1º laboratório]</h3>
+<ul>
+  <li>Introdução ao Javadoc. [<a href="audioslides/Plus/Javadoc">audioslides</a>]</li>
+  <li>Introdução ao Git / GitHub. [<a href="audioslides/Plus/Git-GitHub">audioslides</a>]</li>
+</ul>
+
+<h3 id="4ª-aula">4ª aula</h3>
+<ul>
+  <li>Conceitos de Programação Orientada a Objeto:
+    <ul>
+      <li>Classes e atributos. [<a href="audioslides/2-OO/01-Classes">audioslides</a>]</li>
+      <li>Objetos. [<a href="audioslides/2-OO/02-Objetos">audioslides</a>]</li>
+      <li>Métodos. [<a href="audioslides/2-OO/03-Metodos">audioslides</a>]</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="5ª-aula">5ª aula</h3>
+<ul>
+  <li>Sobrecarga (overload) de métodos. [<a href="audioslides/2-OO/04-Sobrecarga">audioslides</a>]</li>
+  <li>Construtores / Destrutores. [<a href="audioslides/2-OO/05-Construtores-Destrutores">audioslides</a>]</li>
+</ul>
+
+<h3 id="6ª-aula-2º-laboratório">6ª aula [2º laboratório]</h3>
+<ul>
+  <li>Encapsulamento:
+    <ul>
+      <li>Visibilidade: public, private. [<a href="audioslides/2-OO/06-Encapsulamento-Visibilidade">audioslides</a>]</li>
+      <li>Getters e setters; Validação de parâmetros e triggers. [<a href="audioslides/2-OO/07-Encapsulamento-GetSet-Validacao">audioslides</a>]</li>
+      <li>Métodos e atributos de classe (<em>static</em>). [<a href="audioslides/2-OO/05-Construtores-Destrutores">audioslides</a>]</li>
+    </ul>
+  </li>
+  <li>1ª lista de exercícios.</li>
+</ul>
+
+<h3 id="7ª-aula">7ª aula</h3>
+<ul>
+  <li>Herança. [<a href="audioslides/2-OO/09-Heranca">audioslides</a>]</li>
+  <li>Polimorfismo, métodos virtuais. [<a href="audioslides/2-OO/10-Polimorfismo">audioslides</a>]</li>
+  <li>Sobrescrita (override) de métodos. [<a href="audioslides/2-OO/11-Override">audioslides</a>]</li>
+</ul>
+
+<h3 id="8ª-aula">8ª aula</h3>
+<ul>
+  <li>Interfaces. [<a href="audioslides/2-OO/12-Interfaces">audioslides</a>]</li>
+  <li>Classes abstratas. [<a href="audioslides/2-OO/13-ClassesAbstratas">audioslides</a>]</li>
+</ul>
+
+<h3 id="9ª-aula-3º-laboratório">9ª aula [3º laboratório]</h3>
+<ul>
+  <li>Métodos abstratos. [<a href="audioslides/2-OO/14-MetodosAbstratos">audioslides</a>]</li>
+  <li>O modificador <em>final</em>. [<a href="audioslides/2-OO/15-ModificadorFinal">audioslides</a>]</li>
+</ul>
+
+<h3 id="10ª-aula">10ª aula</h3>
+<ul>
+  <li>Introdução à UML. [<a href="audioslides/3-UML/01-Intro-UML">audioslides</a>]</li>
+  <li>Diagrama de classes. [<a href="audioslides/23-UML/02-DiagramaClasses">audioslides</a>]</li>
+</ul>
+
+<h3 id="11ª-aula">11ª aula</h3>
+<ul>
+  <li>Diagrama de classes (cont.). [<a href="audioslides/23-UML/02-DiagramaClasses">audioslides</a>]</li>
+  <li>Diagrama de sequência. [<a href="audioslides/23-UML/03-DiagramaSequencia">audioslides</a>]</li>
+</ul>
+
+<h3 id="12ª-aula-4º-laboratório">12ª aula [4º laboratório]</h3>
+<ul>
+  <li>Diagrama de classes (cont.). [<a href="audioslides/23-UML/02-DiagramaClasses">audioslides</a>]</li>
+  <li>Diagrama de sequência (cont.). [<a href="audioslides/23-UML/03-DiagramaSequencia">audioslides</a>]</li>
+  <li>2ª lista de exercícios.</li>
+</ul>
+
+<h3 id="13ª-aula">13ª aula</h3>
+<ul>
+  <li>Introdução ao teste de software. [<a href="audioslides/4-Testes/01-IntroTestes">audioslides</a>]</li>
+  <li>JUnit. [<a href="audioslides/4-Testes/02-JUnit">audioslides</a>]</li>
+</ul>
+
+<h3 id="14ª-aula">14ª aula.</h3>
+<ul>
+  <li>JUnit (cont.). [<a href="audioslides/4-Testes/02-JUnit">audioslides</a>]</li>
+  <li>Introdução ao desenvolvimento guiado por teste (TDD). [<a href="audioslides/4-Testes/03-IntroTDD">audioslides</a>]</li>
+</ul>
+
+<h3 id="15ª-aula-5º-laboratório">15ª aula [5º laboratório]</h3>
+<ul>
+  <li>Introdução ao TDD (cont.). [<a href="audioslides/4-Testes/03-IntroTDD">audioslides</a>]</li>
+</ul>
+
+<h3 id="16ª-aula">16ª aula</h3>
+<ul>
+  <li>Estruturas de dados: Generics. [<a href="audioslides/5-EstruturasDados/01-Generics">audioslides</a>]</li>
+  <li>Coleções. [<a href="audioslides/5-EstruturasDados/02-Colecoes">audioslides</a>]</li>
+</ul>
+
+<h3 id="17ª-aula">17ª aula</h3>
+<ul>
+  <li>Mapas. [<a href="audioslides/5-EstruturasDados/03-Mapas">audioslides</a>]</li>
+  <li>Iteradores. [<a href="audioslides/5-EstruturasDados/04-Iteradores">audioslides</a>]</li>
+</ul>
+
+<h3 id="18ª-aula-6º-laboratório">18ª aula [6º laboratório]</h3>
+<ul>
+  <li>E/S: StdIO. [<a href="audioslides/6-ES/01-StdIO">audioslides</a>]</li>
+  <li>3ª lista de exercícios.</li>
+</ul>
+
+<h3 id="19ª-aula">19ª aula</h3>
+<ul>
+  <li>E/S: Arquivos. [<a href="audioslides/6-ES/02-Arquivos">audioslides</a>]</li>
+  <li>E/S: Streams. [<a href="audioslides/6-ES/03-Streams">audioslides</a>]</li>
+</ul>
+
+<h3 id="20ª-aula">20ª aula</h3>
+<ul>
+  <li>E/S: Streams (cont.). [<a href="audioslides/6-ES/03-Streams">audioslides</a>]</li>
+  <li>Persistência. [<a href="audioslides/6-ES/04-Persistencia">audioslides</a>]</li>
+</ul>
+
+<h3 id="21ª-aula-7º-laboratório">21ª aula [7º laboratório]</h3>
+<ul>
+  <li>Persistência (cont.). [<a href="audioslides/6-ES/04-Persistencia">audioslides</a>]</li>
+</ul>
+
+<h3 id="22ª-aula">22ª aula</h3>
+<ul>
+  <li>Introdução aos Padrões de Projeto. [<a href="audioslides/7-PadroesProjeto/01-IntroPadroesProjeto">audioslides</a>]</li>
+  <li>Padrões de criação. [<a href="audioslides/7-PadroesProjeto/02-Criacao">audioslides</a>]</li>
+</ul>
+
+<h3 id="23ª-aula">23ª aula</h3>
+<ul>
+  <li>Padrões estruturais. [<a href="audioslides/7-PadroesProjeto/03-Estruturais">audioslides</a>]</li>
+  <li>Padrões de comportamento. [<a href="audioslides/7-PadroesProjeto/04-Comportamento">audioslides</a>]</li>
+  <li>Model-View-Controller (MVC). [<a href="audioslides/7-PadroesProjeto/05-MVC">audioslides</a>]</li>
+</ul>
+
+<h3 id="24ª-aula-8º-laboratório">24ª aula [8º laboratório]</h3>
+<ul>
+  <li>MVC (cont.). [<a href="audioslides/7-PadroesProjeto/05-MVC">audioslides</a>]</li>
+  <li>4ª lista de exercícios.</li>
+</ul>
+
+<h3 id="25ª-aula">25ª aula</h3>
+<ul>
+  <li>Introdução à programação GUI: Swing. [<a href="audioslides/8-ProgramacaoGUI/01-Intro-Swing">audioslides</a>]</li>
+</ul>
+
+<h3 id="26ª-aula">26ª aula</h3>
+<ul>
+  <li>Elementos de interface (Swing). [<a href="audioslides/8-ProgramacaoGUI/02-ElementosInterface">audioslides</a>]</li>
+  <li>Eventos, listeners. [<a href="audioslides/8-ProgramacaoGUI/03-Eventos-Listeners">audioslides</a>]</li>
+</ul>
+
+<h3 id="27ª-aula-9º-laboratório">27ª aula [9º laboratório]</h3>
+<ul>
+  <li>Elementos de interface (Swing) (cont.). [<a href="audioslides/8-ProgramacaoGUI/02-ElementosInterface">audioslides</a>]</li>
+  <li>Eventos, listeners (cont.). [<a href="audioslides/8-ProgramacaoGUI/03-Eventos-Listeners">audioslides</a>]</li>
+</ul>
+
+<h3 id="28ª-aula">28ª aula</h3>
+<ul>
+  <li>Introdução à programação para a Web. [<a href="audioslides/9-Web/01-IntroWeb">audioslides</a>]</li>
+</ul>
+
+<h3 id="29ª-aula">29ª aula</h3>
+<ul>
+  <li>Introdução à programação para a Web. [<a href="audioslides/9-Web/01-IntroWeb">audioslides</a>]</li>
+  <li>A API Servlet. [<a href="audioslides/9-Web/02-Servlet">audioslides</a>]</li>
+</ul>
+
+<h3 id="30ª-aula-10º-laboratório">30ª aula [10º laboratório]</h3>
+<ul>
+  <li>A API Servlet (cont.). [<a href="audioslides/9-Web/02-Servlet">audioslides</a>]</li>
+  <li>Projeto final do curso</li>
+</ul>
+
+<h3 id="31ª-aula">31ª aula</h3>
+<ul>
+  <li>A API Servlet (cont.). [<a href="audioslides/9-Web/02-Servlet">audioslides</a>]</li>
+  <li>JSP. [<a href="audioslides/9-Web/03-JSP">audioslides</a>]</li>
+</ul>
+
+<h3 id="32ª-aula">32ª aula</h3>
+<ul>
+  <li>JSP (cont.). [<a href="audioslides/9-Web/03-JSP">audioslides</a>]</li>
+</ul>
+
+<h3 id="33ª-aula-11º-laboratório">33ª aula [11º laboratório]</h3>
+<ul>
+  <li>Revisão de conteúdos e dúvidas.</li>
+</ul>
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

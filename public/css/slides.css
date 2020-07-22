@@ -51,6 +51,19 @@
     color: #333333;
 }
 
+figcaption {
+    font-size: 10pt;
+    color: #999999;
+}
+
+figure {
+    vertical-align: middle;
+}
+
+figure img {
+    vertical-align: middle;
+}
+
 .fragment.current-visible.visible:not(.current-fragment) {
     animation: removed-item-animation 1s cubic-bezier(0.6, -0.05, 0.9, 0.9) forwards;
 }
