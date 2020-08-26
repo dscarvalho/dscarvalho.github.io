@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Estrutura básica de um programa Java -- Computação II (MAB240)</title>
+	<title>Observações sobre a sintaxe, boas práticas -- Computação II (MAB240)</title>
 
 	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
 	<meta name="author" content="Danilo S. Carvalho">
@@ -36,7 +36,7 @@
                 <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
                     <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
                         <h3>
-                            Estrutura básica de um programa Java
+                            Observações sobre a sintaxe, boas práticas
                         </h3>
                     </div>
                 </div>
@@ -58,131 +58,870 @@
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
                 <p class="fragment">
-                    Nessa aula vamos aprender sobre a estrutura básica de um programa Java. 
+                    Nessa aula vamos falar sobre alguns pontos fundamentais da sintaxe da linguagem Java. 
                 </p>
+                <br/>
                 <p class="fragment">
-                    Ao final da aula, saberemos como criar um programa mínimo e escrever uma saída elementar no terminal (print).
+                    Ao final da aula, saberemos como escrever programas básicos e como criar nossos próprios métodos.
                 </p>
+                <br/>
                 <p class="fragment">
-                    Alguns detalhes da linguagem podem parecer obscuros no começo, mas vamos aos poucos esclarecê-los nessa e 
-                    nas próximas aulas.
+                    Como há bastante coisa em comum com a linguagem C, é importante notar certas diferenças para 
+                    não causar confusão.
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Estrutura mínima">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Comentários">
                 <div class="r-stack">
                     <p class="fragment fade-out" data-fragment-index="1" >
-                        A unidade mínima de um programa Java é a <i>classe</i>.
+                        Os comentários no Java são escritos da seguinte forma:
                     </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="1" >
-                        O código da classe é escrito em um arquivo de texto (fonte) com extensão ".java".
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
-                        Uma classe é declarada através da palavra chave <b style="color: mediumvioletred;">class</b>, 
-                        acompanhada do nome da classe.
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Para uma linha, começamos a linha com <i>//</i> .
                     </p>
                     <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
-                        O nome do arquivo deve ser igual ao nome da classe.
+                        Para múltiplas linhas abrimos o comentário com <i>/*</i> e fechamos com <i>*/</i>.
                     </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
-                        A classe principal de um programa (de onde o programa começa) deve ter o modificador 
-                        <b style="color: mediumvioletred;">public</b>.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
-                        A classe principal também deve conter em seu corpo (o espaço entre {}) um método (função) chamado 
-                        <i>main</i>, com os modificadores <b style="color: mediumvioletred;">public</b>,
-                        <b style="color: mediumvioletred;">static</b> e <b style="color: mediumvioletred;">void</b>.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6">
-                        O método <i>main</i> deve ter como único argumento um array do tipo <b>String</b>, tipicamente
-                        chamado <i>args</i>.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7">
-                        O programa começará executando o código que estiver dentro do método <i>main</i>.
-                    </p>
-                    
                 </div>
 
                 <div class="r-stack">
-                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="1">
+                    <pre data-id="code-animation" style="width: 110%;">
                         <code class="hljs java" data-trim data-line-numbers >
-                            public class Minimo {
-                                public static void main(String[] args) {
-                                }
-                            }
+                            // Comentários de uma linha são escritos assim.
+                            /*
+                                Para múltiplas linhas,
+                                escrevemos assim.
+                            */
                         </code>
                     </pre>
 
                     <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
                         <code class="hljs java" data-trim data-line-numbers="1" >
-                            public class Minimo {
-                                public static void main(String[] args) {
-                                }
+                            // Comentários de uma linha são escritos assim.
+                            /*
+                                Para múltiplas linhas,
+                                escrevemos assim.
+                            */
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="2-5" >
+                            // Comentários de uma linha são escritos assim.
+                            /*
+                                Para múltiplas linhas,
+                                escrevemos assim.
+                            */
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Variáveis">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        A declaração e atribuição de variáveis é feita de forma similar ao <i>C</i>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Para declarar, informamos o tipo e o nome.  
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Atribuimos com <b>=</b> .
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        Podemos declarar e atribuir uma variável na mesma linha.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers="1" >
+                            int quantidade;
+                            quantidade = 5;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="2" >
+                            int quantidade;
+                            quantidade = 5;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%; height: 140px;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            int quantidade = 5;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Tipos primitivos">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Os tipos em Java podem ser divididos entre primitivos e complexos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Os tipos primitivos são listados abaixo:  
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        <b style="color: mediumvioletred;">boolean</b>: verdadeiro ou falso.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        <b style="color: mediumvioletred;">byte</b>: um byte inteiro [-128, +127].
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        <b style="color: mediumvioletred;">char</b>: um caracter Unicode de 16 bits.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6">
+                        <b style="color: mediumvioletred;">short</b>: um inteiro de 16 bits [-32,768, +32,767].
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7">
+                        <b style="color: mediumvioletred;">int</b>: um inteiro de 32 bits [-2^31, +2^31 - 1].
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="8">
+                        <b style="color: mediumvioletred;">long</b>: um inteiro de 64 bits [-2^63, +2^63 - 1].
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="9">
+                        <b style="color: mediumvioletred;">float</b>: número real de 32 bits (IEEE 754).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="10">
+                        <b style="color: mediumvioletred;">double</b>: número real de 64 bits (IEEE 754).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="11">
+                        Não há tipos sem sinal (unsigned) em Java.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="12">
+                        Todos os demais tipos do Java (classes, interfaces) são tipos complexos.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            boolean bool = false;
+                            byte b = 0; // [-128, +127]
+                            char c = '\u0000'; // Unicode 16 bits, de '\u0000' até '\uffff'
+                            short sInt = 0; // [-32,768, +32,767]
+                            int i = 0; // [-2^31, +2^31 - 1]
+                            long l = 0L; // [-2^63, +2^63 - 1]
+                            float f = 0.0f; // 32-bit IEEE 754 (igual ao C)
+                            double d = 0.0d; // 64-bit IEEE 754 (igual ao C)
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="1" >
+                            boolean bool = false;
+                            byte b = 0; // [-128, +127]
+                            char c = '\u0000'; // Unicode 16 bits, de '\u0000' até '\uffff'
+                            short sInt = 0; // [-32,768, +32,767]
+                            int i = 0; // [-2^31, +2^31 - 1]
+                            long l = 0L; // [-2^63, +2^63 - 1]
+                            float f = 0.0f; // 32-bit IEEE 754 (igual ao C)
+                            double d = 0.0d; // 64-bit IEEE 754 (igual ao C)
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers="2" >
+                            boolean bool = false;
+                            byte b = 0; // [-128, +127]
+                            char c = '\u0000'; // Unicode 16 bits, de '\u0000' até '\uffff'
+                            short sInt = 0; // [-32,768, +32,767]
+                            int i = 0; // [-2^31, +2^31 - 1]
+                            long l = 0L; // [-2^63, +2^63 - 1]
+                            float f = 0.0f; // 32-bit IEEE 754 (igual ao C)
+                            double d = 0.0d; // 64-bit IEEE 754 (igual ao C)
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers="3" >
+                            boolean bool = false;
+                            byte b = 0; // [-128, +127]
+                            char c = '\u0000'; // Unicode 16 bits, de '\u0000' até '\uffff'
+                            short sInt = 0; // [-32,768, +32,767]
+                            int i = 0; // [-2^31, +2^31 - 1]
+                            long l = 0L; // [-2^63, +2^63 - 1]
+                            float f = 0.0f; // 32-bit IEEE 754 (igual ao C)
+                            double d = 0.0d; // 64-bit IEEE 754 (igual ao C)
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="6">
+                        <code class="hljs java" data-trim data-line-numbers="4" >
+                            boolean bool = false;
+                            byte b = 0; // [-128, +127]
+                            char c = '\u0000'; // Unicode 16 bits, de '\u0000' até '\uffff'
+                            short sInt = 0; // [-32,768, +32,767]
+                            int i = 0; // [-2^31, +2^31 - 1]
+                            long l = 0L; // [-2^63, +2^63 - 1]
+                            float f = 0.0f; // 32-bit IEEE 754 (igual ao C)
+                            double d = 0.0d; // 64-bit IEEE 754 (igual ao C)
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="7">
+                        <code class="hljs java" data-trim data-line-numbers="5" >
+                            boolean bool = false;
+                            byte b = 0; // [-128, +127]
+                            char c = '\u0000'; // Unicode 16 bits, de '\u0000' até '\uffff'
+                            short sInt = 0; // [-32,768, +32,767]
+                            int i = 0; // [-2^31, +2^31 - 1]
+                            long l = 0L; // [-2^63, +2^63 - 1]
+                            float f = 0.0f; // 32-bit IEEE 754 (igual ao C)
+                            double d = 0.0d; // 64-bit IEEE 754 (igual ao C)
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="8">
+                        <code class="hljs java" data-trim data-line-numbers="6" >
+                            boolean bool = false;
+                            byte b = 0; // [-128, +127]
+                            char c = '\u0000'; // Unicode 16 bits, de '\u0000' até '\uffff'
+                            short sInt = 0; // [-32,768, +32,767]
+                            int i = 0; // [-2^31, +2^31 - 1]
+                            long l = 0L; // [-2^63, +2^63 - 1]
+                            float f = 0.0f; // 32-bit IEEE 754 (igual ao C)
+                            double d = 0.0d; // 64-bit IEEE 754 (igual ao C)
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="9">
+                        <code class="hljs java" data-trim data-line-numbers="7" >
+                            boolean bool = false;
+                            byte b = 0; // [-128, +127]
+                            char c = '\u0000'; // Unicode 16 bits, de '\u0000' até '\uffff'
+                            short sInt = 0; // [-32,768, +32,767]
+                            int i = 0; // [-2^31, +2^31 - 1]
+                            long l = 0L; // [-2^63, +2^63 - 1]
+                            float f = 0.0f; // 32-bit IEEE 754 (igual ao C)
+                            double d = 0.0d; // 64-bit IEEE 754 (igual ao C)
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="10">
+                        <code class="hljs java" data-trim data-line-numbers="8" >
+                            boolean bool = false;
+                            byte b = 0; // [-128, +127]
+                            char c = '\u0000'; // Unicode 16 bits, de '\u0000' até '\uffff'
+                            short sInt = 0; // [-32,768, +32,767]
+                            int i = 0; // [-2^31, +2^31 - 1]
+                            long l = 0L; // [-2^63, +2^63 - 1]
+                            float f = 0.0f; // 32-bit IEEE 754 (igual ao C)
+                            double d = 0.0d; // 64-bit IEEE 754 (igual ao C)
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Tipos primitivos x complexos">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Quando um valor de tipo primitivo é atribuído a uma variável, esse valor é copiado 
+                        para o espaço em memória ocupado pela variável.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Em um tipo complexo, como o tipo String, apenas a referência ao valor é copiada.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Dessa forma a variável atribuída passa a apontar para o mesmo espaço na memória do conteúdo 
+                        que lhe foi atribuído.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            int x = 3;
+                            float z = x;  // Valor de x recebe promoção de tipo para float, 
+                                          // e é copiado para z.
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers="4-6" >
+                            String ola = "Olá mundo";
+                            String texto = ola;  // Apenas referência é copiada. Agora "ola" e "texto"  
+                                                 // apontam para o mesmo espaço na memória
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Strings">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Strings no Java representam uma sequência imutável de caracteres.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Podemos acessar caracteres individuais da string usando o método <i>charAt</i>, mas não podemos alterá-los.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Atribuir uma string significa trocar a referência da variável.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            String str;
+                            str = "Isso é uma string";
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers="3" >
+                            String str;
+                            str = "Isso é uma string";
+                            str.charAt(5);  // == 'é'
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="4" >
+                            String str;
+                            str = "Isso é uma string";
+                            str.charAt(5);  // == 'é'
+                            str = "Isso é uma nova string";  // Substituição da referência.
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Literais numéricos">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        É importante também saber como escrever os literais apropriados para cada tipo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Podemos escrever os tipos inteiros usando diferentes bases numéricas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Podemos escrever literais <b style="color: mediumvioletred;">double</b> usando notação científica.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Os literais <b style="color: mediumvioletred;">float</b> devem ser terminados com "f".
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            // O número 26, em decimal.
+                            int decVal = 26;
+                            // O número 26, em hexadecimal.
+                            int hexVal = 0x1a;
+                            // O número 26, em binário.
+                            int binVal = 0b11010;
+                            double d1 = 123.4;
+                            // O mesmo valor que acima, mas em notação científica.
+                            double d2 = 1.234e2;
+                            // Literal float
+                            float f1 = 123.4f;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers="1-6" >
+                            // O número 26, em decimal.
+                            int decVal = 26;
+                            // O número 26, em hexadecimal.
+                            int hexVal = 0x1a;
+                            // O número 26, em binário.
+                            int binVal = 0b11010;
+                            double d1 = 123.4;
+                            // O mesmo valor que acima, mas em notação científica.
+                            double d2 = 1.234e2;
+                            // Literal float
+                            float f1 = 123.4f;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="7-9" >
+                            // O número 26, em decimal.
+                            int decVal = 26;
+                            // O número 26, em hexadecimal.
+                            int hexVal = 0x1a;
+                            // O número 26, em binário.
+                            int binVal = 0b11010;
+                            double d1 = 123.4;
+                            // O mesmo valor que acima, mas em notação científica.
+                            double d2 = 1.234e2;
+                            // Literal float
+                            float f1 = 123.4f;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers="10-11" >
+                            // O número 26, em decimal.
+                            int decVal = 26;
+                            // O número 26, em hexadecimal.
+                            int hexVal = 0x1a;
+                            // O número 26, em binário.
+                            int binVal = 0b11010;
+                            double d1 = 123.4;
+                            // O mesmo valor que acima, mas em notação científica.
+                            double d2 = 1.234e2;
+                            // Literal float
+                            float f1 = 123.4f;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Arrays">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Arrays são sequências de valores de um mesmo tipo (vetores).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Apesar da notação similar, funcionam de maneira diferente da linguagem C.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Em Java, é possível definir o tamanho de um array através de uma variável.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Entretanto, não é possível modificar o tamanho do array uma vez que foi criado.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        O acesso aos elementos do array é feito através do índice do valor, 
+                        tanto para leitura quanto para atribuição.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;" >
+                        <code class="hljs java" data-trim data-line-numbers >
+                            int[] numeros = new int[30];
+                            // Alocação dinâmica?
+                            int n = 100;
+                            float[] maisNumeros = new float[n];
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers="1" >
+                            int[] numeros = new int[30];
+                            // Alocação dinâmica?
+                            int n = 100;
+                            float[] maisNumeros = new float[n];
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="2-4" >
+                            int[] numeros = new int[30];
+                            // Alocação dinâmica?
+                            int n = 100;
+                            float[] maisNumeros = new float[n];
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers="5" >
+                            int[] numeros = new int[30];
+                            // Alocação dinâmica?
+                            int n = 100;
+                            float[] maisNumeros = new float[n];
+                            maisNumeros[2] = 12.3f;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Operadores aritméticos">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Os operadores aritméticos funcionam da mesma maneira que em <i>C</i>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        As 4 operações básicas realizam promoção de tipo para operandos de tipos diferentes mas compatíveis.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Isso quer dizer que o resultado da operação será do tipo menos restritivo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Por exemplo o resultado da multiplicação <i>z * x</i> abaixo é do tipo float (float * int = float).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        A divisão entre inteiros tem resultado inteiro (truncado).
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            int w;
+                            int x = 3;
+                            int y = 7;
+                            float z = x + y;  // - *
+                            z = z * x;
+                            w = y / 2;  // truncamento
+                            int modulo = y % 2;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers="4-6" >
+                            int w;
+                            int x = 3;
+                            int y = 7;
+                            float z = x + y;  // - *
+                            z = z * x;
+                            w = y / 2;  // truncamento
+                            int modulo = y % 2;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers="5" >
+                            int w;
+                            int x = 3;
+                            int y = 7;
+                            float z = x + y;  // - *
+                            z = z * x;  // promoção de tipo
+                            w = y / 2;  // truncamento
+                            int modulo = y % 2;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers="6" >
+                            int w;
+                            int x = 3;
+                            int y = 7;
+                            float z = x + y;  // - *
+                            z = z * x;
+                            w = y / 2;  // truncamento
+                            int modulo = y % 2;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Operadores booleanos">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Os operadores booleanos realizam comparações e operações lógicas com os operandos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Todos funcionam como no C, mas é importante lembrar da diferença entre tipos primitivos e complexos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Os operador de igualdade no Java (e sua negação) comparam o valor armazenado das variáveis.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        O valor será uma referência no caso de uma variável de tipo complexo.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            int a = 3;
+                            int b = 4;
+                            boolean result;
+                            result = a < b; // true
+                            result = a > b; // false
+                            result = a <= 3; // menor igual
+                            result = b >= 5; // maior igual
+                            result = a == b; // igualdade de valor
+                            result = a != b; // diferença de valor
+                            result = a > b || a < b; // OR lógico
+                            result = 2 < a && a < 5; // AND lógico
+                            result = !result; // NOT lógico
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="8-9" >
+                            int a = 3;
+                            int b = 4;
+                            boolean result;
+                            result = a < b; // true
+                            result = a > b; // false
+                            result = a <= 3; // menor igual
+                            result = b >= 5; // maior igual
+                            result = a == b; // igualdade de valor
+                            result = a != b; // diferença de valor
+                            result = a > b || a < b; // OR lógico
+                            result = 2 < a && a < 5; // AND lógico
+                            result = !result; // NOT lógico
+
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Expressões booleanas">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Outra coisa importante: expressões booleanas tem como resultado um tipo booleano. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Isso quer dizer que podem ser atribuídas a uma variável do tipo boolean.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Mas não podem ser atribuidas a uma variável de tipo inteiro.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            boolean test;
+                            test = numeros[1] < numeros[5]; // um booleano "de verdade".
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="3" >
+                            boolean test;
+                            test = numeros[1] < numeros[5]; // um booleano "de verdade".
+                            int testInt = numeros[1] < numeros[5];  // Erro de compilação.
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Métodos">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Métodos são, de maneira simplificada, funções associadas a uma classe.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Como todo o código Java está contido em classes, todas as nossas funções serão escritas como métodos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        O modificador public informa que o método estará visível (portanto disponível para uso) por outras
+                        classes, além daquela onde foi declarado.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Falaremos sobre o modificador static mais adiante. Ele é necessário aqui para que nossos métodos
+                        se comportem de forma similar à linguagem C.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        Parâmetros e retorno de um método podem ser de qualquer tipo, tendo em mente as diferenças entre
+                        tipos primitivos e complexos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6" >
+                        Parâmetros primitivos passam valores e complexos passam referências. 
+                        O mesmo ocorre com os retornos.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public static int soma(int x, int y) {
+                                // Retorna um valor inteiro.
+                                return x + y;
                             }
                         </code>
                     </pre>
 
                     <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="5">
-                        <code class="hljs java" data-trim data-line-numbers="2" >
-                            public class Minimo {
-                                public static void main(String[] args) {
-                                }
-                            }
-                        </code>
-                    </pre>
-
-                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="7">
-                        <code class="hljs java" data-trim data-line-numbers="2,3" >
-                            public class Minimo {
-                                public static void main(String[] args) {
-                                }
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public static String concat(String x, String y) {
+                                // Retorna referência para nova string.
+                                return x + y;  // Operador "+" concatena strings.
                             }
                         </code>
                     </pre>
                 </div>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Hello World">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Condicionais">
                 <div class="r-stack">
                     <p class="fragment fade-out" data-fragment-index="1" >
-                        Vamos escrever então o nosso programa <b>Hello World</b>!
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="1" >
-                        Primeiramente escrevemos a classe que vai acomodar o nosso programa.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
-                        Chamaremos ela de <b>HelloWorld</b>.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
-                        Em seguida criamos o método <i>main</i>.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
-                        Tudo que queremos que o programa faça é escrever "Olá mundo!" no terminal em que for executado.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
-                        Para esse fim, o Java oferece acesso ao terminal através da classe <b>System</b>, no campo System.out .
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6">
-                        O método <i style="color: darkgreen;">println</i> desse campo imprime uma string na tela.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7">
-                        Há outras maneiras de ler e escrever no terminal, que aprenderemos nas próximas aulas.
+                        O <b>if .. else if .. else</b> é a principal estrutura condicional do Java, 
+                        funcionando da mesma forma que em C.
                     </p>
                 </div>
 
                 <div class="r-stack">
-                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="1">
+                    <pre data-id="code-animation" style="width: 110%;">
                         <code class="hljs java" data-trim data-line-numbers >
-                            public class HelloWorld {
+                            if (a == b) {
+                                // Faz alguma coisa
+                            }
+                            else if (a == c) {
+                                // Faz alguma outra coisa
+                            }
+                            else {
+                                // Faz o que não pôde ser feito nas condições anteriores
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Condicionais">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        A estrutura de condicional ternária também pode ser utilizada. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        As duas condicionais abaixo são equivalentes:
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            String saudacao = (turno == "dia") ? "Bom dia!" : "Boa tarde";
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            String saudacao = (turno == "dia") ? "Bom dia!" : "Boa tarde";
+
+                            String saudacao;
+                            if (turno == "dia") {
+                                saudacao = "Bom dia!";
+                            }
+                            else {
+                                saudacao = "Boa tarde";
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" >
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        O bloco de seleção <b>switch</b> também existe no Java.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        E funciona inclusive com strings (se a JDK >= 7).
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            int x = numeros[3];
+                            switch(x) {
+                                case 9:
+                                    System.out.println("Oi!");
+                                    break;
+                                case 11:
+                                    System.out.println("Tchau!");
+                                    break;
+                                default:
+                                    System.out.println("Muito estranho");
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            
+                            switch(fase) {
+                                case "Início":
+                                    System.out.println("Oi!");
+                                    break;
+                                case "Fim":
+                                    System.out.println("Tchau!");
+                                    break;
+                                default:
+                                    
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Loops">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Os loops <b>for</b>, <b>while</b> e <b>do .. while</b> estão presentes no Java de forma idêntica
+                        ao C. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Mas o Java também possui outras formas de loop, 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        por exemplo, o chamado loop <i>for-each</i>, que executa as instruções do corpo do loop 
+                        para cada elemento de um tipo iterável, tal como um array.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            int soma = 0;
+
+                            for(int i = 0; i <= 30; i++) {
+                                if(i == 12) {
+                                    continue; // vai direto para a próxima iteração
+                                }
+                                if(i == 15) {
+                                    break; // sai completamente do loop
+                                }
+                                else {
+                                    soma += numeros[i];
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%; height: 440px;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            int soma = 0;
+
+                            for (int x : numeros) {
+                                soma += x;
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Método básico">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Por fim, vamos escrever um método usando loops e condicionais.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Nosso método vai calcular os divisores de um número inteiro dado e imprimí-los no terminal.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Colocamos um nome e parâmetro apropriado no método.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Em seguida iteramos a partir de 1 até o número dado...
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        verificando para cada valor se esse divide o número...
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6" >
+                        e caso sim imprimindo o valor.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7" >
+                        Podemos então chamar o método imprimirDivisores dentro do método main.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public static void imprimirDivisores(int numero) {
 
                             }
                         </code>
                     </pre>
 
-                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
-                        <code class="hljs java" data-trim data-line-numbers="2-4" >
-                            public class HelloWorld {
-                                public static void main(String[] args) {
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public static void imprimirDivisores(int numero) {
+                                for(int i=1; i <= numero; i++) {
                                     
                                 }
                             }
@@ -190,12 +929,45 @@
                     </pre>
 
                     <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="5">
-                        <code class="hljs java" data-trim data-line-numbers="3" >
-                            public class HelloWorld {
-                                public static void main(String[] args) {
-                                    System.out.println("Olá mundo!");
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public static void imprimirDivisores(int numero) {
+                                for(int i=1; i <= numero; i++) {
+                                    if(numero % i == 0) {
+                                        
+                                    }
                                 }
                             }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="6">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public static void imprimirDivisores(int numero) {
+                                for(int i=1; i <= numero; i++) {
+                                    if(numero % i == 0) {
+                                        System.out.println(i);
+                                    }
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="7">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Divisores {
+                                public static void imprimirDivisores(int numero) {
+                                    for(int i=1; i <= numero; i++) {
+                                        if(numero % i == 0) {
+                                            System.out.println(i);
+                                        }
+                                    }
+                                }
+
+                                public static void main (String[] args) {
+                                    imprimirDivisores(35);
+                                }
+                            }
+                            
                         </code>
                     </pre>
                 </div>
@@ -203,28 +975,23 @@
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
                 <p class="fragment">
-                    Experimentem usar o compilador javac (parte do JDK) para compilar o código fonte que acabamos de ver e o java 
-                    para executar o bytecode criado.
+                    Com o que vimos até aqui, é possível criar vários tipos de programa que não dependem
+                    de entrada do usuário.
                 </p>
+                <br />
                 <p class="fragment">
-                    Para executar o programa, é necessário informar o nome da classe que queremos executar:
+                    Tentem criar novos métodos com parâmetros e retornos de tipos diferentes.
                 </p>
-                
-                <pre data-id="code-animation" style="width: 110%;" class="fragment">
-                    <code class="hljs sh" data-trim data-line-numbers="3" >
-                        javac HelloWorld.java
-                        java HelloWorld
-                    </code>
-                </pre>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
                 <p>
                     Perguntas:
                 </p>
                 <ol class="list-spacing-long">
-                    <li>Onde o bytecode compilado foi armazenado?</li>
-                    <li>Podemos executar o bytecode da nossa classe HelloWorld em um computador sem o JDK? Como?</li>
+                    <li>O que acontece se tentarmos criar um array com tamanho negativo?</li>
+                    <li>E se tentarmos criar um array com mais elementos que a memória do computador pode armazenar?</li>
+                    <li>Quando atribuimos um int a uma variável, o que acontece com o valor anterior da variável? E uma String?</li>
                 </ol>
             </section>
 

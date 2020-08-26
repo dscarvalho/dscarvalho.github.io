@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Pacotes -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Pacotes
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos ao curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, vamos entender como o funciona a organização do código em módulos no Java: os pacotes. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, seremos capazes de organizar o nosso código de maneira profissional, como é feito
+                    nos pacotes oficiais da linguagem e bibliotecas de terceiros.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Comentários">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Conforme aprendemos anteriormente, os programas Java são escritos em unidades mínimas chamadas classes.
+                    </p>
+                    <br />
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Cada classe é colocada em um arquivo próprio (.java), com o nome da classe.
+                    </p>
+                    <br />
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
+                        Então como fazemos para usar uma classe que está em outro arquivo?
+                    </p>
+                </div>
+
+                <img src="media/classes.png" class="fragment" data-fragment-index="2" />
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Variáveis">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Para resolver esse problema, precisamos organizar nossas classes, de forma que o 
+                        compilador possa encontrá-las.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Em Java, organizamos as classes como um sistema de arquivos, colocando-as em diretórios.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Por exemplo: podemos colocar nossa classe HelloWorld em um diretório chamado "minimo", que contém
+                        classes minimalistas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        Vamos também colocar nossa classe Divisores em um diretório chamado "numeros", que contém classes
+                        que operam com números.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        E se criarmos uma classe Fatorial, também colocamos ela nesse diretório.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/pacotes_1.png" class="fragment" data-fragment-index="3" />
+
+                    <img src="media/pacotes_2.png" class="fragment" data-fragment-index="4" />
+
+                    <img src="media/pacotes_3.png" class="fragment" data-fragment-index="5" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Condicionais">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Esses diretórios que criamos são chamados de <b>pacotes</b>. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Eles representam a organização lógica das classes para o Java, e são utilizados para termos
+                        acesso às classes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        É também necessário declarar em cada arquivo a qual pacote ele pertence.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Por exemplo, o arquivo contendo a classe Divisores deve começar com a linha abaixo:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        Seguido da definição da classe:
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package numeros;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package numeros;
+
+                            public class Divisores {
+                                public static void imprimirDivisores(int numero) {
+                                    for(int i=1; i <= numero; i++) {
+                                        if(numero % i == 0) {
+                                            System.out.println(i);
+                                        }
+                                    }
+                                }
+
+                                public static void main (String[] args) {
+                                    imprimirDivisores(35);
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Condicionais">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Para acessarmos as classes, usamos a instrução <b>import</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        O import é também usado no início de um arquivo .java, e serve para declarar quais classes iremos
+                        acessar nesse arquivo, facilitando seu uso.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        O Java vai procurar pela classe indicada no pacote correspondente para acessar o seu código.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Por exemplo, se queremos usar a classe Divisores em uma outra classe, importamos Divisores...
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        e então podemos usar a classe importada e seus métodos públicos dentro da nossa nova classe.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers data-fragment-index="4">
+                            import numeros.Divisores;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import numeros.Divisores;
+
+                            public class CalculaCoisas {
+                                public static void main(String[] args) {
+                                    Divisores.imprimirDivisores(102);  
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Condicionais">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Apesar de podermos escolher quase qualquer nome e estrutura de pacotes para um programa Java,
+                        há um padrão de nomenclatura para a criação de pacotes e classes. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        O padrão universalmente aceito para nomear pacotes é chamado de "<b>notação de nome reverso de domínio</b>",
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        e leva em consideração o nome do domínio de Internet (real ou fictício) da organização onde o programa
+                        está sendo criado.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Nós por exemplo, somos do DCC/UFRJ, cujo nome de domínio é dcc.ufrj.br.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        Nossas classes portanto devem estar dentro do pacote br.ufrj.dcc. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6" >
+                        Mas como o DCC ainda engloba muita coisa, precisamos ser mais específicos. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7" >
+                        Vamos usar o nome da disciplina. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="8" >
+                        Mas ainda há várias turmas de Comp 2... Então usamos o período. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="9" >
+                        Humm, mas há duas turmas de Comp 2... Colocamos então o nome do professor.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="10" >
+                        Agora temos um pacote só para essa turma.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="11" >
+                        Podemos agora organizar o resto dessa hierarquia conforme o tema das nossas classes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="12" >
+                        Como as classes que mostrei até agora são exemplos, vou criar um pacote "exemplos".
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="13" >
+                        Por fim, dentro desse pacote eu posso colocar o meu pacote de programas mínimos e os demais.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="14" >
+                        Para acessar a classe HelloWorld, fazemos então o seguinte import:
+                    </p>
+
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="15" >
+                        Como o acesso a uma classe é feito através do nome completo do pacote, esse padrão de nomenclatura 
+                        garante que não tenhamos conflitos de classes com mesmo nome, vindas de organizações diferentes.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers>
+                            package br.ufrj.dcc;  // mkdir -p br/ufrj/dcc
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="7">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package br.ufrj.dcc.comp2;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="8">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package br.ufrj.dcc.comp2.ple;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="9">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package br.ufrj.dcc.comp2.ple.aula_danilo;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="12">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package br.ufrj.dcc.comp2.ple.aula_danilo.exemplos;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="13">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package br.ufrj.dcc.comp2.ple.aula_danilo.exemplos.minimo;
+                            // mkdir -p br/ufrj/dcc/comp2/ple/aula_danilo/exemplos/minimo
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%; height: 140px;" class="fragment" data-fragment-index="14">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import br.ufrj.dcc.comp2.ple.aula_danilo.exemplos.minimo.HelloWorld;
+
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Condicionais">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Para compilar o código, podemos usar o <i>javac</i> a partir do topo da hierarquia de diretórios. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Executamos o programa usando o nome completo da classe.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs sh" data-trim data-line-numbers>
+                            javac br/ufrj/dcc/comp2/ple/aula_danilo/exemplos/minimo/HelloWorld.java
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs sh" data-trim data-line-numbers >
+                            java br.ufrj.dcc.comp2.ple.aula_danilo.exemplos.minimo.HelloWorld
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment">
+                    A partir desse ponto, somos capazes de combinar várias classes simples para criar programas mais complexos.
+                </p>
+                <br />
+                <p class="fragment">
+                    Experimentem criar um pacote novo para a classe CalculaCoisas.
+                </p>
+                <br />
+                <p class="fragment">
+                    Olhem a documentação da linguagem Java, (Java API em particular) e vejam quantos pacotes estão 
+                    à disposição do programador na JDK.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li>Que padrão é usado para nomear classes no Java? E os métodos e variáveis?</li>
+                    <li>Posso importar várias classes de uma vez com um único <b>import</b>?</li>
+                    <li>Posso acessar uma classe de outro pacote sem antes importá-la?</li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
