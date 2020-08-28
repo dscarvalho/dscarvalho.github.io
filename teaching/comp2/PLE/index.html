@@ -159,17 +159,20 @@
 
     <ul>
       <li>L[1-4]: Notas das listas de exercícios. Serão 4 listas.</li>
+      <li>Q[1-4]: Notas dos questionários das respectivas listas.</li>
       <li>PFS: Nota do projeto final (grupo).</li>
       <li>PFQ: Nota do questionário do projeto final (individual).</li>
     </ul>
 
     <p>O cálculo das notas é feito da seguinte maneira:</p>
 
-    <script type="math/tex; mode=display">NotaLista = \frac{\sum_{i=1}^4{L[i]}}{4}</script>
+    <script type="math/tex; mode=display">NotaLista = max(L[i] * \frac{Q[i]}{7}, 10.0)</script>
 
-    <script type="math/tex; mode=display">NotaProjeto = PFS * PFQ * 0.1</script>
+    <script type="math/tex; mode=display">TotalListas = \frac{\sum_{i=1}^4{L[i]}}{4}</script>
 
-    <script type="math/tex; mode=display">NotaFinal = 0.4 * NotaLista + 0.6 * NotaProjeto</script>
+    <script type="math/tex; mode=display">NotaProjeto = max(PFS * \frac{PFQ}{7}, 10.0)</script>
+
+    <script type="math/tex; mode=display">NotaFinal = 0.4 * TotalListas + 0.6 * NotaProjeto</script>
 
     <p>Se <script type="math/tex">NotaFinal >= 5.0</script>, o aluno estará aprovado com NotaFinal.
   Se <script type="math/tex">% <![CDATA[
@@ -218,7 +221,7 @@ NotaFinal < 5.0 %]]></script>, o aluno estará reprovado.</p>
 <ul>
   <li>E/S básica no terminal e uso da classe System. [<a href="audioslides/1-Intro/06-ES-Basica">audioslides</a>]</li>
   <li>Erros de compilação e execução; Exceções. [<a href="audioslides/1-Intro/05-Excecoes">audioslides</a>] (Apostila: 12.1 - 12.3)</li>
-  <li>Introdução ao Javadoc. [<a href="audioslides/Plus/Javadoc">audioslides</a>] (Apostila: 8.3 - 8.4)</li>
+  <li>Introdução ao Javadoc. [<a href="audioslides/Plus/Javadoc">audioslides</a>] [<a href="https://www.danilosc.ml/teaching/comp2/2020-1/aula3/javadoc/">resumo</a>] (Apostila: 8.3 - 8.4)</li>
   <li>Introdução ao Git / GitHub. [<a href="audioslides/Plus/Git-GitHub">audioslides</a>]</li>
 </ul>
 

@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Erros de compilação e execução, Exceções -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Erros de compilação e execução, Exceções
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos ao curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, vamos aprender sobre os tipos de erro que podem acontecer na criação e execução 
+                    de um programa. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao fim da aula, saberemos como prever e lidar com certas condições excepcionais que podem interromper 
+                    o funcionamento esperado do nosso código.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Tipos de erros">
+                <div class="r-stack">
+                    <p>
+                        Existem duas maneiras pelas quais um programa que criamos pode dar errado...
+                    </p>
+                </div>
+
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" style="width: 1280px; padding-left: 0px;">
+                <div class="fragment" style="width: 480px; text-align: center; float: left; font-size: 24pt; height: 608px;  background-color: rgba(106, 106, 226, 0.4);">
+                    <u>Erros de compilação</u>
+                    <br /><br />
+                    <ul class="list-spacing-longest">
+                        <li style="margin-bottom: 65px;">São gerados pelo compilador quando encontrado código fonte inválido.</li>
+                        <li style="margin-bottom: 65px;">O programa executável não pode ser obtido</li>
+                        <li>O compilador aponta a linha que causou o problema.</li>
+                    </ul>
+                  </div>
+                
+                  <div class="fragment" style="width: 500px; text-align: center; float: left; font-size: 24pt; margin-left: 40px;background-color: rgba(226, 106, 106, 0.4);">
+                    <u>Erros de execução</u>
+                    <br /><br />
+                    <ul class="list-spacing-long">
+                        <li>
+                            São gerados pelo ambiente de execução (ou sistema operacional) quando um
+                            programa realiza uma operação inválida.
+                        </li>
+                        <li>O programa em execução é interrompido e todos os dados em processamento são perdidos</li>
+                        <li>
+                            O ambiente de execução / SO produz um relatório de falha (stack trace) 
+                            informando o motivo da interrupção do programa
+                        </li>
+                    </ul>
+                  </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Identificando problemas">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Vejam o código abaixo: 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Há algum problema com o programa? De que tipo?
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Sim. O literal atribuído à variável <i>num</i> é do tipo double, e não float.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Como o rebaixamento de tipo não é permitido em Java, ocorrerá um erro de compilação.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 105%;">
+                        <code class="hljs java" data-trim data-line-numbers>
+                            public class RaizQuadrada {
+                                public static void main(String[] args) {
+                                    float num = 2.0;
+
+                                    System.out.printf("A raíz quadrada de %f é %f\n", num, Math.sqrt(num));
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 105%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="3" >
+                            public class RaizQuadrada {
+                                public static void main(String[] args) {
+                                    float num = 2.0;
+
+                                    System.out.printf("A raíz quadrada de %f é %f\n", num, Math.sqrt(num));
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 105%; height: 250px;" class="fragment" data-fragment-index="4">
+                        <code class="hljs sh" data-trim data-line-numbers >
+                            RaizQuadrada.java:3: error: incompatible types: possible lossy conversion 
+                            from double to float
+		                        float num = 2.0;
+		                                    ^
+                            1 error
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        E quanto ao código abaixo: 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Há algum problema com o programa? De que tipo?
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Sim. Um array de 100 elementos tem posições válidas de 0 até 99.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Na linha 4 tenta-se atribuir um valor em uma posição fora dos limites do array.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        Entretanto, o compilador Java não verifica os limites de arrays, portanto o código vai
+                        compilar sem erros.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6" >
+                        O programa portanto causará um erro de execução.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 105%;">
+                        <code class="hljs java" data-trim data-line-numbers>
+                            public class ManipulacaoDeArray {
+                                public static void main(String[] args) {
+                                    int[] v = new int[100];
+                                    v[100] = 2;
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 105%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers="4" >
+                            public class ManipulacaoDeArray {
+                                public static void main(String[] args) {
+                                    int[] v = new int[100];
+                                    v[100] = 2;
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 105%;height: 240px;" class="fragment" data-fragment-index="6">
+                        <code class="hljs sh" data-trim data-line-numbers="4" >
+                            Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 
+                            Index 100 out of bounds for length 100 at ManipulacaoDeArray.main(ManipulacaoDeArray.java:4)
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Tratamento de exceção">
+                <p class="fragment" style="font-size: smaller;">
+                    Nosso foco aqui será nos erros de execução, que não podem ser detectados pelo compilador e
+                    possuem o potencial de causar danos ao sistema e aos usuários, caso não tratados.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Podemos antecipar e detectar certos erros de execução, criando um fluxo de código
+                    alternativo à ocorrência do erro e salvando nosso programa de uma "morte" repentina.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    A esse processo se dá o nome de <b>tratamento de exceção</b>.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <p class="fragment">
+                    Chamamos os erros encontrados dessa maneira de <b>exceções</b>.
+                </p>
+                <p class="fragment">
+                    Isso é feito em três etapas:
+                </p>
+                <br />
+                <ol class="fragment">
+                    <li>Identifica-se um possível erro de execução.</li>
+                    <li>Aplica-se um mecanismo de detecção, para caso o erro ocorra.</li>
+                    <li>Cria-se um caminho alternativo no código, que será tomado quando o erro ocorrer.</li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Identificando exceções">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Vejam o programa abaixo:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Compilamos o programa e não ocorreram erros.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Podemos prever algum erro de execução?
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Pause os slides e pense um pouco...
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        O programa espera receber uma idade (digitada pelo usuário) e imprime a idade recebida em binário.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6" >
+                        E se o valor que o usuário digitar não puder ser convertido em um número inteiro?
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 105%;">
+                        <code class="hljs java" data-trim data-line-numbers>
+                            import java.util.Scanner;
+
+                            public class IntroExcecoes {
+                                public static void main(String[] args) {
+                                    int idade;
+                                    Scanner scanner = new Scanner(System.in);
+                                    
+                                    System.out.println("Digite sua idade e aperte &lt;ENTER&gt;: ");
+                                    String linha = scanner.nextLine();
+                                    idade = Integer.parseInt(linha);
+                                    System.out.println("Sua idade em binário é: " +
+                                                       Integer.toBinaryString(idade));
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="try ... catch">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Agora que identificamos uma exceção, aplicamos o mecanismo para detectar quando ela ocorre.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        No Java, esse mecanismo é o bloco <b>try ... catch</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Colocamos dentro de um bloco <b>try</b> o código que pode causar a exceção.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        O bloco try é sempre seguido de um bloco <b>catch</b>, onde colocamos o caminho alternativo
+                        que o código deve seguir se a exceção ocorrer.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        O bloco catch captura apenas exceções do tipo que foi especificado em sua cláusula.
+                        Nesse caso <b>NumberFormatException</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6" >
+                        Nesse caso informamos ao usuário que a idade digitada é inválida.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 105%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.util.Scanner;
+
+                            public class IntroExcecoes {
+                                public static void main(String[] args) {
+                                    int idade;
+                                    Scanner scanner = new Scanner(System.in);
+                                    System.out.println("Digite sua idade e aperte <ENTER>: ");
+                                    String linha = scanner.nextLine();
+                                    try { // Bloco try: a exceção pode ocorrer aqui
+                                        idade = Integer.parseInt(linha);
+                                        System.out.println("Sua idade em binário é: " +
+                                                           Integer.toBinaryString(idade));
+                                    }
+                                    catch (NumberFormatException e) {
+                                        System.out.println("Idade inválida.");
+                                    }
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 105%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="8-12" >
+                            import java.util.Scanner;
+
+                            public class IntroExcecoes {
+                                public static void main(String[] args) {
+                                    int idade;
+                                    Scanner scanner = new Scanner(System.in);
+                                    System.out.println("Digite sua idade e aperte <ENTER>: ");
+                                    String linha = scanner.nextLine();
+                                    try { // Bloco try: a exceção pode ocorrer aqui
+                                        idade = Integer.parseInt(linha);
+                                        System.out.println("Sua idade em binário é: " +
+                                                           Integer.toBinaryString(idade));
+                                    }
+                                    catch (NumberFormatException e) {
+                                        System.out.println("Idade inválida.");
+                                    }
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 105%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers="13-15" >
+                            import java.util.Scanner;
+
+                            public class IntroExcecoes {
+                                public static void main(String[] args) {
+                                    int idade;
+                                    Scanner scanner = new Scanner(System.in);
+                                    System.out.println("Digite sua idade e aperte <ENTER>: ");
+                                    String linha = scanner.nextLine();
+                                    try { // Bloco try: a exceção pode ocorrer aqui
+                                        idade = Integer.parseInt(linha);
+                                        System.out.println("Sua idade em binário é: " +
+                                                           Integer.toBinaryString(idade));
+                                    }
+                                    catch (NumberFormatException e) {
+                                        System.out.println("Idade inválida.");
+                                    }
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Retornando ao fluxo normal">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Entretanto, isso não resolveu o problema do nosso programa ser abortado quando a exceção ocorre.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Precisamos então melhorar o nosso caminho alternativo, retornando ao fluxo planejado do programa.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Podemos fazer isso repetindo o trecho que lê e imprime a idade até uma idade válida ser digitada.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 105%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.util.Scanner;
+
+                            public class IntroExcecoes {
+                                public static void main(String[] args) {
+                                    int idade = 0;
+                                    Scanner scanner = new Scanner(System.in);
+                                    while (idade == 0) {
+                                        try {
+                                            System.out.println("Digite sua idade e aperte <ENTER>: ");
+                                            String linha = scanner.nextLine();
+                                            idade = Integer.parseInt(linha);
+                                            System.out.println("Sua idade em binário é: " +
+                                            Integer.toBinaryString(idade));
+                                        }
+                                            catch (NumberFormatException e) {
+                                            System.out.println("Idade inválida.");
+                                        }
+                                    }
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 105%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers="7-18" >
+                            import java.util.Scanner;
+
+                            public class IntroExcecoes {
+                                public static void main(String[] args) {
+                                    int idade = 0;
+                                    Scanner scanner = new Scanner(System.in);
+                                    while (idade == 0) {
+                                        try {
+                                            System.out.println("Digite sua idade e aperte <ENTER>: ");
+                                            String linha = scanner.nextLine();
+                                            idade = Integer.parseInt(linha);
+                                            System.out.println("Sua idade em binário é: " +
+                                            Integer.toBinaryString(idade));
+                                        }
+                                            catch (NumberFormatException e) {
+                                            System.out.println("Idade inválida.");
+                                        }
+                                    }
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment">
+                    Agora podemos evitar que nossos programas sejam interrompidos por exceções.
+                </p>
+                <br />
+                <p class="fragment">
+                    Exercitem diversos cenários possíveis onde as coisas podem dar errado. Ficarão surpresos
+                    com a quantidade de exceções diferentes que podem encontrar em programas simples.
+                </p>
+                <br />
+                <p class="fragment">
+                    Abordaremos mais detalhes sobre exceções adiante no curso.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li>É possivel capturar vários tipos de exceção para um mesmo bloco <b>try</b>?</li>
+                    <li>Como a máquina virtual do Java sabe que ocorreu uma exceção?</li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
