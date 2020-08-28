@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>E/S básica no terminal e uso da classe System -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            E/S básica no terminal e uso da classe System
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos ao curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, vamos conhecer os mecanismos básicos de entrada e saída no terminal em Java. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, poderemos processar dados obtidos através de entrada do usuário e colocar 
+                    saída formatada no terminal (standard I/O).
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Biblioteca padrão">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Assim como a linguagem C, o Java oferece ao programador meios simples de acessar a entrada e saída
+                        padrão do sistema (standard I/O).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Isso é feito através da classe <b>System</b>, parte da biblioteca padrão do Java.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Conforme aprendemos na aula sobre pacotes, todas as classes do Java devem ser organizadas em
+                        uma hierarquia de pacotes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        Isso não é diferente para as classes da biblioteca padrão, que acompanham a JDK. 
+                        Elas estão contidas no pacote <b>java</b> e seus subpacotes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        Por exemplo, a classe <i>String</i> é parte do pacote <i>java.lang</i>. Esse pacote é o único
+                        que é importado automaticamente. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6">
+                        Dessa forma, não precisamos escrever "import java.lang.String;" 
+                        no início de todos os arquivos que usam a classe String.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7">
+                        Nem escrever java.lang.String toda vez que declaramos uma variável do tipo String.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="8">
+                        O mesmo se aplica às classes System, Math (operações matemáticas), entre outras.
+                    </p>
+                </div>
+
+                <div class="r-stack" style="margin-top: 20px;">
+                    <img src="media/java_lang_1.svg" class="fragment" data-fragment-index="5" />
+
+                    <img src="media/java_lang_2.svg" class="fragment" data-fragment-index="8" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Biblioteca padrão">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1">
+                        A classe <b>System</b> contem métodos e campos (ou atributos) para acessar funções importantes da máquina virtual, 
+                        inclusive as entradas e saídas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Há três campos dedicados a tal fim: <b>in</b>, <b>out</b> e <b>err</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        <b>out</b> e <b>err</b> são campos do tipo PrintStream, que permitem enviar dados para a saída padrão
+                        e para a saída de erro, respectivamente. Equivalente aos ponteiros <i>stdout</i> e <i>stderr</i> em C.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        <b>in</b> é um campo do tipo InputStream, que permite ler da entrada padrão. Equivalente ao ponteiro 
+                        <i>stdin</i> em C.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/system_diag.svg" class="fragment" data-fragment-index="2" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Biblioteca padrão">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1">
+                        Para escrever na saída padrão, usamos os métodos print* do campo out 
+                        (<a href="https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/io/PrintStream.html">ver API da classe PrintStream</a>).
+                        Por exemplo, o método <b>println​(String x)</b>
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
+                        Há também o método <b>printf​(String format, Object... args)</b>, que é usado de maneira quase idêntica ao C.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
+                        O mesmo se aplica ao System.err.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            System.out.println("Imprime essa string na saída padrão e pula uma linha");
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            int ano = 2020;
+                            System.out.println("O ano é %d", ano);
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Biblioteca padrão">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1">
+                        Para ler da entrada padrão, entretanto, não há um método prático oferecido em System.in.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
+                        System.in.read() permite apenas ler bytes, o que não nos ajuda muito.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
+                        Usaremos então a classe <b>java.util.Scanner</b>, que facilita a leitura dos dados.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        Dentro de um método, criamos um novo Scanner. Isso é feito com a palavra chave <b>new</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        O <b>new</b> alocará a memória necessária para armazenar o novo Scanner, e resultará em uma referência,
+                        que será atribuída à variável. Similar ao <i>malloc</i> em C.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6">
+                        Além disso, toda classe possui pelo menos um método chamado "construtor", que possui o mesmo nome da classe.
+                        
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7">
+                        Esse método é chamado toda vez que uma nova <b style="color: blue;">instância</b> de uma classe é criada,
+                        que daqui em diante chamaremos de <b style="color: blue;">objeto</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="8">
+                        Como exemplo, o literal "Olá mundo" é uma instância da classe String, e portanto um objeto.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="9">
+                        O campo System.in é uma instância da classe InputStream, e portanto também é um objeto.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="10">
+                        Um construtor da classe Scanner tem como argumento um objeto InputStream de onde serão lidos os dados.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="11">
+                        Passamos o campo System.in, que é um InputStream representando a entrada padrão.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="12">
+                        A classe Scanner possui um método chamado <b>nextLine()</b> (<a href="https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/util/Scanner.html">ver API</a>)
+                        que lê uma linha (String) do seu InputStream.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="13">
+                        Ao chamar o método <b>nextLine()</b>, o terminal ficará aguardando o usuário digitar algo e apertar a tecla Enter,
+                        terminando a linha.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="14">
+                        A linha digitada então será armazenada na variável "linha".
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="15">
+                        Podemos agora imprimir a linha que lemos na saída padrão, acompanhada do tamanho dela, em caracteres,
+                        obtido usando o método <b>length()</b> da classe String.
+                    </p>
+                    
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.util.Scanner;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            Scanner scanner = new Scanner(System.in);
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="12">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            Scanner scanner = new Scanner(System.in);
+                            String linha = scanner.nextLine();
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="15">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            Scanner scanner = new Scanner(System.in);
+                            String linha = scanner.nextLine(); 
+
+                            System.out.printf("%s possui %d caracteres\n", linha, linha.length());
+                            System.out.println("Fim!");
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment">
+                    Agora podemos criar programas que lêem strings da entrada padrão e realizar operações sobre elas.
+                </p>
+                <br />
+                <p class="fragment">
+                    Consultem a documentação das classes PrintStream, Scanner e String, para descobrir maneiras de ler
+                    outros tipos: int, float...
+                </p>
+                <p class="fragment">
+                    Dica: para cada tipo primitivo do Java existe uma classe correspondente em java.lang, que nos permite
+                    converter strings no respectivo tipo (ex: string -&gt; double).
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li>Quando devemos usar o campo System.err?</li>
+                    <li>Posso imprimir um número float usando System.out.println, em vez de System.out.printf?</li>
+                    <li>
+                        Apesar do tipo de retorno do método main ser void, há um método da classe System que permite a
+                        máquina virtual Java retornar um código de erro. Que método é esse?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
