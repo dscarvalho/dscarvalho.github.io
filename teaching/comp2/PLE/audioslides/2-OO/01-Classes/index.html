@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Audio slideshows with Reveal.js</title>
+	<title>Programação Orientada a Objetos - [Classes] -- Computação II (MAB240)</title>
 
 	<meta name="description" content="A plugin for reveal.js">
 	<meta name="author" content="Asvin Goel">
@@ -32,7 +32,8 @@
 	<div class="reveal">
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
-            <section data-background="media/bg.png" data-transition="fade-out">
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
                 <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
                     <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
                         <h3>
@@ -43,9 +44,10 @@
                     </div>
                 </div>
 
-                <div class="sl-block" data-block-type="text" style="margin-top: 280px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
                     <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
                         <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
                         <br style="line-height: 100%" />
                         <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
                     </div>
@@ -53,12 +55,27 @@
 
                 <aside class="notes">
                     Olá pessoal.<br />
-                    Esse é o curso de Computação II do Departamento de Ciência da Computação da UFRJ
-                    e hoje vamos começar a aprender sobre Programação Orientada a Objetos.
+                    Bem vindos ao curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
                 </aside>
             </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment" style="font-size: smaller;">
+                    Nessa aula, vamos começar a nossa jornada pelo mundo da Programação Orientada a Objetos. 
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    A cada passo, aprenderemos um novo conceito que tornará nossa maneira de programar mais interessante
+                    e abriremos nossa visão para o código que encontramos nos grandes projetos do mundo real (desde o fim dos anos 90). 
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Ao fim da aula, saberemos como organizar conceitos como classes e como implementar isso no Java.
+                </p>
+            </section>
+
             <section data-background="media/bg.png" data-transition="fade-out">
-				<p>
+				<p class="fragment">
                     Antes de entender como programar orientado a objetos
                 </p>
                 <br />
@@ -67,7 +84,7 @@
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Abstração do mundo">
                 <div class="r-stack">
                     <p class="fragment fade-out" data-fragment-index="1">
                         Imagine que queremos construir um sistema que vai ajudar na organização de uma biblioteca.
@@ -105,7 +122,7 @@
                 
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Classes (reapresentação)">
                 <div class="r-stack">
                     <p class="fragment fade-out" data-fragment-index="1" style="font-size: smaller;">
                         Chamamos os conceitos que obtemos das nossas anotações de <b>classes</b>. 
@@ -146,11 +163,11 @@
                 
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Implementação">
 				<pre data-id="code-animation" style="width: 110%;">
                     <code class="hljs java" data-trim data-line-numbers>
                     public class Livro {  // Declara classe com visibilidade global
-                        String titulo;  // Atributo da classe
+                        String titulo;  // Atributo da classe (campo)
                         String autor;
                         int numPaginas;
                         String assunto;
@@ -160,13 +177,16 @@
                 <br />
                 <div class="r-stack">
                     <p class="fragment fade-out" data-fragment-index="1" style="font-size: smaller;">
-                        Usamos a palavra chave <i style="color: mediumvioletred;">class</i> para declarar uma classe. <br />
-                        A palavra chave <i style="color: mediumvioletred;">public</i> significa que a classe é acessível em qualquer parte do programa.
+                        Declaramos nossa classe usando a palavra chave <i style="color: mediumvioletred;">class</i> como de costume.
                     </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="1" style="font-size: smaller;">
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" style="font-size: smaller;">
+                        Mas dessa vez ignoramos os métodos. Novamente, a palavra chave <i style="color: mediumvioletred;">public</i> 
+                        significa que a classe é acessível por qualquer outra classe.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" style="font-size: smaller;">
                         Cada atributo é declarado em uma linha, com seu respectivo tipo, tal qual uma variável.
                     </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
                         Nosso livro possui um título, autor, num. de páginas, e assunto.
                     </p>
                 </div>
@@ -186,11 +206,11 @@
                 </pre>
                 <div class="r-stack">
                     <p class="fragment fade-out" data-fragment-index="1" style="font-size: smaller;">
-                        A classe <i>Pessoa</i> é declarada da mesma maneira.<br />
-                        Apenas os atributos mudam.
+                        A classe <i>Pessoa</i> é declarada da mesma maneira, com seus respectivos atributos.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" data-fragment-index="1" style="font-size: smaller;">
-                        Os atributos podem ser de qualquer tipo permitido na linguagem Java.
+                        Os atributos podem ser de qualquer tipo permitido na linguagem Java e são chamados oficialmente de 
+                        <b>campos</b> nessa linguagem.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
                         A nossa classe torna-se então um novo tipo, que podemos usar como os demais tipos não primitivos.
@@ -209,6 +229,17 @@
                 </pre>
             </section>
 
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment">
+                    Agora podemos organizar nosso código usando conceitos e criar nossos próprios tipos.
+                </p>
+                <br />
+                <p class="fragment">
+                    Tentem usar o mesmo tipo de raciocínio para criar classes para os conceitos que podem ser aplicados
+                    em um restaurante, por exemplo.
+                </p>
+            </section>
+
             <!--<section data-background="media/bg.png" data-transition="fade-out">
 				<p>
                     Mas e os frequentadores e funcionários?
@@ -218,6 +249,22 @@
                     Vamos falar deles na próxima aula.
                 </p>
             </section>-->
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li>
+                        O que acontece com os atributos da classe quando criamos uma nova instância com <b>new</b>? 
+                        Quais seriam os valores?
+                    </li>
+                    <li>
+                        Quando criamos uma nova instância de uma classe com <b>new</b>, alocamos a memória para armazenar
+                        os seus dados. Como liberamos a memória depois?
+                    </li>
+                </ol>
+            </section>
 
             <section data-background="media/bg.png" data-transition="fade-out">
 				<p style="font-size: larger;">

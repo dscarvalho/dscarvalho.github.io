@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Objetos -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Objetos
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos ao curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, vamos entender um pouco mais sobre o que está por trás das instâncias das classes
+                    que criamos. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao fim da aula, teremos uma noção mais clara de como concretizar os nossos tipos e o que esperar
+                    das nossas variáveis.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Instanciação e Objetos">
+                <div class="r-stack" style="font-size: smaller;">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Já aprendemos anteriormente que todas as instâncias que criamos a partir de uma classe são chamadas
+                        de <b>objetos</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Logo o código "<b>new Livro()</b>" cria um novo objeto do tipo Livro.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Também aprendemos que uma classe representa uma abstração de elementos do mundo real ou virtual,
+                        na forma de um conceito, como por exemplo o conceito de um carro.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        A instanciação é uma operação oposta: a concretização de um conceito como um elemento de dados e seu
+                        respectivo comportamento, na memória do computador.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        No caso da classe "Carro", um objeto representa um carro em particular, com número de chassi, 
+                        cor definida, etc., ou seja, possuindo uma identidade única.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6">
+                        Se os atributos da classe carro fossem detalhados o suficiente, até mesmo o desgaste das peças poderia
+                        ser representados.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7">
+                        E aqui está a ideia central dos objetos: <b>estado</b>
+                    </p>
+                </div>
+
+                <div class="r-stack" style="margin-top: 20px;">
+                    <img src="media/oop_classes.svg" class="fragment" style="width: 600px;" data-fragment-index="3" />
+
+                    <img src="media/oop_classes_objetos.svg" class="fragment" style="width: 600px;" data-fragment-index="5" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Estado">
+                <p class="fragment" style="font-size: smaller;">
+                    Um objeto representa o <b>estado</b> de uma entidade individual associada a um conceito (classe) no programa. 
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Quando orientamos o nosso código a objetos, olhamos para o programa como uma sequência de operações que criam,
+                    manipulam, mantém e armazenam o estado de um conjunto de entidades, que usamos para resolver os nossos problemas.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Interpretando o estado">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        O código abaixo, por exemplo 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Pode ser interpretado como a operação de emplacamento de um carro novo, resultando na mudança
+                        de estado desse carro, que agora pode trafegar regularmente nas vias públicas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Pensando dessa forma, precisamos recorrer a menos traduções para estruturas lógicas estritamente
+                        computacionais, e a programação fica mais simples.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 105%;">
+                        <code class="hljs java" data-trim data-line-numbers>
+                            Carro meuCarro = new Carro();
+                            
+                            meuCarro.placa = new Placa("ABC-1234");
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment">
+                    Agora entendemos um pouco melhor o porque queremos lidar com objetos.
+                </p>
+                <br />
+                <p class="fragment">
+                    Falta então entender como explicamos o comportamento ou capacidades desses objetos. Estamos quase lá.
+                </p>
+                <br />
+                <p class="fragment">
+                    Continuem o exercício proposto na aula sobre classes (ex: restaurante), 
+                    mas aplicando as ideias discutidas nessa aula.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Em uma fábrica de carros está ocorrendo uma grande demanda por carros de cor azul, 
+                        logo precisa-se criar muitos carros com essa característica. De que forma poderiamos fazer 
+                        isso em Java?
+                    </li>
+                    <li style="font-size: smaller;">Quais seriam as implicações de se fazer um "recall" de objetos com defeito de fabricação no Java?</li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+

@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Introdução ao Git / GitHub -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Introdução ao Git / GitHub
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos ao curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula vamos falar sobre a necessidade de controle de versão do nosso código e sobre como
+                    isso pode ser feito com as ferramentas Git e GitHub. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, estaremos aptos a tornar nossa rotina de desenvolvimento mais prática e segura.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Edição do código: Problemas">
+                <p class="fragment" style="font-size: smaller;">
+                    Toda vez que precisamos fazer alguma alteração no código, estamos destruindo parte do código anterior 
+                    e possivelmente criando problemas que precisarão ser analisados. 
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Programadores podem cair na tentação de deixar o código anterior comentado como um registro histórico 
+                    ou "vai que eu preciso usar novamente…"
+                </p>
+                <p class="fragment" style="font-size: smaller;">
+                    No pior dos casos, o programador cria vários arquivos com variações de nome, ex: ClasseImportante1(2,3).java.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Instanciação e Objetos">
+                <div class="r-stack" style="font-size: smaller;">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Gerenciar vários arquivos da mesma base de código manualmente é ineficiente e problemático.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Torna-se inviável para projetos grandes (ex: &gt; 100 arquivos).
+                    </p>
+                </div>
+
+                <div class="r-stack" style="margin-top: 20px;">
+                    <img src="media/versoes.png" style="width: 600px;"/>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="VCS">
+                <div class="r-stack" style="font-size: smaller;">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Nosso problema pode ser resolvido com um sistema de controle de versão (VCS).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Tal sistema mantém para nós um banco de dados com as diferentes versões do nosso código e
+                        outros arquivos (configuração, definições, etc.).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Operamos um VCS típico através de um processo de <b>checkout</b> -- <b>commit</b> -- <b>checkin</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        No <b>checkout</b>, copiamos uma versão específica do código para o nosso diretório de trabalho.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        No <b>commit</b>, registramos as alterações que fizemos no código, criando assim uma nova versão.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6" >
+                        No <b>checkin</b>, enviamos as alterações de volta para o banco de dados onde ficarão guardadas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7" >
+                        Os nomes e comandos para cada uma dessas operações pode ser diferente em cada ferramenta VCS, mas estão
+                        sempre presentes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="8" >
+                        O banco de dados de versões é sempre chamado de <b>repositório</b>.
+                    </p>
+                </div>
+
+                <div class="r-stack" style="margin-top: 20px;">
+                    <img src="media/vcs_1.svg" style="width: 600px;" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="VCS">
+                <div class="r-stack" style="font-size: smaller;">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Existem dois tipos principais de VCS: centralizado e distribuído.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Em um VCS centralizado, o banco de dados de versões é armazenado em um único lugar, que deve ser
+                        acessado por todos que queiram trabalhar com o código.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Nesse tipo de VCS, o programador deve sempre conferir a versão no banco de dados e resolver todos
+                        os possíveis conflitos antes do checkin, no caso de mais de uma pessoa editando o mesmo arquivo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Em um VCS distribuído, há uma cópia do banco de dados para cada programador, e o sistema se encarrega
+                        de resolver os conflitos, cada vez que um ou mais programadores desejam sincronizar suas versões.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5" >
+                        Cada um dos dois tipos possui suas vantagens e desvantagens.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6" >
+                        O tipo centralizado é mais simples, mas mais susceptível a problemas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="7" >
+                        O tipo distribuído é mais complexo, entretanto mais robusto.
+                    </p>
+                </div>
+
+                <div class="r-stack" style="margin-top: 20px;">
+                    <img src="media/vcs_central.svg" class="fragment fade-in-then-out current-visible" style="width: 600px;" data-fragment-index="2" />
+                    <img src="media/vcs_central.svg" class="fragment fade-in-then-out current-visible" style="width: 600px;" data-fragment-index="3" />
+
+                    <img src="media/vcs_distr.svg" class="fragment" style="width: 800px;" data-fragment-index="4" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Git">
+                <div class="r-stack" style="font-size: smaller;">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        O <b>git</b> é o sistema de controle de versão mais popular atualmente.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Foi criado para gerenciar o código fonte do kernel Linux.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        É um VCS distribuído. Os repositórios git podem ser criados facilmente em praticamente 
+                        qualquer diretório do sistema de arquivos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        É provável que vários de nós tenhamos o git instalado, pois é parte integrante de algumas
+                        distribuições Linux.
+                    </p>
+                </div>
+
+                <div class="r-stack" style="margin-top: 20px;">
+                    <img src="media/git-logo.png" style="width: 200px;" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Comentários">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Para criar um repositório git basta executar o comando abaixo no terminal:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        O diretório onde o comando foi executado passará a ser um diretório de trabalho do git, 
+                        atrelado ao repositório
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
+                        Adicionamos arquivos no repositório com <b>git add</b>
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        Realizamos o commit com <b>git commit</b>. Uma janela do editor de texto padrão será aberta para
+                        inserirmos a "mensagem de commit", informando de forma livre o que foi alterado naquela versão.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        Todos os arquivos adicionados com <b>git add</b> terão suas alterações verificadas e automaticamente
+                        registradas acrescentando a opção <b>-a</b> ao <b>git commit</b>.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs sh" data-trim data-line-numbers >
+                            git init
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs sh" data-trim data-line-numbers="1" >
+                            git add &lt;caminho para os arquivos&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs sh" data-trim data-line-numbers="2-5" >
+                            git commit
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="GitHub">
+                <div class="r-stack" style="font-size: smaller;">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        O <b>GitHub</b> é o um serviço de repositórios para o git.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Ele combina as vantagens de um VCS distribuído e um centralizado, oferecendo um local único
+                        para acesso e sincronização dos repositórios.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        É um dos serviços mais utilizados para distribuição de código aberto / livre
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Também disponibiliza outras ferramentas e serviços, como wikis.
+                    </p>
+                </div>
+
+                <div class="r-stack" style="margin-top: 20px;">
+                    <img src="media/github-logo.png" style="width: 200px;" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Comentários">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Quando estamos usando o GitHub (ou outro serviço de repositórios), podemos "clonar" um repositório
+                        do serviço, copiando seu conteúdo (banco de dados + diretório de trabalho) para o nosso computador.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Isso é feito com o comando <b>git clone</b>, cujo parâmetro é o endereço (URL) onde se encontra
+                        o repositório.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3">
+                        Uma vez que atualizamos a versão de um repositório clonado com o <b>git clone</b>, podemos 
+                        enviar a nova versão para o GitHub com o comando <b>git push</b>
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        Caso precisemos atualizar o nosso repositório com a última versão que está no GitHub, usamos
+                        o comendo <b>git pull</b>.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 110%;">
+                        <code class="hljs sh" data-trim data-line-numbers >
+                            git clone &lt;endereço do repositório&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs sh" data-trim data-line-numbers="1" >
+                            git push
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 110%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs sh" data-trim data-line-numbers="2-5" >
+                            git pull
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment">
+                    Sabemos agora como manter o histórico de alterações do nosso código sem torná-lo uma bagunça.
+                </p>
+                <br />
+                <p class="fragment">
+                    De quebra, ganhamos uma forma de backup remoto simples e confiável.
+                </p>
+                <p class="fragment">
+                    Todo o código a ser desenvolvido durante as aulas poderá ser acessado no repositório da turma.
+                </p>
+                <p class="fragment">
+                    Criem e testem seus próprios repositórios localmente e no GitHub.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li>
+                        O que acontece se duas pessoas editarem o mesmo arquivo no git, fizerem o commit e 
+                        tentarem sincronizar (git push/pull)?
+                    </li>
+                    <li>Quais tipos de arquivos devem ser incluídos no repositório e quais não devem?</li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
