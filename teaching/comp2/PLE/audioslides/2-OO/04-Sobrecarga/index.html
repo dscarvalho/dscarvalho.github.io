@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Sobrecarga de métodos (method overloading) -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Sobrecarga de métodos <br />
+                            (method overloading)
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula do curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, aprenderemos sobre a importância de podermos atribuir o mesmo nome à várias 
+                    implementações diferentes de um método. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao fim da aula, saberemos como e quando implementar múltiplas versões de um método.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="De volta à biblioteca">
+                <div class="r-stack" style="font-size: smaller;">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Voltemos ao nosso mundo da biblioteca. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        Sabemos que aqui temos livros e pessoas. E as pessoas estão aqui para ler livros.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Logo, podemos dizer que a ação principal de uma pessoa nesse mundo (a biblioteca) é <b>ler</b>. 
+                    </p>
+                </div>
+
+                <div class="r-stack" style="margin-top: 20px;">
+                    <img src="media/library_user_cut.jpg" style="width: 350px;" />
+
+                    <div class="fragment" data-fragment-index="3">
+                        <img src="media/reading_by_camerazn.jpg" style="width: 600px; margin-top: 70px;"  />
+                        <p style="font-size: 10pt; color: gray; margin-top: 0px;">
+                            "Reading" by <a href="https://www.flickr.com/photos/7849222@N08">camerazn</a>, licensed under CC BY 2.0
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Implementando o método ler">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Trazendo isso para o nosso código Java, dizemos que a classe <b>Pessoa</b> possui o método <b>ler</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Vejamos o nosso arquivo <i>Pessoa.java</i> até o momento:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Como a pessoa lê um livro, esse será o tipo do parâmetro do método <b>ler</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Vamos supor que a administração da biblioteca por algum motivo queira saber quantos livros e 
+                        quantas páginas cada pessoa já leu.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Definimos então os atributos <b>livrosLidos</b> e <b>paginasLidas</b> para manter essa informação.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        A cada livro lido incrementamos o valor de livros lidos em 1 e o valor de páginas lidas pelo número
+                        de páginas do livro.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package br.ufrj.dcc.comp2.ple.aula_danilo.exemplos.biblioteca;
+                            import java.time.LocalDateTime;
+
+                            public class Pessoa {
+                                String cpf;
+                                String nome;
+                                LocalDateTime dataNascimento; 
+                                String endereço;
+                                String telefone;
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package br.ufrj.dcc.comp2.ple.aula_danilo.exemplos.biblioteca;
+                            import java.time.LocalDateTime;
+
+                            public class Pessoa {
+                                String cpf;
+                                String nome;
+                                LocalDateTime dataNascimento; 
+                                String endereço;
+                                String telefone;
+
+                                public void ler(Livro livro) {
+
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package br.ufrj.dcc.comp2.ple.aula_danilo.exemplos.biblioteca;
+                            import java.time.LocalDateTime;
+
+                            public class Pessoa {
+                                String cpf;
+                                String nome;
+                                LocalDateTime dataNascimento; 
+                                String endereço;
+                                String telefone;
+                                int livrosLidos;
+                                int paginasLidas;
+
+                                public void ler(Livro livro) {
+
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="6">
+                        <code class="hljs java" data-trim data-line-numbers="13-16" >
+                            package br.ufrj.dcc.comp2.ple.aula_danilo.exemplos.biblioteca;
+                            import java.time.LocalDateTime;
+
+                            public class Pessoa {
+                                String cpf;
+                                String nome;
+                                LocalDateTime dataNascimento; 
+                                String endereço;
+                                String telefone;
+                                int livrosLidos;
+                                int paginasLidas;
+
+                                public void ler(Livro livro) {
+                                    this.livrosLidos += 1;
+                                    this.paginasLidas += livro.numPaginas;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Mudanças de planos">
+                <p class="fragment" style="font-size: smaller;">
+                    Mas um belo dia, a administração da biblioteca nos informa que além dos livros, 
+                    vão disponibilizar revistas para as pessoas lerem.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Eles por algum motivo não querem que as revistas sejam contadas como livros, logo não vão entrar
+                    na conta de livros, mas contam como páginas lidas.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    O que fazemos agora??
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Interpretando o estado">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Em primeiro lugar, sabemos que as revistas são diferentes dos livros.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Olhamos algumas revistas e chegamos na seguinte classe:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Ela não parece muito diferente da classe <a href="https://www.danilosc.ml/teaching/comp2/PLE/audioslides/2-OO/01-Classes/#/5" target="_blank">Livro</a>, 
+                        mas vamos resolver isso mais tarde...
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Agora precisamos encontrar uma maneira de tornar as pessoas capazes de ler revistas também.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            package br.ufrj.dcc.comp2.ple.aula_danilo.exemplos.biblioteca;
+
+                            public class Revista {  
+                                String titulo;
+                                String editora;
+                                int numPaginas;
+                                String assunto;
+                                int edicao;
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Implementando o método ler">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        A solução para isso será criar um outro método ler, que aceite revistas em vez de livros.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Diferente do que lê livros, esse apenas incrementa o número de páginas lidas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Mas como o Java vai saber qual método quero chamar se ambos têm o mesmo nome?
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Simples, através do tipo do argumento que for passado para o método.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Se <b>ler</b> for chamado passando uma referência a um <b>Livro</b>, o primeiro método será chamado,
+                        se for uma referência a uma <b>Revista</b>, será chamado o segundo.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers="18-20" >
+                            package br.ufrj.dcc.comp2.ple.aula_danilo.exemplos.biblioteca;
+                            import java.time.LocalDateTime;
+
+                            public class Pessoa {
+                                String cpf;
+                                String nome;
+                                LocalDateTime dataNascimento;
+                                String endereço;
+                                String telefone;
+                                int livrosLidos;
+                                int paginasLidas;
+
+                                public void ler(Livro livro) {
+                                    this.livrosLidos += 1;
+                                    this.paginasLidas += livro.numPaginas;
+                                }
+
+                                public void ler(Revista revista) {
+                                    this.paginasLidas += revista.numPaginas;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Sobrecarga de método">
+                <p class="fragment" style="font-size: smaller;">
+                    Isso que acabamos de fazer chama-se <b>sobrecarga de método</b> (method overloading).
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    É um recurso importante do ponto de vista semântico, pois quem for utilizar a classe pessoa,
+                    vai precisar aprender apenas um método, que pode ser aplicado a vários tipos.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    A única restrição quanto à sobrecarga, é que os métodos devem ter assinaturas diferentes, ou seja,
+                    não podemos ter dois métodos com o mesmo tipo, quantidade, e posição dos argumentos. <br />
+                    Não podemos, por exemplo, ter dois métodos <b>ler(Livro livro)</b> na classe Pessoa.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment">
+                    Agora sabemos como criar variantes de um mesmo método que operam em tipos diferentes e de formas
+                    diferentes, mas mantém uma mesma ideia.
+                </p>
+                <br />
+                <p class="fragment">
+                    Que tal expandir o mundo da biblioteca, para que as pessoas possam pegar livros ou revistas emprestados?
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Quantas sobrecargas tem o método <b>getBytes</b> da classe String?
+                    </li>
+                    <li style="font-size: smaller;">
+                        Posso sobrecarregar atributos (tipos diferentes, mesmo nome)?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Crie uma classe <b>PiParaTodos</b> que pode emitir o valor de Pi (&pi;) com a precisão numérica
+                        desejada (em casas decimais) e em quatro tipos diferentes: double, float, int (truncado) e String.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+

@@ -68,7 +68,7 @@
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Instanciação e Objetos">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Acessando e alterando estado">
                 <div class="r-stack" style="font-size: smaller;">
                     <p class="fragment fade-out" data-fragment-index="1" >
                         Aprendemos na aula sobre objetos que eles representam o <b>estado</b> de uma entidade individual 
@@ -99,7 +99,7 @@
                 </div>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Estado">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Sem pânico">
                 <p class="fragment" style="font-size: smaller;">
                     Mas espere um pouco! <br />
                     Os métodos que escrevemos até agora não estavam alterando o estado, nem emitindo
@@ -113,7 +113,7 @@
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Interpretando o estado">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Ações da classe Carro">
                 <div class="r-stack">
                     <p class="fragment fade-out" data-fragment-index="1" >
                         Podemos escrever nossa classe Carro da seguinte maneira:
@@ -192,18 +192,18 @@
                         <code class="hljs java" data-trim data-line-numbers="6-18" >
                             public class Carro {
                                 float quantCombustivel;
-                                float capacidadeCombustivel
+                                float capacidadeCombustivel;
                                 float velocidade;
 
                                 public float reabastecer(float quantidade) {
                                     float abastecido = 0;
                                     if (this.quantCombustivel + quantidade <= this.capacidadeCombustivel) {
-                                        this.quantCombustivel += () quantidade ;
+                                        this.quantCombustivel += quantidade;
                                         abastecido = quantidade;
                                     }
                                     else {
-                                        this.quantCombustivel = this.capacidadeCombustivel;
                                         abastecido = this.capacidadeCombustivel - this.quantCombustivel;
+                                        this.quantCombustivel = this.capacidadeCombustivel;
                                     }
                                     
                                     return abastecido;
@@ -221,12 +221,12 @@
                                 public float reabastecer(float quantidade) {
                                     float abastecido = 0;
                                     if (this.quantCombustivel + quantidade <= this.capacidadeCombustivel) {
-                                        this.quantCombustivel += () quantidade ;
+                                        this.quantCombustivel += quantidade;
                                         abastecido = quantidade;
                                     }
                                     else {
-                                        this.quantCombustivel = this.capacidadeCombustivel;
                                         abastecido = this.capacidadeCombustivel - this.quantCombustivel;
+                                        this.quantCombustivel = this.capacidadeCombustivel;
                                     }
                                     
                                     return abastecido;
@@ -249,12 +249,12 @@
                                 public float reabastecer(float quantidade) {
                                     float abastecido = 0;
                                     if (this.quantCombustivel + quantidade <= this.capacidadeCombustivel) {
-                                        this.quantCombustivel += () quantidade ;
+                                        this.quantCombustivel += quantidade;
                                         abastecido = quantidade;
                                     }
                                     else {
-                                        this.quantCombustivel = this.capacidadeCombustivel;
                                         abastecido = this.capacidadeCombustivel - this.quantCombustivel;
+                                        this.quantCombustivel = this.capacidadeCombustivel;
                                     }
                                     
                                     return abastecido;
@@ -277,12 +277,12 @@
                                 public float reabastecer(float quantidade) {
                                     float abastecido = 0;
                                     if (this.quantCombustivel + quantidade <= this.capacidadeCombustivel) {
-                                        this.quantCombustivel += () quantidade ;
+                                        this.quantCombustivel += quantidade;
                                         abastecido = quantidade;
                                     }
                                     else {
-                                        this.quantCombustivel = this.capacidadeCombustivel;
                                         abastecido = this.capacidadeCombustivel - this.quantCombustivel;
+                                        this.quantCombustivel = this.capacidadeCombustivel;
                                     }
                                     
                                     return abastecido;
@@ -309,12 +309,12 @@
                                 public float reabastecer(float quantidade) {
                                     float abastecido = 0;
                                     if (this.quantCombustivel + quantidade <= this.capacidadeCombustivel) {
-                                        this.quantCombustivel += () quantidade ;
+                                        this.quantCombustivel += quantidade;
                                         abastecido = quantidade;
                                     }
                                     else {
-                                        this.quantCombustivel = this.capacidadeCombustivel;
                                         abastecido = this.capacidadeCombustivel - this.quantCombustivel;
+                                        this.quantCombustivel = this.capacidadeCombustivel;
                                     }
                                     
                                     return abastecido;
