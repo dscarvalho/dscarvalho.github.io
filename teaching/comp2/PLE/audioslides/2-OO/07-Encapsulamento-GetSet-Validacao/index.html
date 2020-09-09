@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Encapsulamento - Getters e setters; Validação de parâmetros e triggers -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Encapsulamento - Getters e setters; Validação de parâmetros e triggers
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, continuaremos a explorar os princípios de encapsulamento através da ocultação total do
+                    estado dos objetos. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, saberemos como dedicar métodos ao acesso e controle do estado de objetos.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Estado interno oculto">
+                <p class="fragment">
+                    Sabemos que ocultar os detalhes de implementação de uma classe nos traz certas vantagens.
+                </p>
+                <br/>
+                <p class="fragment">
+                    Vamos agora expandir esse princípio, e considerar que o estado interno de qualquer objeto deve
+                    sempre estar oculto.
+                </p>
+                <p class="fragment">
+                    Ou seja, apenas o próprio objeto pode saber e manipular o seu próprio estado.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Getters e Setters">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Isso implica em todos os atributos de uma classe serem privados (campos <b style="color: blue;">private</b>).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Logo, no restante do programa, o estado de um objeto só pode ser alterado através de métodos públicos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Fica então a cargo do objeto emitir informações baseadas em seu estado, e manipular o mesmo através de 
+                        seus métodos públicos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        O padrão mais simples pelo qual esse princípio é aplicado são os métodos <b>getter</b> e <b>setter</b>, que
+                        emitem e alteram respectivamente, dados sobre o objeto.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Eles são tipicamente escritos para os atributos da classe os quais deseja-se tornar acessíveis para outras
+                        partes do programa, mas ainda sobre controle do objeto.
+                    </p>
+                    
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="6" >
+                        Funcionam assim:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Se quisermos oferecer acesso de leitura ao atributo <b>cpf</b> da classe Pessoa, criamos um método 
+                        <b>getCpf()</b> que oferece acesso controlado ao atributo. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        No caso mais simples, o atributo é retornado diretamente, mas podemos aplicar alguma transformação, 
+                        como formatação da string.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        Se quisermos oferecer acesso de escrita ao ao atributo <b>cpf</b> da classe Pessoa, criamos um método 
+                        <b>setCpf()</b> que altera o valor do atributo conforme um parâmetro (argumento do método).
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="1">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa {
+                                private String cpf;
+                                ...
+
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="6">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa {
+                                private String cpf;
+                                ...
+
+                                public String getCpf() {
+                                    return cpf;
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="8">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa {
+                                private String cpf;
+                                ...
+
+                                public String getCpf() {
+                                    return formataCpf(cpf);
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="9">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa {
+                                private String cpf;
+                                ...
+
+                                public String getCpf() {
+                                    return formataCpf(cpf);
+                                }
+
+                                public void setCpf(String cpf) {
+                                    this.cpf = cpf;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Validação de parâmetros">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Para garantir que o estado de um objeto será sempre válido, podemos verificar os parâmetros passados
+                        ao método setter, lançando e capturando exceções, ou fazendo ajustes antes de mudar efetivamente um campo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Esse processo é conhecido como <b>validação de parâmetros</b>, e o valor efetivo do campo pode ser 
+                        completamente distinto de sua representação publica através dos métodos getter e setter.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Por exemplo, o campo <b>cpf</b> da classe pessoa poderia ser mudado para o tipo int[] e ainda sim 
+                        mantermos o getter como <b>public String getCpf()</b> e o setter como <b>public void setCpf(String cpf)</b>, 
+                        fazendo as transformações apropriadas.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa {
+                                private String cpf;
+                                private ValidadorCpf validador;
+                                ...
+
+                                public void setCpf(String cpf) {
+                                    try {
+                                        this.cpf = validador.validarCpf(cpf);
+                                    }
+                                    catch (CpfFormatException e) {
+                                        ...
+                                    }
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Triggers">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Os métodos getter e setter também podem ser usados para disparar ações, por exemplo informando
+                        a outros objetos que o seu estado foi modificado.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Esse tipo de ação é conhecida como <b>trigger</b> (gatilho).
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa {
+                                private String cpf;
+                                private ValidadorCpf validador;
+                                
+                                ...
+
+                                public void setCpf(String cpf) {
+                                    try {
+                                        String novoCpf = validarCpf(cpf);
+                                        validador.informaMudanca(this.cpf, novoCpf);
+                                        this.cpf = novoCpf;
+                                        
+                                    }
+                                    catch (CpfFormatException e) {
+                                        ...
+                                    }
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    Agora entendemos um pouco mais sobre os princípios envolvidos no encapsulamento e como aplicá-los
+                    às nossas classes usando os métodos de acesso getters e setters.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Também pudemos ver que o controle de acesso ao estado interno dos objetos nos traz novas possibilidades,
+                    como a verificação de parâmetros e triggers.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Que tipo de verificação faríamos ao construir métodos para fazer uma transferência bancária em nosso
+                    sistema bancário simples?
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Há algum problema em retornar campos de tipos complexos através de um método getter? 
+                        De que forma poderíamos resolver isso?
+                    </li>
+                    <li style="font-size: smaller;">
+                        Porquê não deveríamos alterar o estado do objeto em um método getter?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Adicione o conceito de caixa eletrônico ao sistema bancário simples (caso ainda não tenha feito), e
+                        implemente as operações deste sem que incluam conhecimento interno dos outros objetos do sistema.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+

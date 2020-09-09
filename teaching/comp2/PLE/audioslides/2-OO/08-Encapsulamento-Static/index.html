@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Encapsulamento - Métodos e atributos de classe (static) -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Encapsulamento - Métodos e atributos de classe (static)
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, concluiremos as noções básicas de encapsulamento com a ideia de que as classes, assim como
+                    objetos, podem ter o seu próprio estado. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, asberemos como e porque manter o estado de classes.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Encapsulamento">
+                <div class="r-stack" style="margin-top: 40px;">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Falamos bastante até agora sobre os objetos e seus estados.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
+                        Mas e se eu lhes dissesse que as classes também são objetos?
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Sim. As classes que criamos no Java são todas instâncias da classe <b>Class</b>, ou seja, são objetos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
+                        Portanto elas também podem ter atributos e métodos, e portanto possuem estado próprio.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        Quanto ao tipo <b>Class</b>... Não precisamos falar sobre ele aqui.
+                    </p>
+                </div>
+
+                <div class="r-stack" style="margin-top: 10px;">
+                    <img src="media/recusrsive_surprise.gif" class="fragment fade-in-then-out current-visible" style="width: 400px;" data-fragment-index="3" />
+                    <img src="media/inception_meme.jpg" class="fragment fade-in-then-out current-visible" style="width: 300px;" data-fragment-index="5" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Modificadores (1)">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Para criar um atributo ou método para uma classe usamos o modificador <i style="color: mediumvioletred;">static</i>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Por exemplo, se quisermos manter uma contagem de quantos objetos do tipo Pessoa foram criados no programa,
+                        podemos incluir um novo atributo static <b>totalPessoas</b> na classe Pessoa.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Quando uma nova pessoa é criada, incrementamos esse valor em 1 no construtor.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        E podemos conceder acesso público a tal atributo através de um método getter static.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Dessa forma, podemos saber o total de pessoas criadas em outras partes do programa chamando o método
+                        <b>Pessoa.getTotalPessoas()</b>.
+                    </p>
+                    
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Atributos e métodos criados com o modificador <i style="color: mediumvioletred;">static</i> são também
+                        chamados de atributos ou métodos <b>de classe</b> (em oposição à atributos/métodos de instância).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Similarmente ao caso do total de pessoas, incluimos atributos de classe quando precisamos manter alguma
+                        informação que diz respeito à <b>todos os objetos da classe</b>, ou à classe em si.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        Já os métodos de classe são também utilizados para criar procedimentos dependam do estado da classe 
+                        ou que não dependam de estado algum, tal como <b>Math.sqrt(double a)</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        Foi isso que usamos nas primeiras aulas para criar nossas "funções" básicas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="10" >
+                        O método <b>main</b> é sempre static, pois inicia o programa a partir de uma certa classe, e portanto
+                        não depende de estado anterior.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa {
+                                private static int totalPessoas;
+                                private String cpf;
+                                ...
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa {
+                                private static int totalPessoas;
+                                private String cpf;
+                                ...
+
+                                public Pessoas(String cpf, ...) {
+                                    this.cpf = cpf;
+                                    ...
+                                    Pessoas.totalPessoas++;
+                                }
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa {
+                                private static int totalPessoas;
+                                private String cpf;
+                                ...
+
+                                public Pessoas(String cpf, ...) {
+                                    this.cpf = cpf;
+                                    ...
+                                    Pessoas.totalPessoas++;
+                                }
+
+                                public static int getTotalPessoas() {
+                                    return Pessoa.totalPessoas;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment">
+                    Agora sabemos que há situações em que precisamos manter informações sobre a classe em si ou
+                    sobre todas as instâncias de uma classe e que é possivel fazer isso com atributos e métodos 
+                    de classe (static).
+                </p>
+                <br />
+                <p class="fragment">
+                    Há alguma informação que diz respeito a todas as instâncias de alguma classe no sistema bancario simples?
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        A que referência vou apontar se usar <b>this</b> em um método static?
+                    </li>
+                    <li style="font-size: smaller;">
+                        Porque é do interesse do programador encapsular o estado da classe?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Resolva os desafios da apostila da Caelum
+                        <a href="https://www.caelum.com.br/apostila-java-orientacao-objetos/modificadores-de-acesso-e-atributos-de-classe#exercicios-encapsulamento-construtores-e-static">
+                            Seção 5.9
+                        </a>.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
