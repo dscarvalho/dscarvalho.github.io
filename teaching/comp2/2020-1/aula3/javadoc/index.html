@@ -109,6 +109,10 @@
     
       
     
+      
+    
+      
+    
 
     <!--<a class="sidebar-nav-item" href="/archive/v1.1.0.zip">Download</a>
     <a class="sidebar-nav-item" href="">GitHub project</a>-->
@@ -166,12 +170,13 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// imports</span>
 
-<span class="cm">/**
+<span class="cm">/** Classe de exemplo para o uso de Javadoc.  (Descrição curta de uma linha)
+ * &lt;p&gt;
+ * Descrição detalhada da classe.
+ * &lt;/p&gt;
  * @author      Nome Sobrenome &lt;address @ example.com&gt;
  * @version     1.0                 (versão atual dessa classe)
  * @since       0.9          (versão onde essa classe foi incluida no código)
- *
- * Classe de exemplo para o uso de Javadoc.
  */</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExemploJavadoc</span> <span class="o">{</span>
     <span class="c1">// corpo da classe</span>
@@ -203,6 +208,12 @@
  * Valor da constante PI: A razão da circunferência de um círculo pelo seu diâmetro.
 */</span>
 <span class="kd">const</span> <span class="kt">double</span> <span class="n">PI</span> <span class="o">=</span> <span class="mf">3.1415926535</span>
+</code></pre></div></div>
+
+<p>Para gerar a documentação, deve-se usar o programa javadoc, incluso na JDK, ou a opção correspondente na IDE de sua escolha.
+Usando pela linha de comando:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javadoc <span class="nt">-subpackages</span> <span class="nt">-sourcepath</span> &lt;diretório onde estão os fontes&gt; &lt;lista pacotes a serem documentados&gt;
 </code></pre></div></div>
 
 <p>A lista e descrição de todos os campos que podem ser usados no Javadoc pode ser consultada em</p>
