@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Encapsulamento - Métodos e atributos de classe (static) -- Computação II (MAB240)</title>
+	<title>Sobrescrita (override) de métodos -- Computação II (MAB240)</title>
 
 	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
 	<meta name="author" content="Danilo S. Carvalho">
@@ -36,7 +36,7 @@
                 <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
                     <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
                         <h3>
-                            Encapsulamento - Métodos e atributos de classe (static)
+                            Sobrescrita (override) de métodos
                         </h3>
                     </div>
                 </div>
@@ -58,121 +58,81 @@
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
                 <p class="fragment">
-                    Nessa aula, concluiremos as noções básicas de encapsulamento com a ideia de que as classes, assim como
-                    objetos, podem ter o seu próprio estado. 
+                    Nessa aula, falaremos da especificação de métodos em subclasses.
                 </p>
                 <br/>
                 <p class="fragment">
-                    Ao final da aula, asberemos como e porque manter o estado de classes.
+                    Ao final da aula, poderemos alterar a implementação de um método já existente em uma subclasse através
+                    do mecanismo de sobrescrita de métodos.
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Encapsulamento">
-                <div class="r-stack" style="margin-top: 40px;">
-                    <p class="fragment fade-out" data-fragment-index="1" >
-                        Falamos bastante até agora sobre os objetos e seus estados.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2">
-                        Mas e se eu lhes dissesse que as classes também são objetos?
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
-                        Sim. As classes que criamos no Java são todas instâncias da classe <b>Class</b>, ou seja, são objetos.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="4" >
-                        Portanto elas também podem ter atributos e métodos, e portanto possuem estado próprio.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="5">
-                        Quanto ao tipo <b>Class</b>... Não precisamos falar sobre ele aqui.
-                    </p>
-                </div>
-
-                <div class="r-stack" style="margin-top: 10px;">
-                    <img src="media/recusrsive_surprise.gif" class="fragment fade-in-then-out current-visible" style="width: 400px;" data-fragment-index="3" />
-                    <img src="media/inception_meme.jpg" class="fragment fade-in-then-out current-visible" style="width: 300px;" data-fragment-index="5" />
-                </div>
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Métodos herdados">
+                <p class="fragment">
+                    Como vimos na aula sobre herança, uma subclasse herda os campos e métodos da sua superclasse.
+                </p>
+                <br/>
+                <p class="fragment">
+                    Isso que dizer que não precisamos implementar novamente os métodos da superclasse e eles apresentarão o
+                    mesmo comportamento.
+                </p>
+                <br/>
+                <p class="fragment">
+                    Mas e se quisermos que o comportamento de algum método da superclasse seja diferente na subclasse?
+                </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Modificadores (1)">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Sobrescrita de método">
                 <div class="r-stack">
                     <p class="fragment fade-out" data-fragment-index="1" >
-                        Para criar um atributo ou método para uma classe usamos o modificador <i style="color: mediumvioletred;">static</i>.
+                        Para isso, precisamos sobrescrever/reescrever (override) o método a ser alterado na subclasse.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
-                        Por exemplo, se quisermos manter uma contagem de quantos objetos do tipo Pessoa foram criados no programa,
-                        podemos incluir um novo atributo static <b>totalPessoas</b> na classe Pessoa.
+                        Isso é feito declarando o método novamente com a mesma assinatura, mudando apenas o corpo.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
-                        Quando uma nova pessoa é criada, incrementamos esse valor em 1 no construtor.
+                        Por exemplo, na classe VeiculoComRodas, podemos implementar a ação de acelerar com um método genérico
+                        de aceleração de todos os veículos com rodas: ...torque aplicado nas rodas produz rotação, que produz atrito
+                        com o solo...
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
-                        E podemos conceder acesso público a tal atributo através de um método getter static.
+                        Já no caso da classe Carro, especificamos como a aceleração é obtida nesse tipo específico de veículo.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
-                        Dessa forma, podemos saber o total de pessoas criadas em outras partes do programa chamando o método
-                        <b>Pessoa.getTotalPessoas()</b>.
-                    </p>
-                    
-                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
-                        Atributos e métodos criados com o modificador <i style="color: mediumvioletred;">static</i> são também
-                        chamados de atributos ou métodos <b>de classe</b> (em oposição à atributos/métodos de instância).
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
-                        Similarmente ao caso do total de pessoas, incluimos atributos de classe quando precisamos manter alguma
-                        informação que diz respeito à <b>todos os objetos da classe</b>, ou à classe em si.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
-                        Já os métodos de classe são também utilizados para criar procedimentos dependam do estado da classe 
-                        ou que não dependam de estado algum, tal como <b>Math.sqrt(double a)</b>.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
-                        Foi isso que usamos nas primeiras aulas para criar nossas "funções" básicas.
-                    </p>
-                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="10" >
-                        O método <b>main</b> é sempre static, pois inicia o programa a partir de uma certa classe, e portanto
-                        não depende de estado anterior.
+                        O mesmo pode ser feito para a bicicleta, e assim por diante.
                     </p>
                 </div>
 
                 <div class="r-stack">
-                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
-                        <code class="hljs java" data-trim data-line-numbers >
-                            public class Pessoa {
-                                private static int totalPessoas;
-                                private String cpf;
-                                ...
-                            }
-                        </code>
-                    </pre>
                     <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="3">
                         <code class="hljs java" data-trim data-line-numbers >
-                            public class Pessoa {
-                                private static int totalPessoas;
-                                private String cpf;
+                            public class VeiculoComRodas {
                                 ...
 
-                                public Pessoas(String cpf, ...) {
-                                    this.cpf = cpf;
-                                    ...
-                                    Pessoas.totalPessoas++;
+                                public void acelerar(float intensidade) {
+                                    ...  // Como um veículo com rodas acelera.
                                 }
                             }
                         </code>
                     </pre>
                     <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="4">
                         <code class="hljs java" data-trim data-line-numbers >
-                            public class Pessoa {
-                                private static int totalPessoas;
-                                private String cpf;
+                            public class Carro extends VeiculoComRodas {
                                 ...
 
-                                public Pessoas(String cpf, ...) {
-                                    this.cpf = cpf;
-                                    ...
-                                    Pessoas.totalPessoas++;
+                                public void acelerar(float intensidade) {
+                                    ... // Como um carro acelera.
                                 }
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Bicicleta extends VeiculoComRodas {
+                                ...
 
-                                public static int getTotalPessoas() {
-                                    return Pessoa.totalPessoas;
+                                public void acelerar(float intensidade) {
+                                    ... // Como uma bicicleta acelera.
                                 }
                             }
                         </code>
@@ -180,15 +140,71 @@
                 </div>
             </section>
 
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Uso do super">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Assim como nos construtores, podemos fazer uso do comportamento da superclasse dentro de um método
+                        da subclasse usando a palavra chave <b style="color: blue;">super</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Assim, podemos não precisamos reimplementar partes da superclasse que se repetem nas subclasses.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Bicicleta extends VeiculoComRodas {
+                                ...
+
+                                public void acelerar(float intensidade) {
+                                    super.acelerar(intensidade); // Ativa o comportamento da classe mãe.
+                                    ... // Realiza o restante da ação particular a essa classe.
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="A anotação @Override">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        É possível deixar explícito que um determinado método está sendo sobrescrito usando a anotação
+                        <b>@Override</b> do Java. Tal como no exemplo abaixo:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Essa anotação informa ao compilador que o método anotado deve sobrescrever o método de mesmo nome da
+                        superclasse. Dessa forma, obriga o programador a usar a assinatura correta, evitando erros.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Bicicleta extends VeiculoComRodas {
+                                ...
+
+                                @Override
+                                public void acelerar(float intensidade) {
+                                    super.acelerar(intensidade); // Ativa o comportamento da classe mãe.
+                                    ... // Realiza o restante da ação particular a essa classe.
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+            
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
                 <p class="fragment">
-                    Agora sabemos que há situações em que precisamos manter informações sobre a classe em si ou
-                    sobre todas as instâncias de uma classe e que é possivel fazer isso com atributos e métodos 
-                    de classe (static).
+                    Podemos agora especificar o comportamento de uma subclasse modificando os métodos da superclasse
+                    através da sobrescrita (override) de método.
                 </p>
                 <br />
                 <p class="fragment">
-                    Há alguma informação que diz respeito a todas as instâncias de alguma classe no sistema bancario simples?
+                    Comportamento já desenvolvido para a superclasse pode ser aproveitado nos métodos usando a palavra
+                    chave super, assim como nos construtores.
                 </p>
             </section>
 
@@ -198,24 +214,24 @@
                 </p>
                 <ol class="list-spacing-long">
                     <li style="font-size: smaller;">
-                        A que referência vou apontar se usar <b>this</b> em um método static?
+                        Como poderiamos fazer para incorporar o comportamento de uma classe avó (dois níveis hierárquicos acima)
+                        de uma subclasse que estamos criando.
                     </li>
                     <li style="font-size: smaller;">
-                        Porque é do interesse do programador encapsular o estado da classe?
+                        Porque os construtores não são herdados da superclasse e como isso está relacionado com a sobrescrita de
+                        métodos?
                     </li>
                 </ol>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
                 <p>
                     Exercício:
                 </p>
                 <ol class="list-spacing-long">
                     <li style="font-size: smaller;">
-                        Resolva os desafios da apostila da Caelum
-                        <a href="https://www.caelum.com.br/apostila-java-orientacao-objetos/modificadores-de-acesso-e-atributos-de-classe#exercicios-encapsulamento-construtores-e-static">
-                            Seção 5.9
-                        </a>.
+                        Sobrescreva o método <b>toString()</b> da classe ArrayList&lt;String&gt; para que as strings contidas
+                        na lista apareçam uma em cada linha.
                     </li>
                 </ol>
             </section>

@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                <div class="sl-block" data-block-type="text" style="margin-top: 180px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
                     <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
                         <h4>Computação II - Ciência da Computação</h4>
                         <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
@@ -81,7 +81,7 @@
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Modificadores (1)">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Modificadores">
                 <div class="r-stack">
                     <p class="fragment fade-out" data-fragment-index="1" >
                         Toda vez que declaramos uma classe, método ou campo, especificamos para este um <b>modificador de acesso</b>.
@@ -133,7 +133,7 @@
                     <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="7">
                         <code class="hljs java" data-trim data-line-numbers >
                             public class Pessoa {
-                                String cpf;
+                                public String cpf;
                                 ...
 
                                 public void ler(Livro livro) {
@@ -186,7 +186,7 @@
                 <div class="r-stack">
                     <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
                         <code class="hljs java" data-trim data-line-numbers >
-                            private class Pessoa {
+                            public class Pessoa {
                                 ...
                                 int paginasAtento;
 
@@ -201,7 +201,7 @@
 
                     <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="6">
                         <code class="hljs java" data-trim data-line-numbers >
-                            private class Pessoa {
+                            public class Pessoa {
                                 ...
                                 private int paginasAtento;
 
@@ -216,7 +216,7 @@
                 </div>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Porque modificadores">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Protected">
                 <p class="fragment">
                     Além de public e private, há também o modificador <b style="color: blue;">protected</b>, que permite que
                     campos e métodos sejam acessados também por subclasses (falaremos sobre elas adiante).
@@ -227,7 +227,7 @@
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Porque modificadores">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Default">
                 <p class="fragment">
                     Quando não usamos um modificador, os campos e métodos podem ser acessados por qualquer classe dentro
                     do mesmo <b>pacote</b>.
@@ -323,7 +323,7 @@
                 </ol>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
                 <p>
                     Exercício:
                 </p>
