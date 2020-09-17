@@ -1,3 +1,20 @@
+.reveal .slides {
+    height: 100%;
+    top: 0;
+    margin-top: 0;
+}
+
+.reveal .slides>section {
+    min-height: 90% !important;
+    top: auto !important;
+    vertical-align: middle;
+}
+
+.reveal .slides>section>section {
+    min-height: 100% !important;
+    vertical-align: middle;
+}
+
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal ul {
     color: black;
     text-shadow: -1px 0 #ccccff, 0 1px #ccccff, 1px 0 #ccccff, 0 -1px #ccccff;
@@ -5,9 +22,9 @@
 
 .header {
     position: absolute;
-    top: -3%;
-    left: -6%;
-    width: 1680px;
+    top: 0px;
+    left: 2px;
+    width: 1320px;
     height: 60px;
     background-color: rgba(108, 125, 255, 0.8);
     text-align: left;
@@ -64,19 +81,71 @@ figure img {
     vertical-align: middle;
 }
 
-.fragment.current-visible.visible:not(.current-fragment) {
-    animation: removed-item-animation 1s cubic-bezier(0.6, -0.05, 0.9, 0.9) forwards;
+.fragment.current-visible.collapsible:not(.current-fragment) {
+    display: none;
+    height:0px;
+    line-height: 0px;
+    font-size: 0px;
+    animation: removed-item-animation 1.5s cubic-bezier(0.6, -0.05, 0.9, 0.9) forwards;
+    transform-origin: 0% 100%;
 }
 @keyframes removed-item-animation {
     0% {
         opacity: 1;
+        transform: rotateZ(0);
     }
 
     100% {
         opacity: 0;
+        transform: translateY(900px) rotateZ(70deg);
         line-height: 0px;
-        font-size: 0px;
-        height: 0px;
         display: none;
     }
+}
+
+blockquote {
+    font-family: Georgia, serif;
+    color: #383838;
+    border-radius: 25px;
+    position: relative;
+    padding-left: 50px !important;
+}
+
+/* Thanks: http://callmenick.com/post/styling-blockquotes-with-css-pseudo-classes */
+blockquote:before {
+    font-family: Georgia, serif;
+    position: absolute;
+    font-size: 54pt;
+    line-height: 1;
+    top: 0;
+    left: 0;
+    content: "\201C";
+}
+
+blockquote:after {
+    font-family: Georgia, serif;
+    position: absolute;
+/* display: block; don't use this, it raised the quote too high from the bottom - defeated line-height? */
+    float:right;
+    font-size: 54pt;
+    line-height: 1;
+    right:0;
+    bottom:-0.5em;
+    content: "\201D";
+}
+
+.box-illustration {
+    width:400px;
+    height:280px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.box-illustration-2 {
+    width:520px;
+    height:280px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
