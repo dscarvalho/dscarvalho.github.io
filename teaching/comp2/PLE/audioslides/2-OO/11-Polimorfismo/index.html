@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Polimorfismo, métodos virtuais -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Polimorfismo, métodos virtuais
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, damos sequência a ideia de organizar nossos conceitos em uma hierarquia de classes, falando
+                    das consequências disso em termos de métodos e tipagem no Java. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, saberemos como nos referirmos a objetos por tipos diferentes na hierarquia de classes.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Herança e tipagem">
+                <p class="fragment" style="font-size: smaller;">
+                    Quando herdamos de uma classe estamos também criando uma relação semântica de hiponímia e hiperonímia, onde a
+                    subclasse é um hipônimo da superclasse (<a href="https://en.wikipedia.org/wiki/Is-a">relação is-a</a>).
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Os tipos da linguagem Java seguem essa mesma relação: um objeto de um subtipo é também um objeto de seu supertipo. 
+                    Ou seja, uma instância de <b>Funcionario</b> também é uma instância de <b>Pessoa</b>, e uma instância de <b>Carro</b> é também uma instância
+                    de <b>VeiculoComRodas</b>.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Mas o que isso significa em termos do código?
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Polimorfismo">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        A primeira consequência desse fato é que podemos atribuir uma referência de um objeto a uma variável
+                        de seu supertipo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="2" >
+                        O funcionário que foi criado no exemplo abaixo é referenciado por uma variável do tipo <b>Pessoa</b>,
+                        mas não deixa de ser do tipo <b>Funcionario</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" data-fragment-index="3" >
+                        Chamamos de <b>polimorfismo</b> a capacidade de nos referir a um mesmo objeto via mais de um tipo.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            Pessoa pessoa = new Funcionario("123456789-00", "Fulano da Silva", 321);
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Métodos virtuais">
+                <div class="r-stack">
+                    <p class="fragment fade-out current-visible" style="font-size: smaller;" data-fragment-index="1" >
+                        Isso quer dizer que se um método for chamado através dessa variável, e ele existir nas classes
+                        Pessoa e Funcionario, será chamado o método da classe Funcionario caso haja um override, e caso não,
+                        será chamado o método da classe Pessoa.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Por exemplo: para garantir que a biblioteca não emprega menores de idade, sobrescrevemos o setter da
+                        data de nascimento de Pessoa, para verificar a idade antes de atribuir. Podemos fazer tal verificação
+                        também no construtor.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Se o método setDataNascimento for chamado usando a variável <i>pessoa</i> no exemplo abaixo, a atribuição não será feita
+                        pois o método da classe Funcionário será chamado e a verificação de idade resultará na impressão da
+                        mensagem de erro programada.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Uma chamada a um método sobrescrito em uma subclasse através de uma referência a sua superclasse é 
+                        conhecida como <b>chamada de método virtual</b>. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        O compilador valida a chamada usando a declaração do método na superclasse, mas a JVM só fará a 
+                        chamada ao método correto durante a execução. Daí o nome "virtual", pois a chamada não está definida 
+                        de fato no bytecode.
+                    </p>
+                    
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            Pessoa pessoa = new Funcionario("123456789-00", "Fulano da Silva", 321);
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment fade-in-then-out current-visible" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            private class Funcionario extends Pessoa {
+                                ...
+
+                                @Override
+                                public void setDataNascimento(LocalDateTime dataNascimento) {
+                                    if (Pessoa.calculaIdade(dataNascimento) >= 18) {
+                                        this.dataNascimento = dataNascimento;
+                                    }
+                                    else {
+                                        System.err.println("Erro: Funcionários devem ter mais de 18 anos de idade.");
+                                    }
+                                }
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            pessoa.setDataNascimento(new LocalDateTime.now().minusDays(1));
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs sh" data-trim data-line-numbers >
+                            Erro: Funcionários devem ter mais de 18 anos de idade.
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            pessoa.setDataNascimento(new LocalDateTime.now().minusDays(1));
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Onde usar?">
+                <p class="fragment" style="font-size: smaller;">
+                    Esses recursos são tipicamente utilizados no intento de generalizar os argumentos de métodos,
+                    aceitando múltiplos tipos complementares e deixando a decisão de qual método chamar em cada
+                    ponto para a JVM.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Não é difícil imaginar situações em que precisaremos verificar ou manipular pessoas no sistema
+                    da biblioteca independente de serem funcionários ou usuários. Fazemos isso sabendo que cada objeto
+                    possui sua própria maneira de manter seu estado interno, e essa maneira depende do tipo.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    O polimorfismo e as chamadas de método virtual adicionam novos recursos ao nosso arsenal de
+                    encapsulamento, permitindo abstrair até mesmo qual método será chamado para uma dada referência.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Entretanto, o polimorfismo não permite o intercâmbio de tipos irmãos ou de tipos não complementares.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    E se eu quisesse declarar que a minha classe permite certas ações, mas não quisesse implementá-las de 
+                    imediato?
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        No caso da variável pessoa, do tipo Pessoa, mas que contém uma referência para um objeto do tipo 
+                        Funcionário. Posso realizar a chamada pessoa.getMatricula(), assumindo que tal método existe na
+                        classe Funcionario?
+                    </li>
+                    <li style="font-size: smaller;">
+                        Se todo <b>Carro</b> é um <b>VeiculoComRodas</b> e todo <b>VeiculoComRodas</b> é um <b>Veiculo</b>,
+                        então todo <b>Carro</b> é um <b>Veiculo</b>?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Construa um programa Java que calcule polimorficamente o resultado do método <b>estimativaAnosEscolaridade()</b> 
+                        para as classes <b>EnsinoBasico</b>, <b>Bacharel</b> e <b>Mestre</b>, considerando o sistema educacional do Brasil.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
