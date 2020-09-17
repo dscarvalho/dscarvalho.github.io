@@ -1,0 +1,729 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Metodologia de Construção e Avaliação de Modelos Preditivos</title>
+
+        <meta name="description" content="Inteligência Artificial e Aplicações ao Diagnóstico e Tratamento do Câncer">
+        <meta name="author" content="Danilo S. Carvalho">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+        <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+        <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+        
+        <link rel="stylesheet" href="/public/css/slides.css">
+
+        <!--[if lt IE 9]>
+        <script src="/public/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-image="media/sampling_bg.png" data-transition="fade-out">
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+						<div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                            <h3>
+                                Metodologia de Construção e Avaliação de Modelos Preditivos
+                            </h3>
+						</div>
+					</div>
+
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 300px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+    					<div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+							<h4>Mineração de Dados - 2019</h4>
+							<br style="line-height: 100%" />
+							<h5 style="font-size: 24pt">Danilo S. Carvalho</h5>
+                        </div>
+    				</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png">
+                    <div class="header">
+        			    <h3>Índice</h3>
+                    </div>
+                    <div style="height: 40px"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-long">
+									<li>Construindo um modelo preditivo</li>
+									<li>Amostragem de dados</li>
+									<li>Treinamento (fit) do modelo</li>
+									<ul>
+										<li>Condição de parada</li>
+									</ul>
+									<li>Validação do modelo</li>
+									<li>Avaliação</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+				
+
+				<section data-background-image="media/sampling_bg.png" data-transition="none">
+					<div class="header">
+        			    <h3>Construindo um modelo preditivo</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<p><b>O que é um modelo preditivo?</b></p>
+						        <ul class="list-spacing-medium">
+						            <li>
+										Um modelo preditivo é um artefato matemático que nos permite prever o comportamento de uma ou mais variáveis, 
+										condicionado à observação de um conjunto de dados pertinente ao problema em análise.
+									</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="none">
+					<div class="header">
+        			    <h3>Construindo um modelo preditivo</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<p><b>O que é um modelo preditivo?</b></p>
+						        <ul class="list-spacing-longer">
+						            <li>Geralmente obtido a partir do ajuste de</li>
+                                    <ul>
+										<li>
+											A) Probabilidade condicional das variáveis dependentes, 
+											dadas as variáveis explicativas: $P(Y | X = x)$. (modelo discriminativo)
+										</li>
+										<li>
+											B) Probabilidade condicional das variáveis explicativas, 
+											dadas as variáveis dependentes: $P(X | Y = y)$, ou a probabilidade conjunta
+											$P(X, Y)$. (modelo gerador)</li>
+									</ul>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png">
+					<div class="header">
+        			    <h3>Construindo um modelo preditivo</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+						<img src="media/k-means_convergence.gif" style="height: 580px; border: 0;" />
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png">
+					<div class="header">
+        			    <h3>Construindo um modelo preditivo</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+						            <li>Para construir um bom modelo, precisamos então</li>
+						            <ol>
+										<li>
+											Selecionar um conjunto de dados que represente bem o <i>domínio</i> do problema sendo analisado. 
+											<span class="fragment" data-fragment-index="1" style="color: #bb0000; text-decoration: underline; margin-left: 10px;">Amostragem</span>
+										</li>
+										<li>
+											Ajustar o modelo o suficiente para que possa generalizar seu comportamento para dados não conhecidos, 
+											sem "decorar" os dados. 
+											<span class="fragment" data-fragment-index="2" style="color: #bb0000; text-decoration: underline; margin-left: 10px;">Treinamento</span>
+										</li>
+										<li>
+											Verificar se o modelo está corretamente ajustado e estimar o seu desempenho.
+											<span class="fragment" data-fragment-index="3" style="color: #bb0000; text-decoration: underline; margin-left: 10px;">Validação</span>
+										</li>
+										<li>
+											Testar e avaliar o desempenho do modelo.
+											<span class="fragment" data-fragment-index="4" style="color: #bb0000; text-decoration: underline; margin-left: 10px;">Teste ou Avaliação</span>
+										</li>
+									</ol>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+
+				<section data-background-image="media/sampling_bg.png">
+					<div class="sl-block" data-block-type="text" style="width: 1280px; height: auto; margin-top: 200px">
+    					<div class="sl-block-content" data-placeholder-tag="h2" style="z-index: 10;">
+        				<h2>Amostragem de dados</h2>
+	    				</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Amostragem de dados</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+						            <li>
+										Os exemplos conhecidos para um problema no mundo real apresenta uma distribuição <b>D</b> para suas variáveis,
+										determinada pelo domínio do problema.
+									</li>
+									<li><b>D</b> é desconhecida.</li>
+						            <li>Ao selecionar exemplos, obtemos uma distribuição <b>D'</b>, a qual gostariamos que fosse similar a <b>D</b>.</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.jpeg" data-transition="fade">
+					<div class="header">
+        			    <h3>Amostragem de dados</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Estratégias de amostragem</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+						            <li>
+										As estratégias de amostragem determinam como serão feitos os próximos passos da construção
+										do modelo: treinamento, validação, e avaliação.
+									</li>
+									<li>Cada estratégia possui vantagens e desvantagens, sendo usadas em diferentes situações.</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Resubstituição</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+									<li>Todo o conjunto de exemplos conhecido é utilizado para treinar e avaliar o modelo.</li>
+								</ul>
+								<div style="margin-top: 40px;">
+									<ul style="width: 650px; float: left;">
+										<li>Estimativa otimista do desempenho.</li>
+										<li>Aumenta tendência a "decorar" os dados.</li>
+										<li>Útil no caso de falta de exemplos úteis.</li>
+									</ul>
+									<img src="media/resubstituicao.svg" style="height: 250px; border: 0; margin-left: 20px;" />
+								</div>
+						</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Holdout</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+									<li>Uma fração $q \lt 1.0$ do conjunto de exemplos é separada para treinamento e $(1 - q)$ para teste/validação.</li>
+								</ul>
+								<div style="margin-top: 40px;">
+									<ul style="width: 650px; float: left;">
+										<li>Dados de teste não fazem parte do treinamento.</li>
+										<li>Menos otimista.</li>
+										<li>Problemático em conjuntos muito pequenos pois parte dos exemplos são ignorados.</li>
+									</ul>
+									<img src="media/holdout.svg" style="height: 250px; border: 0; margin-left: 20px;" />
+								</div>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Validação Cruzada</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<ul class="list-spacing-medium">
+									<li>Realiza $K$ amostragens holdout (folds) mutualmente exclusivos.</li>
+								</ul>
+								<div style="margin-top: 10px; text-align: center">
+									Ex: 5-fold CV
+									<ul style="width: 650px; float: left; margin-top: 30px;">
+										<li>A cada iteração, $K - 1$ folds são usados para treinamento e 1 para teste/validação.</li>
+										<li>Este processo é repetido $K$ vezes.</li>
+										<li>A avaliação do modelo é feita sobre a média dos resultados dos folds.</li>
+									</ul>
+									<img src="media/crossval.svg" style="height: 400px; border: 0; margin-left: 30px;" />
+								</div>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Validação Cruzada</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<ul class="list-spacing-medium">
+									<li>Realiza $K$ amostragens holdout (folds) mutualmente exclusivos.</li>
+								</ul>
+								<div style="margin-top: 10px; text-align: center">
+									Ex: 5-fold CV
+									<ul style="width: 650px; float: left; margin-top: 40px;">
+										<li>Diminui viés de amostragem.</li>
+										<br/>
+										<li>Mais custoso.</li>
+									</ul>
+									<img src="media/crossval.svg" style="height: 400px; border: 0; margin-left: 30px;" />
+								</div>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Bootstrap</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<ul class="list-spacing-medium">
+										<li>Seleciona $N$ amostras aleatórias (com reposição) a partir do conjunto de exemplos.</li>
+									</ul>
+									<div style="text-align: center">
+										<ul class="list-spacing-medium" style="width: 550px; float: left; margin-top: 20px;">
+											<li>Ex: Bootstrap e0: <br/> $N = $ tamanho do conjunto de exemplos.</li>
+											<li>Exemplos não sorteados são usados para teste/validação.</li>
+											<li>Vantagens e desvantagens similares à Validação Cruzada.</li>
+										</ul>
+										<img src="media/bootstrapping.svg" style="height: 400px; border: 0; margin-left: 30px; " />
+									</div>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png">
+					<div class="sl-block" data-block-type="text" style="width: 1280px; height: auto; margin-top: 200px">
+    					<div class="sl-block-content" data-placeholder-tag="h2" style="z-index: 10;">
+        				<h2>Treinamento (fit) do modelo</h2>
+	    				</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png">
+					<div class="header">
+        			    <h3>Treinamento</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+									<ul class="list-spacing-medium">
+										<li>
+											Os exemplos selecionados para treinamento são apresentados uma ou mais vezes 
+												para o algoritmo que vai construir o modelo.
+											</li>
+									</ul>
+									<div style="text-align: center; margin-top: 30px;">
+										<img src="media/godzilla_kaitensushi.gif" style="height: 400px; float: left; border: 0;" />
+
+										<ul class="list-spacing-medium" style="width: 550px; float: left; margin-left: 60px;">
+											<li style="list-style: none;">
+												Dependendo do algoritmo e do problema, pode ser necessário a reordenação dos exemplos, 
+												para evitar a ocorrência de viés temporal.
+											</li>
+										</ul>
+									</div>
+								</div>
+						</div>
+						
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Condição de parada</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+						            <li>Decidir quando o treinamento deve parar envolve geralmente um ou mais dos seguintes critérios:</li>
+						            <ul class="list-spacing-long">
+										<li>Convergência</li>
+										<ul>
+											<li>Aguarda a condição de convergência do algoritmo.</li>
+										</ul>
+										<li>Número de iterações (early stopping)</li>
+										<ul>
+											<li>Interrompe o algoritmo após um número determinado de iterações.</li>
+										</ul>
+						            </ul>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Condição de parada</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+						            <li>Decidir quando o treinamento deve parar envolve geralmente um ou mais dos seguintes critérios:</li>
+						            <ul class="list-spacing-long">
+										<li>Desempenho sobre o conjunto de treinamento</li>
+										<ul>
+											<li>Treina até que o modelo consiga um desempenho desejado no conjunto de treinamento.</li>
+										</ul>
+										<li>Desempenho sobre o conjunto de validação</li>
+										<ul>
+											<li>
+												Separa um conjunto de validação para ajuste do modelo e treina 
+												até alcançar o desempenho desejado neste.
+											</li>
+										</ul>
+						            </ul>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png">
+					<div class="sl-block" data-block-type="text" style="width: 1280px; height: auto; margin-top: 200px">
+    					<div class="sl-block-content" data-placeholder-tag="h2" style="z-index: 10;">
+        				<h2>Validação do modelo</h2>
+	    				</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Validação</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+						            <li>
+										Consiste em avaliar o desempenho do modelo em um conjunto de exemplos separado do de treinamento, 
+										mas diferente do de teste.
+									</li>
+									<li>Usado para ajustar os parâmetros do modelo e fazer o retreinamento conforme necessário.</li>
+						            <ul>
+										<li style="color: brown">Nota de terminologia: </li>
+										<ul>
+											<li>Parâmetros: variáveis internas ao modelo (e.g., coeficientes)</li>
+											<li>Hiperparâmetros: variáveis do algoritmo de construção do modelo (e.g., num. iterações, função objetivo)</li>
+										</ul>
+									</ul>
+									<li>Muitas vezes "teste" é usado quando queremos nos referir à validação.</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Ajuste de parâmetros</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+									<li>O ajuste de parâmetros é feito de acordo com o algoritmo utilizado.</li>
+									<li>Alguns métodos comuns são:</li>
+						            <ul class="list-spacing-long">
+										<li>Aleatório / Eliminação</li>
+										<li>Busca binária</li>
+										<li>Fator de confiança</li>
+										<ul>
+											<li>Elimina elementos do modelo baseado em um fator de confiança calculado para cada exemplo.</li>
+										</ul>
+						            </ul>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png">
+					<div class="sl-block" data-block-type="text" style="width: 1280px; height: auto; margin-top: 200px">
+    					<div class="sl-block-content" data-placeholder-tag="h2" style="z-index: 10;">
+        				<h2>Avaliação</h2>
+	    				</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Avaliação</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-longer">
+									<li>Consiste em obter uma medida do desempenho final do modelo.</li>
+									<li>Realizada usando os dados separados para teste.</li>
+									<li>Dependente do tipo de problema, mas métricas comuns são bastante utilizadas.</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Métricas</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+							<p>Algumas métricas comuns são:</p>
+
+							<ul class="list-spacing-medium">
+								<li>Erro Quadrático Médio (MSE)</li>
+								<li>Precisão</li>
+								<li>Cobertura (Recall)</li>
+								<li>F1-score</li>
+							</ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Métricas</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+							<ul class="list-spacing-medium">
+								<li>Erro Quadrático Médio (MSE)</li>
+								<br/>
+
+								<ul style="list-style: none">
+									<li>$$MSE = \frac{1}{n}\sum_{i=1}^{n}(Y_i - \hat{Y}_i)^2$$</li>
+								</ul>
+							</ul>
+							<br/><br/>
+							<ul style="list-style: none;">
+								<li>onde $Y_i$ é o valor do exemplo de teste conhecido e $\hat{Y}_i$ é o valor estimado.</li>
+							</ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Matriz de Confusão</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<ul class="list-spacing-medium">
+										<li>Apresenta os resultados do teste de forma sumarizada.</li>
+									</ul>
+									<div style="text-align: center">
+										<ul class="list-spacing-medium" style="width: 550px; float: left; margin-top: 20px;">
+											<li>As linhas representam os valores esperados (verdadeiros).</li>
+											<li>As colunas representam os valores obtidos (estimados).</li>
+											
+										</ul>
+										<img src="media/confmatrix.png" style="height: 450px; border: 0; margin-left: 30px; " />
+									</div>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Matriz de Confusão</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<ul class="list-spacing-medium">
+										<li>Apresenta os resultados do teste de forma sumarizada.</li>
+									</ul>
+									<div style="text-align: center">
+										<ul class="list-spacing-medium" style="width: 550px; float: left; margin-top: 20px;">
+											<li>Os erros, em uma classificação binária, são divididos em</li>
+											<ul>
+												<li>Falsos positivos: classificados como positivos, mas são negativos</li>
+												<li>Falsos negativos: classificados como negativos, mas são positivos</li>
+											</ul>
+										</ul>
+										<img src="media/confmatrix.png" style="height: 450px; border: 0; margin-left: 30px; " />
+									</div>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Métricas</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+							<ul class="list-spacing-medium">
+								<li>Precisão</li>
+								<br/>
+
+								<ul style="list-style: none">
+									<li>$P = \frac{verdadeiros\_positivos}{verdadeiros\_positivos + falsos\_positivos}$</li>
+								</ul>
+								<br/>
+								<li>Cobertura (Recall)</li>
+								<br/>
+
+								<ul style="list-style: none">
+									<li>$R = \frac{verdadeiros\_positivos}{verdadeiros\_positivos + falsos\_negativos}$</li>
+								</ul>
+							</ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png">
+					<div class="header">
+        			    <h3>Precisão & Cobertura</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+						<img src="media/precisionrecall_1.png" style="height: 600px; border: 0; float: left; margin-left: 40px;" />
+						<img src="media/precisionrecall_2.png" style="height: 400px; border: 0;" />
+					</div>
+				</section>
+
+				<section data-background-image="media/sampling_bg.png" data-transition="fade">
+					<div class="header">
+        			    <h3>Métricas</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+							<ul class="list-spacing-medium">
+								<li>F1-score</li>
+								<br/>
+
+								<ul style="list-style: none">
+									<li>$F1 = 2 * \frac{Precisão * Recall}{Precisão + Recall}$</li>
+								</ul>
+							</ul>
+							<br/><br/>
+							<ul class="list-spacing-longer">
+								<li>Média harmônica da precisão e cobertura.</li>
+								<li>Oferece um bom balanço entre as duas medidas.</li>
+							</ul>
+					    </div>
+					</div>
+				</section>
+				
+			</div>
+        </div>
+        
+        <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+		</script>
+
+
+		<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+        <script src="/public/reveal.js/dist/reveal.js"></script>
+        <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+        <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+        <script src="/public/reveal.js/plugin/search/search.js"></script>
+        <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+        <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+    
+        <script>
+    
+                // Full list of configuration options available here:
+                // https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                    width: 1280,
+                    height: 720,
+                    controls: true,
+                    progress: true,
+                    history: true,
+                    center: true,
+                    mouseWheel: true,
+                    slideNumber: "c/t",
+                    showSlideNumber: "all",
+                    audio: {
+                        prefix: 'audio/',
+                        suffix: '.webm',
+                        defaultDuration: 5,
+                        textToSpeechURL: null,
+                        advance: 500,
+                        autoplay: false,
+                        defaultNotes: true,
+                        defaultText: false,
+                        playerOpacity: 0.2,
+                    },
+                    menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+                        themes: false,
+                        transitions: false,
+                        markers: true,
+                        hideMissingTitles: true,
+                        //custom: [
+                        //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+                        //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+                        //    ]
+                    },
+                    //theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                    //transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+    
+                    // Optional libraries used to extend on reveal.js
+                    dependencies: [
+                        { src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+                        //{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+                        //{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+                        //{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+                        { src: '/public/reveal.js-plugins/menu/menu.js' },
+                    ],
+                    
+                    /*
+                    keyboard: { 
+                        82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+                        90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+                        84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+                      },
+                    */
+                    
+                    plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+                });
+    
+        </script>
+	</body>
+</html>
