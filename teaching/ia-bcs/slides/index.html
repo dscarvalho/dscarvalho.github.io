@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="pt">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Inteligência Artificial e Aplicações ao Diagnóstico e Tratamento do Câncer</title>
+
+        <meta name="description" content="Inteligência Artificial e Aplicações ao Diagnóstico e Tratamento do Câncer">
+        <meta name="author" content="Danilo S. Carvalho">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+        <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+        <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+        
+        <link rel="stylesheet" href="/public/css/slides.css">
+
+        <!--[if lt IE 9]>
+        <script src="/public/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-image="media/bg.png" data-transition="fade-out">
+					<div class="sl-block" data-block-type="text" style="height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+						<div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11; margin-top: 40px;">
+                            <h3>
+                                Inteligência Artificial e Aplicações <br />
+                                ao Diagnóstico e Tratamento do Câncer
+                            </h3>
+                            <h4>
+                                Abordagens de biologia de sistema para medicina translacional
+                            </h4>
+						</div>
+					</div>
+
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                        <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                            <br style="line-height: 200%" />
+
+                            <h5 style="font-size: 24pt">Danilo S. Carvalho, PhD <sup>1, 2</sup></h5>
+                            
+                            <br style="line-height: 100%" />
+
+                            <ol class="list-spacing-medium" style="font-size: 20pt;">
+                                <li>Centro de Desenvolvimento Tecnológico em Saúde (CDTS) - FIOCRUZ</li>
+                                <li>Departamento de Ciência da Computação - UFRJ</li>
+                            </ol>
+							
+							
+                        </div>
+    				</div>
+				</section>
+
+				<section data-background-image="media/bg.png">
+                    <div class="header">
+        			    <h3>Conteúdo</h3>
+                    </div>
+                    <div style="height: 40px"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-long">
+                                    <li>Computadores &amp; Inteligência Artificial</li>
+                                    <li>Princípios de funcionamento</li>
+                                    <li>Desafios na medicina diagnóstica</li>
+                                    <li>Desafios na aplicação de IA ao tratamento de pacientes</li>
+									<li>Sistemas preditivos e Aprendizado de Máquina</li>
+                                    <li>Ferramentas e conjuntos de dados</li>
+                                    <li>Visualização</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+				
+
+				<section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>Computadores</h3>
+                    </div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<img src="media/eniac.jpeg" style="width:850px; border: 0px;" />
+					</div>
+				</section>
+
+				<section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>Computadores</h3>
+					</div>
+					<div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+							<blockquote>
+								Se a GM tivesse acompanhado a tecnologia da mesma forma que a indústria de computadores,
+								estariamos todos dirigindo carros de 25 dólares que percorrem 300 Km por litro.						
+							</blockquote>
+							<div style="width: 100%; text-align: right; font-size: 24pt; margin-top: 40px;">
+								-- Antiga piada atribuida (incorretamente) a Bill Gates, em 1997.
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Inteligência Artificial: O que queremos</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<div>
+									<ul class="list-spacing-longer" style="width: 800px; float: left;">
+										<li>Autonomia de decisão: resolver tarefas sem intervenção humana</li>
+										<li>Versatilidade: utilização em diversas atividades</li>
+									</ul>
+									<div class="fragment box-illustration  current-visible" data-fragment-index="2" style="background-image: url(media/terminator_cut.jpg); position: relative; float: right;"></div>
+									<div class="fragment box-illustration" data-fragment-index="3" style="background-image: url(media/auto_car.jpg); right: 10px; position: absolute; "></div>	
+								</div>
+		
+								<ul class="list-spacing-medium fragment" style="margin-top: 40px;" data-fragment-index="4">
+									<li>Outros interesses: comunicação, consciência</li>
+									<li>Problemas: desemprego, responsabilidade da máquina</li>
+								</ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Inteligência Artificial: O que temos</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+							<div>
+								<ul class="list-spacing-longer" style="width: 700px; float: left;">
+									<li>Autonomia limitada: necessário &ldquo;treinamento&rdquo; para cada tarefa</li>
+									<li>Versatilidade: utilização em tipos específicos de tarefas</li>
+								</ul>
+								<div class="fragment box-illustration-2 current-visible" data-fragment-index="2" style="background-image: url(media/face_recog.jpg); position: relative; float: right;"></div>
+								<div class="fragment box-illustration-2" data-fragment-index="3" style="background-image: url(media/amazon-echo.jpg); right: 0px; position: absolute;"></div>	
+							</div>
+	
+							<ul class="list-spacing-medium" style="margin-top: 40px;">
+								<li class="fragment" data-fragment-index="2">Reconhecimento facial</li>
+								<li class="fragment" data-fragment-index="3">Transcrição de voz, comandos via linguagem natural</li>
+							</ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>Autonomia (limitada aos dados)</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-longer">
+									<li>Sistemas atuais são capazes de &ldquo;aprender&rdquo; padrões de variada complexidade</li>
+									<li>Padrões são armazenados como parâmetros de funções matemáticas ou lógicas</li>
+									<li>Precisam ser ajustados de acordo com os dados</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>A lacuna semântica</h3>
+                    </div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<img src="media/semantic_gap.jpg.webp" style="width:1100px; border: 0px;" />
+						<div style="width: 100%; text-align: right; font-size: 20pt; margin-top: 0px;">
+								[Andre M. Maier - bitjunkie.wordpress.com].
+						</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>Indo um pouco além dos dados...</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+								<ul class="list-spacing-medium">
+									<li>
+										Interesse na informação implícita.
+									</li>
+									<li>
+										Aproximar a representação da informação nos computadores daquela 
+										que pode ser interpretada por humanos.
+									</li>
+								</ul>
+								<div style="text-align: center; margin-top: 30px;">
+									<img src="media/godzilla_kaitensushi.gif" style="height: 400px; float: left; border: 0;" />
+
+									<ul class="list-spacing-medium" style="width: 550px; float: left; margin-left: 60px;">
+										<li style="list-style: none;">
+											Precisamos também entender o que nossas criações estão aprendendo...
+										</li>
+									</ul>
+								</div>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Inteligência Artificial: Tipos</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+							<div>
+								<ul class="list-spacing-longer" style="width: 600px; float: left;">
+									<li>
+                                        <b>IA forte</b>: máquina toma decisões autonomamente.<br />
+                                        <ul>
+                                            <li>Consciência</li>
+                                            <li>Território da ficção</li>
+                                        </ul>
+                                    </li>
+									<li>
+                                        <b>IA fraca</b>: computador registra padrões em dados na forma de funções matemáticas/lógicas.<br />
+                                        <ul>
+                                            <li>Aprendizado de Máquina</li>
+                                            <li>Realidade hoje</li>
+                                        </ul>
+                                    </li>
+								</ul>
+								<div class="fragment box-illustration-2 current-visible" data-fragment-index="2" style="background-image: url(media/robo.jpeg); position: relative; float: right; width:600px; height: 400px;"></div>
+								<div class="fragment box-illustration-2" data-fragment-index="3" style="background-image: url(media/nn_digits.gif); right: 0px; position: absolute; width:600px; height: 400px;"></div>	
+							</div>
+					    </div>
+					</div>
+                </section>
+                
+                <section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>IA: Princípios de funcionamento</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-longer">
+                                    <li>Abstração do mundo real.</li>
+                                    <li>
+                                        Função objetivo.
+                                        <ul>
+                                            <li>Função de perda: punição ao erro.</li>
+                                        </ul>
+                                    </li>
+									<li>Treinamento: observação -> tentativa e erro -> aproximação.</li>
+									<li>Validação / Teste: reprodução do comportamento esperado.</li>
+									<li class="fragment" data-fragment-index="2">Refinamento e Interpretabilidade.</li>
+						        </ul>
+					    </div>
+					</div>
+                </section>
+
+                <section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>Aprendendo como uma IA</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+                    <div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+                        <video autoplay="true" controls loop="true" muted="true" width="600">
+                            <source src="media/reinforcement_learning.mp4" type="video/mp4"> Your browser does not support the video tag.
+                         </video>
+                    </div>
+                </section>
+                
+                <section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>IA: Propósitos</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-longer">
+                                    <li>Automação de sistemas complexos.</li>
+                                    <li>Reconhecimento de padrões.</li>
+                                    <li>Explicação de sistemas complexos.</li>
+						        </ul>
+					    </div>
+					</div>
+                </section>
+                
+                <section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>IA: Ramos</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-longer">
+                                    <li>Computação Cognitiva</li>
+                                    <ul class="fragment fade-in-then-out current-visible collapsible" style="font-size: smaller;" data-fragment-index="2">
+                                        <li>
+                                            Capturar e utilizar o contexto em torno de um problema para produzir inferências, 
+                                            imitando o processo de raciocínio humano.
+                                        </li>
+                                    </ul>
+                                    <li>Aprendizado de Máquina</li>
+                                    <ul class="fragment fade-in-then-out current-visible collapsible" style="font-size: smaller;" data-fragment-index="3">
+                                        <li>
+                                            Capacidade de aprender com os dados sem ser explicitamente programado. Imita o processo de aprendizado.
+                                        </li>
+                                    </ul>
+                                    <li>Deep Learning</li>
+                                    <ul class="fragment fade-in-then-out current-visible collapsible" style="font-size: smaller;" data-fragment-index="4">
+                                        <li>
+                                            Um dos tipos de Aprendizado de Máquina. Realiza o aprendizado usando uma técnica conhecida como <b>Redes Neurais
+                                            Artificiais</b>, que imitam (superficialmente) o funcionamento do cérebro humano.
+                                        </li>
+                                    </ul>
+                                    <li>Visão Computacional</li>
+                                    <ul class="fragment fade-in-then-out current-visible collapsible" style="font-size: smaller;" data-fragment-index="5">
+                                        <li>
+                                            Técnicas para análise de dados visuais: fotos, vídeos, radiografia, MRI, entre outros.
+                                            Identificação de padrões e interpretação das imagens.
+                                        </li>
+                                    </ul>
+                                    <li>Processamento de Linguagem Natural</li>
+                                    <ul class="fragment fade-in-then-out current-visible collapsible" style="font-size: smaller;" data-fragment-index="6">
+                                        <li>
+                                            Técnicas para análise de dados textuais e linguagem humana: texto (documentos, livros, redes sociais, ...), fala, 
+                                            sinais, entre outros. Identificação de padrões, representação e interpretação da linguagem. 
+                                        </li>
+                                    </ul>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>Desafios à Medicina diagnóstica</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="r-stack" style="font-size: smaller;">
+                            <p class="fragment fade-out" data-fragment-index="1" >
+                                Dados clínicos podem possuir naturezas físicas e conceituais bastante distintas.
+                            </p>
+                            <p class="fragment fade-out" data-fragment-index="2" >
+                                Dados clínicos podem possuir naturezas físicas e conceituais bastante distintas.
+                            </p>
+                            <p class="fragment fade-in-then-out" data-fragment-index="3" >
+                                Dados clínicos podem possuir naturezas físicas e conceituais bastante distintas.
+                            </p>
+                            <p class="fragment fade-in-then-out" data-fragment-index="4" >
+                                Dados clínicos podem possuir naturezas físicas e conceituais bastante distintas.
+                            </p>
+                            <p class="fragment fade-in-then-out" data-fragment-index="5" >
+                                Dados clínicos podem possuir naturezas físicas e conceituais bastante distintas.
+                            </p>
+                            <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6">
+                                Um médico analisa resultados de exames baseado em treinamento abrangente e especializado a
+                                respeito das causas e consequências de determinados disturbios, e em experiência pessoal com pacientes.
+                            </p>
+                            <p class="fragment fade-in-then-out current-visible" data-fragment-index="7" >
+                                Uma IA apenas determina as opções mais prováveis de diagnóstico dentro de um conjunto limitado de possibilidades
+                                em que foi treinada, baseada apenas nos dados de clínicos aos quais foi apresentada.
+                            </p>
+                            <p class="fragment fade-in-then-out current-visible" data-fragment-index="8" >
+                                Essa simplicidade traz uma vasta gama de usos, nas mais diversas especialidades médicas, mas também limita
+                                a qualidade e abrangência dos resultados.
+                            </p>
+                            <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="10">
+                                Com um potencial mercado bilionário à espera, não faltam empresas, grandes ou pequenas, tentando emplacar
+                                um produto que consiga cativar o interesse de médicos e laboratórios. Exemplos incluem:
+                            </p>
+                        </div>
+        
+                        <div class="r-stack">
+                            <img src="media/blood_test.jpeg" class="fragment fade-out current-visible" style="width: 500px;" data-fragment-index="0" />
+                            <img src="media/blood_test.jpeg" class="fragment fade-out current-visible" style="width: 500px;" data-fragment-index=1 />
+                            <img src="media/blood_test.jpeg" class="fragment fade-out current-visible" style="width: 500px;" data-fragment-index=2 />
+                            <img src="media/diagnostics_breast_cut.jpg" class="fragment fade-in-then-out current-visible" style="width: 600px;" data-fragment-index="3" />
+                            <img src="media/diagnostics_lung.jpeg" class="fragment fade-in-then-out current-visible" style="width: 600px;" data-fragment-index="4" />
+                            <img src="media/Fundus_photograph_of_normal_left_eye.jpg" class="fragment fade-in-then-out current-visible" style="width: 500px;" data-fragment-index="5" />
+                            <img src="media/doctor_paperwork.jpg" class="fragment fade-in-then-out current-visible" style="width: 600px;" data-fragment-index="6" />
+                            <img src="media/watson_jeopardy.jpeg" class="fragment fade-in-then-out current-visible" style="width: 600px;" data-fragment-index="7" />
+                            <img src="media/watson_jeopardy.jpeg" class="fragment fade-in-then-out current-visible" style="width: 600px;" data-fragment-index="8" />
+                            <img src="media/watson_unsafe_3.jpg" class="fragment fade-in-then-out current-visible" style="width: 600px;" data-fragment-index="10" />
+                        </div>
+					</div>
+                </section>
+                
+                <section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>Desafios à Medicina diagnóstica: Sistemas</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="r-stack" style="font-size: smaller;">
+                            <p class="fragment fade-out" data-fragment-index="1" >
+                                O IBM Watson sugere roteiros de tratamento para os médicos, baseado nos dados clínicos dos
+                                pacientes e está sendo expandido para também utilizar dados genéticos.
+                            </p>
+                        </div>
+        
+                        <div class="r-stack" style="margin-top: 20px;">
+                            <object data="media/watson_oncology-data-book_9_77026377USEN.pdf" type="application/pdf" style="width: 100%; height: 500px;">
+                                <iframe src="https://docs.google.com/viewer?url=www.ibm.com/downloads/cas/0ZRYPWL9&embedded=true" style="width: 100%; height: 500px;"></iframe>
+                            </object>
+                        </div>
+					</div>
+                </section>
+                
+                <section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>Desafios à Medicina diagnóstica: Sistemas</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="r-stack" style="font-size: smaller;">
+                            <p class="fragment fade-out" data-fragment-index="1" >
+                                Centros médicos nos <a href="https://www.bidmc.org/about-bidmc/news/bidmc-researchers-use-artificial-intelligence-to-identify-bacteria-quickly-and-accurately">Estados Unidos</a>
+                                e em <a href="https://www.zebra-med.com/">Israel</a> estão desenvolvendo sistemas para microscópios e outros equipamentos de
+                                diagnóstico por imagem, que reconhecem automaticamente e rapidamente padrões de doenças e alertam os técnicos responsáveis
+                                para realização de análise detalhada.
+                            </p>
+                        </div>
+        
+                        <div class="r-stack" style="margin-top: 20px;">
+                            <img src="media/artificial-intelligence-application-healthcare-zebra-medical-vision.jpg" style="width: 600px;"  />
+                        </div>
+					</div>
+                </section>
+                
+                <section data-background-image="media/bg.png">
+					<div class="header">
+        			    <h3>Aprendizado de máquina: demonstração</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="r-stack" style="font-size: smaller;">
+                            <p>
+                                Veremos agora uma breve demonstração do uso de aprendizado de máquina em um conjunto de dados
+                                público.
+                            </p>
+                        </div>
+					</div>
+				</section>
+				
+				
+			</div>
+		</div>
+
+
+		<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+        <script src="/public/reveal.js/dist/reveal.js"></script>
+        <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+        <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+        <script src="/public/reveal.js/plugin/search/search.js"></script>
+        <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+        <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+    
+        <script>
+    
+                // Full list of configuration options available here:
+                // https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                    width: 1280,
+                    height: 720,
+                    controls: true,
+                    progress: true,
+                    history: true,
+                    center: true,
+                    mouseWheel: true,
+                    slideNumber: "c/t",
+                    showSlideNumber: "all",
+                    audio: {
+                        prefix: 'audio/',
+                        suffix: '.webm',
+                        defaultDuration: 5,
+                        textToSpeechURL: null,
+                        advance: 500,
+                        autoplay: false,
+                        defaultNotes: true,
+                        defaultText: false,
+                        playerOpacity: 0.2,
+                    },
+                    menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+                        themes: false,
+                        transitions: false,
+                        markers: true,
+                        hideMissingTitles: true,
+                        //custom: [
+                        //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+                        //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+                        //    ]
+                    },
+                    //theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                    //transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+    
+                    // Optional libraries used to extend on reveal.js
+                    dependencies: [
+                        { src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+                        //{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+                        //{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+                        //{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+                        { src: '/public/reveal.js-plugins/menu/menu.js' },
+                    ],
+                    
+                    /*
+                    keyboard: { 
+                        82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+                        90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+                        84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+                      },
+                    */
+                    
+                    plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+                });
+    
+        </script>
+	</body>
+</html>
