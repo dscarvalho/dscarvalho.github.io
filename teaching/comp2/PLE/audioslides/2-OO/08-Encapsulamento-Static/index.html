@@ -150,10 +150,10 @@
                                 private String cpf;
                                 ...
 
-                                public Pessoas(String cpf, ...) {
+                                public Pessoa(String cpf, ...) {
                                     this.cpf = cpf;
                                     ...
-                                    Pessoas.totalPessoas++;
+                                    Pessoa.totalPessoas++;
                                 }
                             }
                         </code>
@@ -161,14 +161,14 @@
                     <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="4">
                         <code class="hljs java" data-trim data-line-numbers >
                             public class Pessoa {
-                                private static int totalPessoas;
+                                private static int totalPessoas = 0;  // Podem ser inicializados dessa forma.
                                 private String cpf;
                                 ...
 
-                                public Pessoas(String cpf, ...) {
+                                public Pessoa(String cpf, ...) {
                                     this.cpf = cpf;
                                     ...
-                                    Pessoas.totalPessoas++;
+                                    Pessoa.totalPessoas++;
                                 }
 
                                 public static int getTotalPessoas() {
