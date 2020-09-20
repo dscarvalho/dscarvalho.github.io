@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      2ª Lista de Exercícios - Computação II (DCC - UFRJ) - PLE &middot; Danilo S. Carvalho, Ph.D.
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="/public/css/site.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Danilo S. Carvalho, Ph.D.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About</a>
+        
+      
+    
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/projects/">Projects</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/publications/">Publications</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/teaching/">Teaching</a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    <!--<a class="sidebar-nav-item" href="/archive/v1.1.0.zip">Download</a>
+    <a class="sidebar-nav-item" href="">GitHub project</a>-->
+    <span class="sidebar-nav-item">Currently v1.1.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2020. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Danilo S. Carvalho, Ph.D.</a><span style="margin-left: 20px;"></span>
+            <small>Assistant Professor - Computer Programming / AI / NLP</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="page">
+  <h1 class="page-title">2ª Lista de Exercícios - Computação II (DCC - UFRJ) - PLE</h1>
+  <h3 id="atenção-escrever-javadoc-para-todos-os-programas"><strong>Atenção</strong>: Escrever Javadoc para todos os programas.</h3>
+
+<ol>
+  <li>
+    <p>Considere as classes que representem os conceitos: <strong>carro</strong>, <strong>bicicleta</strong>, <strong>moto</strong>, <strong>caminhão</strong>, <strong>jipe</strong>, <strong>canoa</strong>, <strong>lancha</strong> e <strong>tanque anfíbio</strong>. Cada veículo individual dessas categorias possui uma velocidade máxima (km/h), uma quantidade máxima de carga (kg) e uma quantidade máxima de passageiros (todos dentro de uma faixa possível na categoria). Além disso, podem possuir as seguintes capacidades: <strong>aquático</strong>, <strong>off-road</strong>, <strong>interior impermeável</strong>. Veículos aquáticos podem andar na água, veículos off-road podem andar fora do asfalto e veículos com interior impermeável não deixam molhar seus ocupantes em caso de chuva.</p>
+
+    <p>Implemente um programa Java que dada uma entrada (padrão) escrita na forma:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;distância&gt;, &lt;tipo de caminho&gt;, &lt;número de pessoas&gt;, &lt;quantidade de carga&gt;, &lt;tempo limite&gt;, &lt;clima&gt;
+</code></pre></div>    </div>
+
+    <p>entregue uma lista de veículos (instâncias) com suas respectivas características, que podem realizar a viagem sem problemas.</p>
+
+    <p>Onde:</p>
+    <ul>
+      <li><em>distância</em>: número real indicando a distância até o destino em km.</li>
+      <li><em>tipo de caminho</em>: rodovia, estrada de terra, rio, lago, mar.</li>
+      <li><em>número de pessoas</em>: número inteiro de pessoas que precisam viajar, incluindo o condutor.</li>
+      <li><em>quantidade de carga</em>: peso total da carga que será carregada na viagem.</li>
+      <li><em>tempo limite</em>: tempo máximo (em horas) que a viagem precisa ser completada.</li>
+      <li><em>clima</em>: sol ou chuva.</li>
+    </ul>
+
+    <p>Para simplificar, assuma que a velocidade média da viagem é a metade da velocidade máxima do veículo.</p>
+
+    <p>Exemplos:</p>
+
+    <ul>
+      <li>Entrada:
+        <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 40.0, estrada de terra, 2, 300.0, 1.5, sol
+</code></pre></div>        </div>
+      </li>
+      <li>Saída:
+        <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> caminhão: vel. máxima <span class="o">=</span> 80km/h, carga max. <span class="o">=</span> 2000.0kg, max. passageiros <span class="o">=</span> 1
+ jipe: vel. máxima <span class="o">=</span> 140km/h, carga max. <span class="o">=</span> 500.0kg, max. passageiros <span class="o">=</span> 3
+</code></pre></div>        </div>
+      </li>
+      <li>Entrada:
+        <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 10.0, lago, 3, 100.0, 0.5, chuva
+</code></pre></div>        </div>
+      </li>
+      <li>Saída:
+        <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> lancha: vel. máxima <span class="o">=</span> 100km/h, carga max. <span class="o">=</span> 800.0kg, max. passageiros <span class="o">=</span> 5
+</code></pre></div>        </div>
+      </li>
+      <li>Entrada:
+        <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 2.0, lago, 2, 20.0, 0.5, sol
+</code></pre></div>        </div>
+      </li>
+      <li>Saída:
+        <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> lancha: vel. máxima <span class="o">=</span> 85km/h, carga max. <span class="o">=</span> 600.0kg, max. passageiros <span class="o">=</span> 4
+ canoa: vel. máxima <span class="o">=</span> 10km/h, carga max. <span class="o">=</span> 200.0kg, max. passageiros <span class="o">=</span> 2
+</code></pre></div>        </div>
+      </li>
+    </ul>
+
+    <p>(Dica: consultem os métodos da classe String.)</p>
+
+    <p><strong>É obrigatório o uso de herança, interfaces, e atributos de classe nesse exercício.</strong>
+ <br /><br /><br /></p>
+  </li>
+  <li>
+    <p>Implemente um protótipo de jogo “text adventure” em Java de acordo com as seguintes especificações:</p>
+    <ul>
+      <li>O protótipo deve ter apenas um tabuleiro 10x10.</li>
+      <li>O protagonista possui pontos de vida (HP) e ataque (ATK), onde HP + ATK = 100.</li>
+      <li>Uma célula do tabuleiro pode conter um muro, um monstro, um item de recuperação, ou nada.</li>
+      <li>Muros são intransponíveis.</li>
+      <li>O protagonista (jogador) começa em uma célula (linha, coluna) aleatória, que esteja vazia.</li>
+      <li>Se encontrar um monstro, o protagonista precisa derrotá-lo ou fugir.</li>
+      <li>Se encontrar um item de recuperação o protagonista recupera um percentual do seu HP.</li>
+      <li>Monstros possuem pontos de vida (HP), ataque (ATK), e uma técnica ofensiva.</li>
+      <li>Devem haver pelo menos 3 técnicas ofensivas distintas.</li>
+      <li>Devem haver pelo menos 4 tipos de monstro.</li>
+      <li>O jogo é operado um turno por vez, pela entrada padrão.</li>
+      <li>As ações possíveis ao jogador são: (andar para) direita, esquerda, frente, trás, e atacar.</li>
+      <li>Um monstro é derrotado quando seus pontos de vida são reduzidos a zero.</li>
+      <li>O protagonista é derrotado quando seus pontos de vida são reduzidos a zero (game over).</li>
+      <li>O protagonista vence o jogo quando derrota todos os monstros.</li>
+    </ul>
+
+    <p>Exemplo:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> :frente
+ Não há nada aqui...
+ :frente
+ Há um muro à frente.
+ :esquerda
+ Há um Zumbi aqui <span class="o">(</span>ATK: 10<span class="o">)</span><span class="nb">.</span>
+ :atacar
+ Você feriu o Zumbi <span class="o">(</span>HP: <span class="nt">-20</span><span class="o">)</span><span class="nb">.</span>
+ Zumbi atacou com mordida.
+ Você foi ferido pelo Zumbi <span class="o">(</span>HP: 70<span class="o">)</span><span class="nb">.</span>
+ :atacar
+ Você feriu o Zumbi <span class="o">(</span>HP: <span class="nt">-20</span><span class="o">)</span><span class="nb">.</span>
+ Você derrotou o Zumbi.
+ :direita
+ Você encontrou um item de recuperação <span class="o">(</span>HP: 90<span class="o">)</span><span class="nb">.</span>
+</code></pre></div>    </div>
+
+    <p><strong>É obrigatório o uso dos conceitos de encapsulamento e polimorfismo nesse exercício.</strong></p>
+  </li>
+</ol>
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>
