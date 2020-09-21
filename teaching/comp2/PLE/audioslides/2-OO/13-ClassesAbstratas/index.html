@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Classes &amp; métodos abstratos -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Classes &amp; métodos abstratos
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, vamos falar da combinação dos recursos de herança de classes e implementação de interfaces 
+                    na forma de classes abstratas. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, poderemos aplicar a abstração de classes e métodos ao nosso código.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Classes + interfaces">
+                <p class="fragment" style="font-size: smaller;">
+                    Aprendemos até agora que podemos definir as características e comportamento dos objetos através de classes
+                    e suas capacidades desejadas através de interfaces.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Mas e se quisermos fazer ambos ao mesmo tempo? Ou seja, se quisermos definir atributos para os objetos, mas 
+                    também métodos que gostariamos que tivessem, sem necessariamente implementá-los.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Necessidade de modelagem">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        A maneira mais óbvia de fazer isso com o que sabemos até aqui, é colocando os atributos desejados em
+                        uma superclasse e fazendo ela implementar as interfaces desejadas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Por exemplo, digamos que todas as pessoas no sistema da biblioteca serão autenticadas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Implementado dessa forma, todas as subclasses de <b>Pessoa</b> e seus descendentes possuirão os atributos
+                        de <b>Pessoa</b> e o método autenticar() da interface <b>Autenticavel</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Mas parando para pensar um pouco mais, notamos que qualquer classe que venhamos a utilizar no sistema da
+                        biblioteca vai representar um papel específico de uma pessoa nesse mundo. Logo nunca teremos um objeto
+                        apenas do tipo <b>Pessoa</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Além disso, apenas pessoas são autenticáveis dentro da noção de funcionamento da biblioteca, mas diferentes
+                        modos de autenticação serão aplicados aos usuários e funcionários.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Precisamos então fazer com que a classe Pessoa funcione como um guia de implementação para seus descendentes,
+                        garantindo que o método de autenticação será sobrescrito, e que não existam instâncias de Pessoa sem um papel 
+                        definido...
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Mas também que seus atributos sejam herdados e utilizáveis por todos os seus descendentes.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class Pessoa implements Autenticavel {
+                                private string cpf;
+                                ...
+
+                                public boolean autenticar(String cpf, String senha) {
+                                    ...
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Classes abstratas">
+                <div class="r-stack">
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="1" >
+                        A solução para esse problema é o uso de <b>classes abstratas</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Uma classe abstrata possui os recursos de uma classe e uma interface ao mesmo tempo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Para declarar uma classe abstrata, usamos a palavra chave <b style="color: mediumvioletred;">abstract</b>
+                        na declaração da classe.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Em uma classe abstrata, podemos declarar métodos sem implementação, ou seja, métodos abstratos.<br />
+                        Esses métodos precisarão ser implementados nas subclasses como nas interfaces.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Assim como as interfaces, uma classe abstrata não pode ser instanciada. Ela deve ser herdada por uma 
+                        classe que, se for concreta (não abstrata), deve implementar todos os métodos abstratos que foram declarados. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Entretanto, a classe abstrata pode ter atributos de instância e de classe, e também métodos concretos, 
+                        que funcionam como em uma classe concreta.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        No exemplo abaixo, a classe <b>Pessoa</b> passou a ser abstrata, logo não podemos mais ter instâncias
+                        de Pessoa, apenas de seus descendentes concretos, que no momento são <b>Usuario</b> e <b>Funcionario</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        <b>Usuario</b> e <b>Funcionario</b> precisarão implementar cada um o seu próprio método <b>autenticar</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        Por polimorfismo, podemos garantir que toda subclasse de pessoa é autenticável.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public abstract class Pessoa {
+                                private string cpf;
+                                ...
+
+                                public boolean autenticar(String cpf, String senha);
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="9">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            // Em algum outro lugar do programa...
+
+                            public void autenticaPessoa(Pessoa) {
+                                // Autentica uma pessoa independentemente do seu papel 
+                                // e ajusta o estado apropriado do sistema.
+                                ...
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment">
+                    Usando classes abstratas e interfaces temos uma grande flexibilidade em como organizar nossos conceitos
+                    no código.
+                </p>
+                <br />
+                <p class="fragment">
+                    Nesse caso, as características e capacidades desejadas fazem parte de um mesmo conjunto, que determina o
+                    encapsulamento destas nas subclasses.
+                </p>
+                <br />
+                <p class="fragment">
+                    O polimorfismo garante a interoperabilidade dos objetos, tornando o encapsulamento prático e desejável.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-superlong">
+                    <li style="font-size: smaller;">
+                        Ao herdar uma classe abstrata, como faço para implementar apenas alguns dos métodos abstratos?
+                    </li>
+                    <li style="font-size: smaller;">
+                        A classe que inicia o programa pode ser abstract? Porquê?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Com base nos exemplos até esse ponto, implemente um sistema simples para a biblioteca que permita
+                        a autenticação de usuários e funcionários. Os funcionários podem inserir novos livros e revistas e
+                        os usuários podem ler os livros e revistas. A interação com o sistema deve ser feita através de um
+                        menu textual, com opções numeradas para cada operação.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
