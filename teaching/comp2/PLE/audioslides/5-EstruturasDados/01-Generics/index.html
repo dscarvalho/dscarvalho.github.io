@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Estruturas de dados: Generics -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Estruturas de dados: Generics
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, aprenderemos sobre um poderoso recurso de sintaxe da linguagem Java: os tipos genéricos. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, saberemos como definir os nossos próprios tipos genéricos e usar aqueles já existentes na JDK.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Operações e estruturas multi-tipo">
+                <p class="fragment" style="font-size: smaller;">
+                    Seguindo o conceito de polimorfismo, muitas vezes gostariamos de aplicar uma mesma operação em objetos de 
+                    tipos diferentes.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Entretanto, nem sempre esses tipos fazem parte de uma mesma hierarquia de classes ou compartilham de uma 
+                    mesma interface.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Isso é bastante comum quando queremos manipular os objetos em estruturas de dados comuns, como listas, filas 
+                    e pilhas.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Generics">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        A pergunta que queremos responder é então:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Como criamos uma estrutura de dados comum (ex: lista) ou método (ex: somar) que opere com qualquer tipo 
+                        definido?
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        A resposta está em um recurso da linguagem Java chamado <b>Generics</b> (tipos ou métodos genéricos).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Esse recurso nos permite parametrizar um método ou classe para ser aplicado a qualquer tipo, sendo o tipo 
+                        o parâmetro.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Vejamos um exemplo:
+                    </p>
+                    
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Queremos criar um classe para representar um par ordenado de números.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Uma abordagem generalista razoável seria guardar cada um dos elementos do par em um campo do tipo double.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        Dessa forma poderiamos guardar um número qualquer e depois converter conforme necessário para outros tipos numéricos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        Criamos então um construtor e getters para os campos do par.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="6">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado {
+                                ...
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="7">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado {
+                                private double x;
+                                private double y;
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="9">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado {
+                                private double x;
+                                private double y;
+
+                                public ParOrdenado(double x, double y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+
+                                public double getX() {
+                                    return x;
+                                }
+
+                                public double getY() {
+                                    return y;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Mas e se quisermos guardar um par ordenado de um tipo qualquer, não apenas de números?
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Nesse caso, usamos o recurso de <b>Generics</b> da linguagem Java para definir nossa classe de par em 
+                        função do tipo que queremos representar.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Isso é feito colocando um parâmetro de tipo após o nome da classe entre &lt;...&gt;.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Tipicamente usamos a letra <b>T</b> ou <b>E</b> maiúscula para representar o parâmetro de tipo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Todas as outras definições de tipo na classe podem agora ser substituidas pelo parâmetro.
+                    </p>
+                    
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Agora para criar um par de Strings por exemplo, podemos declarar uma variável e instanciar um objeto 
+                        do tipo ParOrdenado dessa forma:
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado {
+                                private double x;
+                                private double y;
+
+                                public ParOrdenado(double x, double y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+
+                                public double getX() {
+                                    return x;
+                                }
+
+                                public double getY() {
+                                    return y;
+                                }
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                        public class ParOrdenado&lt;T&gt; {
+                            private double x;
+                            private double y;
+
+                            public ParOrdenado(double x, double y) {
+                                this.x = x;
+                                this.y = y;
+                            }
+
+                            public double getX() {
+                                return x;
+                            }
+
+                            public double getY() {
+                                return y;
+                            }
+                        }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers >
+                        public class ParOrdenado&lt;T&gt; {
+                            private T x;
+                            private T y;
+
+                            public ParOrdenado(T x, T y) {
+                                this.x = x;
+                                this.y = y;
+                            }
+
+                            public T getX() {
+                                return x;
+                            }
+
+                            public T getY() {
+                                return y;
+                            }
+                        }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Agora para criar um par de Strings por exemplo, podemos declarar uma variável e instanciar um objeto 
+                        do tipo ParOrdenado dessa forma:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Como podemos observar, o parâmetro agora faz parte do tipo que criamos. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Esse é um <b>ParOrdenado&lt;String&gt;</b>, que podemos ler como: "ParOrdenado de String".
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Os métodos vão se comportar conforme o parâmetro de tipo que definimos.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            ParOrdenado&lt;String&gt; par = new ParOrdenado&lt;String&gt;("cachorro", "quente");
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="4">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            // Vai imprimir "cachorro" na saída padrão.
+                            System.out.println(par.getX()); 
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Também é possível parametrizar em mais de um tipo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Nesse exemplo, criamos um par ordenado onde o primeiro e o segundo elemento podem ter tipos diferentes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        A declaração de variável e instanciação é feita de forma similar ao caso de um único parâmetro.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Chamamos esse um "ParOrdenado de Integer e String".
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment fade-in-then-out" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado&lt;T, E&gt; {
+                                private T x;
+                                private E y;
+
+                                public ParOrdenado(T x, E y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+
+                                public T getX() {
+                                    return x;
+                                }
+
+                                public E getY() {
+                                    return y;
+                                }
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            ParOrdenado&lt;Integer, String&gt; par = 
+                            new ParOrdenado&lt;Integer, String&gt;(6, "Cheeseburguer com fritas");
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Generics & Polimorfismo">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Podemos também limitar os parâmetros polimorficamente.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        No exemplo abaixo, garantimos que os elementos de um par devem ser veículos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Já nesse exemplo, garantimos que os elementos de um par devem poder ser comparados entre si.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado&lt;T extends Veiculo&gt; {
+                                private T x;
+                                private T y;
+
+                                public ParOrdenado(T x, T y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+
+                                public T getX() {
+                                    return x;
+                                }
+
+                                public T getY() {
+                                    return y;
+                                }
+                            }
+                        </code>
+                    </pre>
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado&lt;T implements Comparable&gt; {
+                                private T x;
+                                private T y;
+
+                                public ParOrdenado(T x, T y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+
+                                public T getX() {
+                                    return x;
+                                }
+
+                                public T getY() {
+                                    return y;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Limitação e cuidados">
+                <div class="r-stack">
+                    <p class="fragment fade-out" data-fragment-index="1" >
+                        Mas nem tudo é alegria. Os parâmetros de tipo aceitam apenas tipos complexos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Isso quer dizer que para trabalhar com números inteiros, precisamos usar o tipo <b>Integer</b>, e 
+                        <b>Float</b> ou <b>Double</b> para números reais, assim por diante. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        A conversão dos literais primitivos para esses tipos (boxing) é feita automaticamente pelo compilador.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Entretanto, devemos tomar cuidado com os getters e setters. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Como estamos lidando com referências, retornar ou atribuir diretamente a um campo significa que a referência 
+                        privada ao campo ficará exposta fora do objeto, estragando o encapsulamento.
+                    </p>
+                    
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Para resolver esse problema, primeiro garantimos que os campos são "clonáveis", isto é, que podem 
+                        gerar cópias de si mesmos, produzindo objetos com estado idêntico, mas diferentes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Essa garantia é dada pela interface <b>Cloneable</b> da JDK.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        Retornamos então uma cópia dos campos nos getters, e atribuímos uma cópia aos campos nos setters.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        Dessa forma não há problema de exposição e consequente quebra do encapsulamento.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            // Conversão de literais primitivos para os tipos complexos correspondentes 
+                            // é automática.
+                            ParOrdenado&lt;Float, Boolean&gt; par = new ParOrdenado&lt;Float, Boolean&gt;(1.0f, true);
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="5">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado&lt;T&gt; {
+                                private T x;
+                                private T y;
+
+                                public ParOrdenado(T x, T y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+
+                                public T getX() {
+                                    return x;  // Retorna referência privada, expondo o campo.
+                                }
+
+                                public T setX(T x) {
+                                    this.x = x;  // Atribui uma referência externa, expondo o campo.
+                                }
+
+                                ...
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="6">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado&lt;T implements Cloneable&gt; {
+                                private T x;
+                                private T y;
+
+                                public ParOrdenado(T x, T y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+
+                                public T getX() {
+                                    return x;  // Retorna referência privada, expondo o campo.
+                                }
+
+                                public T setX(T x) {
+                                    this.x = x;  // Atribui uma referência externa, expondo o campo.
+                                }
+
+                                ...
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="8">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            public class ParOrdenado&lt;T implements Cloneable&gt; {
+                                private T x;
+                                private T y;
+
+                                public ParOrdenado(T x, T y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+
+                                public T getX() {
+                                    return x.clone();  // Retorna uma cópia do campo. Sem problema.
+                                }
+
+                                public T setX(T x) {
+                                    this.x = x.clone();  // Guarda uma cópia no campo. Sem problema.
+                                }
+
+                                ...
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Na JDK">
+                <p class="fragment" style="font-size: smaller;">
+                    A JDK está repleta de classes parametrizáveis. Um exemplo que já vimos foi a classe <b>ArrayList&lt;E&gt;</b>, que 
+                    representa uma lista dinâmica de um tipo qualquer.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Outro exemplo é a classe <b>Comparator&lt;T&gt;</b>, que permite comparar ordem entre dois objetos de um 
+                    mesmo tipo.
+                </p>
+            </section>
+            
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    Entendemos agora a utilidade de podermos parametrizar o tipo de classes e métodos para implementar 
+                    estruturas comuns de dados.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Em breve estudaremos um grupo de classes que aplica o recurso de Generics de forma integral e abrangente: 
+                    as coleções.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Podemos parametrizar interfaces? Qual seria a intenção?
+                    </li>
+                    <li style="font-size: smaller;">
+                        Quando deveriamos usar sobrecarga de métodos em vez de Generics?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Implemente uma classe Java que armazene um número limitado de elementos, mantendo-os sempre ordenados 
+                        segundo sua "ordem natural" (ex: numérica para números, alfabética para strings). Quando um novo elemento 
+                        é inserido que excede o tamanho permitido, o elemento mais próximo na lista é descartado para dar espaço ao 
+                        novo.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
