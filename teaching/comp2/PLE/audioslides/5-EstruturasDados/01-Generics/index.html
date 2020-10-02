@@ -365,7 +365,7 @@
                     </pre>
                     <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="3">
                         <code class="hljs java" data-trim data-line-numbers >
-                            public class ParOrdenado&lt;T extends Comparable&gt; {
+                            public class ParOrdenado&lt;T extends Comparable&lt;T&gt;&gt; {
                                 private T x;
                                 private T y;
 
@@ -412,7 +412,8 @@
                         gerar cópias de si mesmos, produzindo objetos com estado idêntico, mas diferentes.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
-                        Essa garantia é dada pela interface <b>Cloneable</b> da JDK.
+                        <del>Essa garantia é dada pela interface <b>Cloneable</b> da JDK.</del><br />
+                        Isso deve ser verificado 
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
                         Retornamos então uma cópia dos campos nos getters, e atribuímos uma cópia aos campos nos setters.
@@ -455,11 +456,48 @@
                         </code>
                     </pre>
 
-                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="6">
-                        <code class="hljs java" data-trim data-line-numbers >
-                            public class ParOrdenado&lt;T extends Cloneable&gt; {
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="6">
+                        <code class="hljs java" data-trim data-line-numbers>
+                            import java.io.*;
+
+                            public class ParOrdenado&lt;T extends Serializable&gt; {
                                 private T x;
                                 private T y;
+
+                                /** Copia um campo para um novo objeto.
+                                 *  <p>
+                                 *  Realiza a cópia de um campo através de um processo de serialização - deserialização.
+                                 *  Método faz casting explícito, então colocamos essa anotação para evitar 
+                                 *  um warning do compilador.
+                                 *  </p>
+                                 *  @param campo Campo a ser copiado.
+                                 *  @return uma cópia (clone) do argumento campo.
+                                 */
+                                @SuppressWarnings("unchecked") 
+                                private static &lt;T&gt; T clone(T campo) { // Parâmetro do método genérico vem antes do tipo.
+                                    T copia;
+                                    try {
+                                        // Cria um array de bytes na memória para guardar o objeto.
+                                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                        ObjectOutputStream out = new ObjectOutputStream(bos);
+                                        out.writeObject(campo);
+                                        
+                                        // Lê os bytes da memória para criar uma cópia do objeto.
+                                        ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+                                        ObjectInputStream in = new ObjectInputStream(bis);
+                                        copia = (T) in.readObject();
+                                    }
+                                    catch (IOException e) {
+                                        System.err.println("Não foi possível clonar um objeto: Erro de serialização");
+                                        return campo;
+                                    }
+                                    catch (ClassNotFoundException e) {
+                                        System.err.println("Não foi possível clonar um objeto: Erro de tipo.");
+                                        return campo;
+                                    }
+                                    
+                                    return copia; 
+                                }
 
                                 public ParOrdenado(T x, T y) {
                                     this.x = x;
@@ -467,38 +505,20 @@
                                 }
 
                                 public T getX() {
-                                    return x;  // Retorna referência privada, expondo o campo.
+                                    return clone(x);  // Retorna uma cópia do campo. Sem problema.
                                 }
 
-                                public T setX(T x) {
-                                    this.x = x;  // Atribui uma referência externa, expondo o campo.
+                                public void setX(T x) {
+                                    this.x = clone(x);  // Guarda uma cópia no campo. Sem problema.
                                 }
 
-                                ...
-                            }
-                        </code>
-                    </pre>
-
-                    <pre data-id="code-animation" style="width: 100%;" class="fragment" data-fragment-index="8">
-                        <code class="hljs java" data-trim data-line-numbers >
-                            public class ParOrdenado&lt;T extends Cloneable&gt; {
-                                private T x;
-                                private T y;
-
-                                public ParOrdenado(T x, T y) {
-                                    this.x = x;
-                                    this.y = y;
+                                public T getY() {
+                                    return clone(y);  // Retorna uma cópia do campo. Sem problema.
                                 }
 
-                                public T getX() {
-                                    return x.clone();  // Retorna uma cópia do campo. Sem problema.
+                                public void setY(T y) {
+                                    this.y = clone(y);  // Guarda uma cópia no campo. Sem problema.
                                 }
-
-                                public T setX(T x) {
-                                    this.x = x.clone();  // Guarda uma cópia no campo. Sem problema.
-                                }
-
-                                ...
                             }
                         </code>
                     </pre>
@@ -583,7 +603,7 @@
 				progress: true,
 				history: true,
 				center: true,
-				mouseWheel: true,
+				//mouseWheel: true,
                 slideNumber: "c/t",
                 showSlideNumber: "all",
 				audio: {
