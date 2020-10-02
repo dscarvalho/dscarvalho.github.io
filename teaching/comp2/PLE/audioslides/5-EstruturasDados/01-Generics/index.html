@@ -413,12 +413,19 @@
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
                         <del>Essa garantia é dada pela interface <b>Cloneable</b> da JDK.</del><br />
-                        Isso deve ser verificado 
+                        Isso deve ser implementado na forma de um método genérico de clonagem (tipicamente é usado uma biblioteca 
+                        fora da JDK), dado que os campos sejam serializáveis. 
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
-                        Retornamos então uma cópia dos campos nos getters, e atribuímos uma cópia aos campos nos setters.
+                        Um objeto serializável pode ser convertido em uma sequência de bytes e convertido de volta a um objeto.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        Criamos aqui um método de clonagem na classe ParOrdenado, que copia os campos.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        Retornamos então uma cópia dos campos nos getters, e atribuímos uma cópia aos campos nos setters.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="10" >
                         Dessa forma não há problema de exposição e consequente quebra do encapsulamento.
                     </p>
                 </div>
@@ -547,6 +554,14 @@
                 <p class="fragment" style="font-size: smaller;">
                     Em breve estudaremos um grupo de classes que aplica o recurso de Generics de forma integral e abrangente: 
                     as coleções.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Leiam a página
+                    <a href="https://docs.oracle.com/javase/tutorial/java/generics/">
+                        https://docs.oracle.com/javase/tutorial/java/generics/
+                    </a>
+                    para saber dos detalhes a respeito do uso de Generics.
                 </p>
             </section>
 
