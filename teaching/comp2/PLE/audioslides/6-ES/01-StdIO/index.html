@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Streams: Standard IO -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Streams: Standard IO
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, vamos compreender um pouco melhor sobre os mecanismos de entrada e saída padrão do Java. 
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, teremos uma visão mais clara sobre os fluxos de dados (streams) básicos e como se organizam.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conhecendo mais o System.in/out">
+                <p class="fragment" style="font-size: smaller;">
+                    Até esse momento, utilizamos frequentemente o <b>System.out</b> e <b>System.in</b> para ler e escrever dados no 
+                    terminal.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Mas ainda não paramos para entender como eles funcionam e o que mais podemos fazer com eles.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Faremos isso agora, dando o primeiro passo rumo à compreensão dos fluxos de entrada e saída da linguagem Java.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Fluxos de entrada/saída">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Relembrando: a classe <b>System</b> fornece várias ferramentas para interação do programa com seu ambiente 
+                        de execução.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Isso é feito através de campos e métodos <b>static</b>, uma vez que a classe não é instanciável (pois possui 
+                        apenas construtores privados) e não pode ser herdada (final).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Desses campos podemos destacar <b>in</b> e <b>out</b>, que fornecem acesso à entrada e saída padrão do 
+                        sistema, respectivamente.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Cada um desses campos pertence a um subtipo diferente de um conceito conhecido em Java como <b>fluxo</b> 
+                        (de dados).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Um fluxo possui uma origem e um destino para os dados que nele são transferidos.
+                    </p>
+                    
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Quando a origem dos dados é externa ao programa, queremos trazer os dados para manipulá-los dentro do 
+                        programa. Portanto o fluxo é de <b>entrada</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Quando a origem dos dados é interna ao programa, queremos levar os dados para fora do 
+                        programa, de forma a comunicar um resultado ou tornar persistente uma mudança feita em memória volátil. 
+                        Portanto o fluxo é de <b>saída</b>.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/system_diag.svg" class="fragment fade-in" style="width: 600px;" data-fragment-index="3" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Entrada padrão">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        O campo System.in é do tipo <b>InputStream</b>, o fluxo de entrada mais abstrato em Java (e uma 
+                        classe abstrata de fato). É portanto uma instância de uma subclasse concreta qualquer de fluxo de 
+                        entrada.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Quando iniciamos um programa, esse campo é inicializado por padrão para uma instância que representa a 
+                        entrada padrão do sistema. A entrada padrão tem como principal meio de acesso o terminal interativo do 
+                        sistema.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Por ser o tipo mais abstrato de fluxo de entrada, o InputStream não faz suposições sobre os dados a serem 
+                        transferidos, e oferece apenas métodos para ler e pular bytes, verificar disponibilidade da entrada, e encerrar 
+                        o fluxo de dados.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Portanto, precisaremos de alguma outra classe para poder interpretar e manipular os dados vindos dessa entrada.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        A escolha que usamos até então foi a classe <b>Scanner</b> (java.util), que é instanciada para um certo fluxo de 
+                        entrada, e interpreta o conteúdo desse fluxo de acordo com a chamada de seus métodos (ex: nextDouble()).
+                    </p>
+                    
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Além do terminal, podemos redirecionar a saída de um outro programa qualquer para a entrada padrão 
+                        do nosso programa.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Isso traz uma grande flexibilidade quanto ao que podemos trazer como entrada, mas também implica em maior 
+                        complexidade para tratar o fluxo de dados. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        A classe Scanner possui uma variedade de métodos para nos ajudar a interpretar o fluxo de entrada escolhido.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        Por fim, a classe System nos permite redefinir o campo <b>in</b> para um outro fluxo de entrada, que veremos 
+                        nas próximas aulas. Isso é feito através do método <b>setIn()</b>.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/inputstream.svg" class="fragment fade-in-then-out current-visible" style="width: 800px;" data-fragment-index="1" />
+                    <img src="media/inputstream.svg" class="fragment fade-in-then-out current-visible" style="width: 800px;" data-fragment-index="2" />
+                    <img src="media/inputstream.svg" class="fragment fade-in-then-out current-visible" style="width: 800px;" data-fragment-index="3" />
+                    <img src="media/inputstream.svg" class="fragment fade-in-then-out current-visible" style="width: 800px;" data-fragment-index="4" />
+                    <img src="media/inputstream_scanner.svg" class="fragment fade-in" style="width: 800px;" data-fragment-index="5" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Saída padrão">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        O campo System.out é do tipo <b>PrintStream</b>, um tipo de fluxo de saída responsável por formatar os 
+                        dados de outros fluxos de saída. Faz parte da hierarquia de classes do OutputStream, o fluxo de saída 
+                        mais abstrato em Java.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Quando iniciamos um programa, esse campo é inicializado por padrão para uma instância que representa a 
+                        saída padrão do sistema. A saída padrão tem como principal destino o terminal interativo do 
+                        sistema.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        O PrintStream assume que queremos escrever texto formatado no destino, logo todos os dados direcionados 
+                        a esse tipo de fluxo serão convertidos em uma sequência de caracteres.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Os dados são passados ao fluxo através dos métodos append, format, print, println, e write, que diferem na 
+                        maneira como escrevem os dados e no tipo de dado que recebem. 
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Da mesma forma que o campo <b>in</b>, a classe System nos permite redefinir o campo <b>out</b> para direcionar 
+                        a saída para outro PrintStream.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Além disso, um PrintStream pode ser instanciado para utilizar qualquer OutputStream como destino, permitindo 
+                        encadear fluxos de dados para escrever em um arquivo por exemplo.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/outputstream.svg" class="fragment fade-in-then-out current-visible" style="width: 800px;" data-fragment-index="1" />
+                    <img src="media/outputstream.svg" class="fragment fade-in-then-out current-visible" style="width: 800px;" data-fragment-index="2" />
+                    <img src="media/printstream.svg" class="fragment fade-in" style="width: 800px;" data-fragment-index="3" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    Agora sabemos um pouco mais sobre os mecanismos de entrada e saída padrão em Java.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Os fluxos de dados que estudamos nessa aula serão fundamentais para entendermos os demais fluxos encontrados 
+                    na linguagem, e também a idéia de persistência dos dados.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Links importantes para consultar:
+                    <ul class="fragment">
+                        <li>
+                            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html">
+                                Javadoc da classe System.
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.oracle.com/javase/8/docs/api/java/io/package-summary.html">
+                                O pacote java.io
+                            </a>
+                        </li>
+                    </ul>
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Como podemos saber se um fluxo de entrada padrão chegou ao fim?
+                    </li>
+                    <li style="font-size: smaller;">
+                        Qual é a superclasse de PrintStream e seu conceito?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Redirecione um arquivo fonte java para a entrada padrão do seu programa e conte quantas vari[aveis 
+                        do tipo String e do tipo int foram declaradas no fonte lido.
+                    </li>
+                </ol>
+                <p>
+                    Exemplo (Linux):
+                </p>
+                <pre data-id="code-animation" style="width: 100%; font-size: 14pt;">
+                    <code class="hljs sh" data-trim data-line-numbers >
+                        cat UmaClasse.java | java MeuPrograma.java 
+                        4 String(s), 2 int(s)
+                    </code>
+                </pre>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				//mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
