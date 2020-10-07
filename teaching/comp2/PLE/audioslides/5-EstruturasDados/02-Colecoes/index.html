@@ -118,7 +118,7 @@
                         <code class="hljs java" data-trim data-line-numbers >
                             public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
                                 public boolean add(E e);
-                                public boolean addAll(Collection<? extends E> c);
+                                public boolean addAll(Collection&lt;? extends E&gt; c);
                                 public void clear();
                                 public boolean contains(Object o);
                                 
@@ -152,9 +152,9 @@
                             public interface List&lt;E&gt; extends Collection&lt;E&gt; {
                                 public E get(int index);
                                 ...
-                                public boolean indexOf(Object o);
+                                public int indexOf(Object o);
                                 ...
-                                public default void sort(Comparator<? super E> c);
+                                public default void sort(Comparator&lt;? super E&gt; c);
                                 ...
                             }
                         </code>
@@ -283,7 +283,7 @@
 
                                     ParOrdenado other = (ParOrdenado)o;
 
-                                    return (this.x == other.x && this.y == other.y);
+                                    return (this.x == other.getX() && this.y == other.getY());
                                 }
                             }
                         </code>
@@ -301,7 +301,7 @@
                                 }
 
                                 @Override
-                                public boolean hashcode() {
+                                public int hashcode() {
                                     // Shift left no x para diferenciar a ordem dos elementos.
                                     return (this.x << 1) + this.y; 
                                 }
@@ -347,12 +347,6 @@
                     Outras interfaces:
                 </p>
                 <ul class="list-spacing-longer">
-                    <li><b>HashSet&lt;E&gt;</b></li>
-                    <ul class="fragment fade-in-then-out current-visible collapsible" style="font-size: smaller;" data-fragment-index="2">
-                        <li>
-                            Similar ao Set, mas comparando e organizando os objetos através do seu hashcode.
-                        </li>
-                    </ul>
                     <li><b>SortedSet&lt;E&gt;</b></li>
                     <ul class="fragment fade-in-then-out current-visible collapsible" style="font-size: smaller;" data-fragment-index="3">
                         <li>
@@ -473,8 +467,8 @@
                                 ...
                                 public static int frequency(Collection&lt;?&gt; c, Object o);
                                 ...
-                                static &lt;T extends Object &amp; Comparable&lt;? super T&gt;&gt; T max(Collection<&lt;? extends T&gt; coll);
-                                static &lt;T&gt; T max(Collection&lt;? extends T&gt; coll, Comparator&lt;? super T&gt; comp)
+                                static &lt;T extends Object &amp; Comparable&lt;? super T&gt;&gt; T max(Collection&lt;? extends T&gt; coll);
+                                static &lt;T&gt; T max(Collection&lt;? extends T&gt; coll, Comparator&lt;? super T&gt; comp);
                                 ...
                                 public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(List&lt;T&gt; list);
                                 public static void sort(List&lt;T&gt; list, Comparator&lt;? super T&gt; c);
