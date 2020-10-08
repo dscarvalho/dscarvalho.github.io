@@ -11,7 +11,7 @@
 
   <title>
     
-      1ª Lista de Exercícios - Computação II (DCC - UFRJ) - PLE &middot; Danilo S. Carvalho, Ph.D.
+      3ª Lista de Exercícios - Computação II (DCC - UFRJ) - PLE &middot; Danilo S. Carvalho, Ph.D.
     
   </title>
 
@@ -149,22 +149,38 @@
 
       <div class="container content">
         <div class="page">
-  <h1 class="page-title">1ª Lista de Exercícios - Computação II (DCC - UFRJ) - PLE</h1>
+  <h1 class="page-title">3ª Lista de Exercícios - Computação II (DCC - UFRJ) - PLE</h1>
   <h3 id="atenção-escrever-javadoc-para-todos-os-programas"><strong>Atenção</strong>: Escrever Javadoc para todos os programas.</h3>
 
-<ol>
-  <li>
-    <p>Implemente um programa que receba da entrada padrão uma lista de números e escreva na saída padrão a média dos números da lista. A primeira entrada deve ser o tamanho da lista, seguido do primeiro elemento, segundo, e assim por diante.</p>
-  </li>
-  <li>
-    <p>Implemente um programa que receba da entrada padrão uma lista de palavras e retorne para a saída padrão a lista ordenada alfabeticamente, com uma palavra por linha.
-(Dica: Usar a classe java.util.ArrayList)</p>
-  </li>
-  <li>
-    <p>Implemente um programa que represente 4 tipos diferentes de figuras geométricas no plano (2D): triângulo, retângulo, trapézio e círculo, através de seus vértices (centro e raio, no caso do círculo). Cada objeto desses tipos deve ser capaz de calcular sua própria área e perímetro. <br />
-<strong>Use o que aprendemos sobre Orientação a Objetos nesse exercício.</strong></p>
-  </li>
-</ol>
+<p>1 . A partir de dados à respeito da pandemia de COVID-19 no Brasil, que podem ser obtidos no endereço <a href="https://data.brasil.io/dataset/covid19/caso.csv.gz">https://data.brasil.io/dataset/covid19/caso.csv.gz</a>, implemente um programa Java que:</p>
+
+<ul>
+  <li>Dado o nome de um estado ou cidade, produza uma página web com um gráfico da evolução do número de casos e do número de mortes naquele estado ou cidade.</li>
+  <li>Se nenhum nome for dado, produza os totais de casos e mortes.</li>
+  <li>Produza um arquivo com o ranking das 10 cidades com maior número de casos / 100K habitantes e os respectivos valores para essa estatística.</li>
+  <li>Idem, para o menor número de casos / 100K habitantes.</li>
+  <li>Idem, para o maior número de mortos / casos.</li>
+  <li>Idem, para o menor número de mortos / casos.</li>
+  <li>Idem, para a maior taxa de crescimento no número de casos no último mês.</li>
+</ul>
+
+<p>A página web deve ser gerada segundo um template disponível <a href="https://github.com/dscarvalho/comp2-2020-ple">no repositório da turma</a>, em <em>aux/template_grafico.html</em>. Um exemplo do formato está no mesmo diretório, em <em>exemplo_grafico.html</em>, cujo resultado pode ser visto <a href="../exemplo_grafico.html">aqui</a></p>
+
+<p>Outros requisitos:</p>
+
+<ul>
+  <li>O programa deve ter pelo menos quatro classes: a principal (que começa o programa), uma para representar e manipular os dados / calcular estatísticas, uma para escrever os arquivos de ranking, e uma para escrever a página web.</li>
+  <li>Os arquivos de ranking devem ser formatados com as colunas: “cidade”, “data_ultima_medicao” e “valor”, separadas por tabulações, onde a coluna “valor” contém o valor da estatística calculada (ex: mortos / 100k habitantes).</li>
+  <li>Os arquivos de ranking devem ter os seguintes nomes: maior_casos_100k, maior_mortos_100k, menor_casos_100k, menor_mortos_100k, maior_mortalidade, menor_mortalidade. Todos com extensão .tsv.</li>
+</ul>
+
+<p>Dicas:</p>
+<ul>
+  <li>O template da página web possui campos que devem ser substituidos pelos valores no padrão apropriado, mostrado no arquivo de exemplo. Esses campos são cercados por “:” (ex: <em>:items:</em>).</li>
+  <li>Usem a classe <em>GZIPInputStream</em> (java.util.zip) para ler o arquivo de dados de forma eficiente.</li>
+  <li>Usem a classe <em>StringBuilder</em> (java.lang) para concatenar strings de maneira eficiente.</li>
+  <li>Observem as oportunidades de usar os conceitos que vocês aprenderam recentemente, como generics, coleções e iteradores. Eles podem facilitar bastante o trabalho.</li>
+</ul>
 
 
 </div>
