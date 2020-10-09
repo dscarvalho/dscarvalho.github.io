@@ -134,7 +134,7 @@
                                         arq.createNewFile();
                                     }
                                     catch (IOException e) {
-                                        System.out.println("Erro ao criar arquivo.");
+                                        System.err.println("Erro ao criar arquivo.");
                                         return;
                                     }
                                     
@@ -209,10 +209,10 @@
                                         }
                                     }
                                     catch (FileNotFoundException e) {
-                                        System.out.println("Arquivo não encontrado: " + arq.getAbsolutePath());
+                                        System.err.println("Arquivo não encontrado: " + arq.getAbsolutePath());
                                     }
                                     catch (IOException e) {
-                                        System.out.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
+                                        System.err.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
                                     }
                                     
                                 }
@@ -236,10 +236,10 @@
                                         }	
                                     }
                                     catch (FileNotFoundException e) {
-                                        System.out.println("Arquivo não encontrado: " + arq.getAbsolutePath());
+                                        System.err.println("Arquivo não encontrado: " + arq.getAbsolutePath());
                                     }
                                     catch (IOException e) {
-                                        System.out.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
+                                        System.err.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
                                     }
                                 }
                             }
@@ -264,7 +264,7 @@
                                         }
                                     }
                                     catch (IOException e) {
-                                        System.out.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
+                                        System.err.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
                                     }
                                 }
                             }
@@ -286,10 +286,10 @@
                                         }	
                                     }
                                     catch (EOFException e) {
-                                        System.out.println(numeros.toString());
+                                        System.err.println(numeros.toString());
                                     }
                                     catch (IOException e) {
-                                        System.out.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
+                                        System.err.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
                                     }
                                 }
                             }
@@ -366,7 +366,7 @@
                                         }
                                     }
                                     catch (IOException e) {
-                                        System.out.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
+                                        System.err.println("Problema ao abrir ou fechar o arquivo: " + arq.getAbsolutePath());
                                     }
                                 }
                             }
