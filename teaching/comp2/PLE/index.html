@@ -182,11 +182,11 @@
 
     <p>O cálculo das notas é feito da seguinte maneira:</p>
 
-    <script type="math/tex; mode=display">NotaLista[i] = max(L[i] * \frac{Q[i]}{7}, 10.0)</script>
+    <script type="math/tex; mode=display">NotaLista[i] = min(L[i] * \frac{Q[i]}{7}, 10.0)</script>
 
     <script type="math/tex; mode=display">TotalListas = \frac{\sum_{i=1}^4{NotaLista[i]}}{4}</script>
 
-    <script type="math/tex; mode=display">NotaProjeto = max(PFS * \frac{PFQ}{7}, 10.0)</script>
+    <script type="math/tex; mode=display">NotaProjeto = min(PFS * \frac{PFQ}{7}, 10.0)</script>
 
     <script type="math/tex; mode=display">NotaFinal = 0.4 * TotalListas + 0.6 * NotaProjeto</script>
 
@@ -344,7 +344,7 @@ NotaFinal < 5.0 %]]></script>, o aluno estará reprovado.</p>
 <ul>
   <li>Streams: StdIO. [<a href="audioslides/6-ES/01-StdIO">audioslides</a>]</li>
   <li>Streams: Arquivos. [<a href="audioslides/6-ES/02-Arquivos">audioslides</a>]</li>
-  <li>3ª lista de exercícios. [<a href="listas/lista3">Lista</a>] [<a href="listas/questionario2">Questionário</a>]</li>
+  <li>3ª lista de exercícios. [<a href="listas/lista3">Lista</a>] [<a href="listas/questionario3">Questionário</a>]</li>
 </ul>
 
 <h3 id="20ª-aula-7º-laboratório">20ª aula [7º laboratório]</h3>
