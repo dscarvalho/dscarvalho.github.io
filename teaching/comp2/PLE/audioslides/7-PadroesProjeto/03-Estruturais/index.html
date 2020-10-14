@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Padrões de criação -- Computação II (MAB240)</title>
+	<title>Padrões estruturais -- Computação II (MAB240)</title>
 
 	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
 	<meta name="author" content="Danilo S. Carvalho">
@@ -36,7 +36,7 @@
                 <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
                     <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
                         <h3>
-                            Padrões de criação
+                            Padrões estruturais
                         </h3>
                     </div>
                 </div>
@@ -58,133 +58,142 @@
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
                 <p class="fragment">
-                    Nessa aula, vamos aprender um pouco mais sobre os padrões de projeto criacionais.
+                    Nessa aula, vamos aprender um pouco mais sobre os padrões de projeto estruturais.
                 </p>
                 <br/>
                 <p class="fragment">
-                    Ao final da aula, entenderemos melhor o que são os padrões criacionais e quando utilizá-los.
+                    Ao final da aula, entenderemos melhor o que são os padrões estruturais e quando utilizá-los.
                 </p>
             </section>
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Motivação">
                 <p class="fragment" style="font-size: smaller;">
-                    Em algumas situações a informação necessária para criação de certos objetos no programa é externa aos 
-                    objetos, e é obtida da combinação dos estado de vários outros objetos.
+                    Muitos dos problemas com que temos que lidar no projeto de software referem-se a maneira como combinamos 
+                    as estruturas do programa (ex: classes, interfaces) para alcançar as funcionalidades desejadas.
                 </p>
                 <br/>
                 <p class="fragment" style="font-size: smaller;">
-                    Isso pode acontecer por diversos motivos, sendo alguns dos mais comuns: 
+                    Algumas perguntas comuns nesse sentido são: 
                 </p>
                 <br/>
                 <ul class="fragment list-spacing-long" style="font-size: smaller;">
                     <li>
-                        A presença de várias classes com características similares que são usadas dependendo de um contexto.
+                        Como combinar as capacidades um grupo de classes mantendo a independência entre elas?
                     </li>
                     <li>
-                        A necessidade de centralização de estado de um certo tipo em uma única.
+                        Como parte da estrutura comum de um grupo de objetos pode ser compartilhada para reduzir sua redundância?
                     </li>
                 </ul>
             </section>
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Padrões de projeto criacionais">
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
-                    Para resolver esses problemas, recorremos aos <b>padrões de projeto criacionais</b>.
+                    Para responder a perguntas como essas, recorremos aos <b>padrões de projeto estruturais</b>.
                 </p>
                 <br />
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
-                    Esses padrões lidam com a criação de objetos de forma controlada, permitindo a criação de objetos complexos 
-                    de maneira flexível, eficiente e organizada. 
+                    Esses padrões tratam de como as classes e objetos podem ser combinados para formar estruturas mais complexas. 
                 </p>
             </section>
 
             <section data-background="media/bg.png" data-transition="fade-out">
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
-                    A ideia aqui é delegar a tarefa de criação de certos tipos de objetos a uma classe especial, que possui o 
-                    conhecimento necessário para criar e manipular o estado dos objetos sob sua responsabilidade.
+                    Nesse caso, a ideia é facilitar o projeto ao identificar uma maneira eficiente e escalonável de combinar as 
+                    estruturas, dependendo do tipo de combinação e do efeito desejado.
                 </p>
                 <br />
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
-                    O nome e papel dessa classe especial vão depender do padrão utilizado.
+                    Para esse fim, podem ser usadas classes com papéis específicos e algoritmos que produzem uma funcionalidade 
+                    desejada, mais que a simples agregação de estruturas existentes.
                 </p>
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
                     Vejamos alguns exemplos:
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Factory method">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Adapter">
                 <p>
-                    <b><a href="https://refactoring.guru/pt-br/design-patterns/factory-method">Factory method</a></b>
+                    <b><a href="https://refactoring.guru/pt-br/design-patterns/adapter">Adapter</a></b>
                 </p>
                 <div class="r-stack">
                     <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
-                        Delega a criação de objetos a uma "fábrica", que produz instâncias que compartilham de uma mesma interface.
+                        O padrão <b>Adapter</b> responde às seguintes perguntas:
                     </p>
-                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
-                        A fábrica encapsula o conhecimento para criação dos objetos e conhece o contexto necessário para criar 
-                        os objetos corretos e em um estado apropriado.
-                    </p>
+                    <ul class="fragment fade-in-then-out current-visible" style="font-size: 28px;" data-fragment-index="2" >
+                        <li>Como posso reusar uma classe que não possui uma interface requerida por um certo código (cliente)?</li>
+                        <li>Como classes que implementam interfaces incompatíveis podem funcionar em conjunto?</li>
+                        <li>Como podemos fornecer uma interface alternativa para uma classe qualquer?</li>
+                    </ul>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
-                        Dessa forma, não é necessário saber o tipo exato do objeto que será criado, apenas que ele atenderá a 
-                        necessidade do contexto dado à fabrica.
+                        A classe que oferece a interface desejada para uma funcionalidade provida por uma classe incompatível recebe 
+                        o nome de <b>adaptadora (adapter)</b>.
                     </p>
                 </div>
 
-                <img src="media/Factory_Method_UML_class_diagram.png" style="width: 70%; border: 0px;" />
+                <img src="media/Adapter_using_delegation_UML_class_diagram.svg" style="width: 70%; border: 0px;" />
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Singleton">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Decorator">
                 <p>
-                    <b><a href="https://refactoring.guru/pt-br/design-patterns/singleton">Singleton</a></b>
+                    <b><a href="https://refactoring.guru/pt-br/design-patterns/decorator">Decorator</a></b>
                 </p>
                 <div class="r-stack">
                     <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
-                        Restringe a instanciação de uma classe a um único objeto.
+                        O padrão <b>Decorator</b> permite adicionar capacidades ou comportamento a uma classe sem interferir em 
+                        sua estrutura.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
-                        A classe não fornece um construtor público e mantém uma única instância, que pode ser solicitada.
+                        A ideia aqui é "cobrir" um objeto de uma classe com um "decorador" compatível, onde o decorador expõe as 
+                        capacidades adicionais, implementadas sobre aquelas da classe decorada.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
-                        Dessa forma, pode-se manter um controle de estado global no programa quando for necessário.
+                        Isso é feito implementando uma interface comum, tal que uma classe decoradora possa acrescentar suas 
+                        capacidades a qualquer classe compatível.
                     </p>
                 </div>
 
-                <img src="media/Singleton_UML_class_diagram.svg" style="width: auto; border: 0px;" />
+                <img src="media/Decorator_UML_class_diagram.svg" style="width: 50%; border: 0px;" />
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Object pool">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Flyweight">
                 <p>
-                    <b><a href=""></a>Object pool</a></b>
+                    <b><a href="https://refactoring.guru/pt-br/design-patterns/flyweight"></a>Flyweight</a></b>
                 </p>
                 <div class="r-stack">
                     <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
-                        Mantém uma reserva (pool) de objetos instanciados que podem ser reaproveitados após utilizados.
+                        O padrão <b>Flyweight</b> consiste em identificar partes comuns na representação de objetos em uma 
+                        estrutura de classes e combiná-las em uma estrutura que possa ser reutilizada por todas as classes 
+                        interessadas.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
-                        Frequentemente implementado como um tipo particular de Singleton.
+                        Essa estrutura comum é instanciada apenas uma vez para cada um dos seus possíveis estados, economizando 
+                        os recursos computacionais (especialmente memória) usados para manter esses objetos.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
-                        Dessa forma, podem ser economizados recursos computacionais envolvidos na criação e destruição dos objetos 
-                        complexos.
+                        Dessa forma, várias instâncias de uma classe ou grupo de classes podem compartilhar os mesmos dados, reduzindo 
+                        a redundância e aumentando a eficiência.
                     </p>
                 </div>
 
-                <img src="media/object_pool_2.png" style="width: 50%; border: 0px;" />
+                <img src="media/flyweight.gif" style="width: 70%; border: 0px;" />
             </section>
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
                 <p class="fragment" style="font-size: smaller;">
-                    A medida que temos mais classes a nossa disposição para realizar as mais diversas tarefas, torna-se mais 
-                    produtivo realizar a <b>composição</b> de classes em estruturas mais complexas. Assim o uso de padrões de 
-                    criação torna-se relevante e muitas vezes indispensável.
+                    A medida que as tarefas a serem realizadas pelas classes se tornam mais complexas, a organização de heranças, 
+                    interfaces e composição de classes se torna mais desafiadora. 
                 </p>
-                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Assim, o uso de padrões estruturais deve se tornar parte do repertório básico do programador.
+                </p>
                 <p class="fragment" style="font-size: smaller;">
                     Outros padrões desse tipo incluem:
                 </p>
                 <ul class="fragment list-spacing-longer" style="font-size: smaller;">
-                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/abstract-factory">Abstract factory</a></b></li>
-                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/builder">Builder</a></b></li>
-                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/prototype">Prototype</a></b></li>
+                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/bridge">Bridge</a></b></li>
+                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/composite">Composite</a></b></li>
+                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/facade">Facade</a></b></li>
+                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/proxy">Proxy</a></b></li>
                 </ul>
             </section>
 
@@ -194,10 +203,10 @@
                 </p>
                 <ol class="list-spacing-long">
                     <li style="font-size: smaller;">
-                        Dê um exemplo de situação onde podemos aplicar o padrão singleton.
+                        Dê um exemplo de situação onde podemos aplicar o padrão Adapter.
                     </li>
                     <li style="font-size: smaller;">
-                        Que problemas podem ser encontrados na aplicação do padrão Object pool?
+                        Qual a diferença entre o padrão Flyweight e o padrão Object pool?
                     </li>
                 </ol>
             </section>
