@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Padrões de criação -- Computação II (MAB240)</title>
+	<title>Padrões de comportamento -- Computação II (MAB240)</title>
 
 	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
 	<meta name="author" content="Danilo S. Carvalho">
@@ -36,7 +36,7 @@
                 <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
                     <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
                         <h3>
-                            Padrões de criação
+                            Padrões de comportamento
                         </h3>
                     </div>
                 </div>
@@ -58,133 +58,168 @@
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
                 <p class="fragment">
-                    Nessa aula, vamos aprender um pouco mais sobre os padrões de projeto criacionais.
+                    Nessa aula, vamos aprender um pouco mais sobre os padrões de projeto comportamentais.
                 </p>
                 <br/>
                 <p class="fragment">
-                    Ao final da aula, entenderemos melhor o que são os padrões criacionais e quando utilizá-los.
+                    Ao final da aula, entenderemos melhor o que são os padrões comportamentais e quando utilizá-los.
                 </p>
             </section>
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Motivação">
                 <p class="fragment" style="font-size: smaller;">
-                    Em algumas situações a informação necessária para criação de certos objetos no programa é externa aos 
-                    objetos, e é obtida da combinação dos estado de vários outros objetos.
+                    Além dos problemas com a criação dos objetos e com a combinação de estruturas para produzir funcionalidades 
+                    elaboradas, precisamos também lidar com a interação entre os objetos, de forma que a comunicação entre eles 
+                    seja previsível e não redundante.
                 </p>
                 <br/>
                 <p class="fragment" style="font-size: smaller;">
-                    Isso pode acontecer por diversos motivos, sendo alguns dos mais comuns: 
+                    A comunicação entre objetos e de um objeto consigo mesmo definem questões de comportamento, que incluem:
                 </p>
                 <br/>
                 <ul class="fragment list-spacing-long" style="font-size: smaller;">
                     <li>
-                        A presença de várias classes com características similares que são usadas dependendo de um contexto.
+                        Como uma coleção pode apresentar seus elementos independentemente de sua representação interna?
                     </li>
                     <li>
-                        A necessidade de centralização de estado de um certo tipo em uma única instância.
+                        Como um objeto pode representar e fazer uso de alterações em seu próprio estado?
+                    </li>
+                    <li>
+                        Como um objeto pode monitorar mudanças no estado de outro objeto?
                     </li>
                 </ul>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Padrões de projeto criacionais">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Padrões de projeto comportamentais">
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
-                    Para resolver esses problemas, recorremos aos <b>padrões de projeto criacionais</b>.
+                    Essas questões são tratadas pelos <b>padrões de projeto comportamentais</b>.
                 </p>
                 <br />
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
-                    Esses padrões lidam com a criação de objetos de forma controlada, permitindo a criação de objetos complexos 
-                    de maneira flexível, eficiente e organizada. 
+                    Esses padrões tratam da interação/comunicação entre objetos e sua respectiva descrição pelas classes/interfaces. 
                 </p>
             </section>
 
             <section data-background="media/bg.png" data-transition="fade-out">
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
-                    A ideia aqui é delegar a tarefa de criação de certos tipos de objetos a uma classe especial, que possui o 
-                    conhecimento necessário para criar e manipular o estado dos objetos sob sua responsabilidade.
+                    A ideia desses padrões é a de definir formas eficientes e escalonáveis de expor comportamentos comuns dos objetos.
                 </p>
                 <br />
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
-                    O nome e papel dessa classe especial vão depender do padrão utilizado.
+                    Esse objetivo é alcançado através da criação de classes, interfaces e métodos que, em conjunto, definem um 
+                    certo comportamento. Esses elementos podem ser facilmente reconhecidos quando encontrados no programa, promovendo 
+                    o entendimento das capacidades das partes envolvidas em um sistema.
                 </p>
                 <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
                     Vejamos alguns exemplos:
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Factory method">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Iterator">
                 <p>
-                    <b><a href="https://refactoring.guru/pt-br/design-patterns/factory-method">Factory method</a></b>
+                    <b><a href="https://refactoring.guru/pt-br/design-patterns/iterator">Iterator</a></b>
                 </p>
                 <div class="r-stack">
                     <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
-                        Delega a criação de objetos a uma "fábrica", que produz instâncias que compartilham de uma mesma interface.
+                        O padrão <b>Iterator</b> resolve os seguintes problemas:
                     </p>
-                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
-                        A fábrica encapsula o conhecimento para criação dos objetos e conhece o contexto necessário para criar 
-                        os objetos corretos e em um estado apropriado.
-                    </p>
+                    <ul class="fragment fade-in-then-out current-visible" style="font-size: 28px;" data-fragment-index="2" >
+                        <li>Acesso aos elementos de um objeto agregado ou coleção, sem expor sua representação interna.</li>
+                        <li>Definir maneiras alternativas de acesso aos elementos de uma coleção ou agregado sem mudar sua interface.</li>
+                    </ul>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
-                        Dessa forma, não é necessário saber o tipo exato do objeto que será criado, apenas que ele atenderá a 
-                        necessidade do contexto dado à fabrica.
+                        Para esse fim, é definida uma interface (ou classe abstrata) <b>Iterador</b> que expõe as capacidades 
+                        de iteração para um tipo de coleção/agregado.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        A concretização do iterador implica na implementação de uma forma específica de iterar sobre os 
+                        elementos da coleção de interesse.
                     </p>
                 </div>
 
-                <img src="media/Factory_Method_UML_class_diagram.png" style="width: 70%; border: 0px;" />
+                <img src="media/Iterator_UML_class_diagram.svg" style="width: 70%; border: 0px;" />
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Singleton">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Memento">
                 <p>
-                    <b><a href="https://refactoring.guru/pt-br/design-patterns/singleton">Singleton</a></b>
+                    <b><a href="https://refactoring.guru/pt-br/design-patterns/memento">Memento</a></b>
                 </p>
                 <div class="r-stack">
                     <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
-                        Restringe a instanciação de uma classe a um único objeto.
+                        O padrão <b>Memento</b> confere aos objetos a capacidade de representar alterações em seu próprio 
+                        estado e oferecer a outros a possibilidade de fazê-lo retornar a um estado anterior, sem quebrar o 
+                        encapsulamento.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
-                        A classe não fornece um construtor público e mantém uma única instância, que pode ser solicitada.
+                        Para isso são criadas três classes com papéis bem distintos:
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
-                        Dessa forma, pode-se manter um controle de estado global no programa quando for necessário.
+                        O <b>Originador (Originator)</b>, que implementa uma forma de guardar a memória do seu próprio estado 
+                        (memento), e uma forma de restaurá-la.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        O <b>Memento</b>, que representa a memória do estado de um certo tipo de objeto.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        O <b>Cuidador (Caretaker)</b>, que cuida de um objeto e pode requisitar deste um memento, para posteriormente 
+                        solicitar sua eventual restauração.
                     </p>
                 </div>
 
-                <img src="media/Singleton_UML_class_diagram.svg" style="width: auto; border: 0px;" />
+                <img src="media/Memento_design_pattern.png" style="width: 50%; border: 0px;" />
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Object pool">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Observer">
                 <p>
-                    <b><a href=""></a>Object pool</a></b>
+                    <b><a href="https://refactoring.guru/pt-br/design-patterns/observer"></a>Observer</a></b>
                 </p>
                 <div class="r-stack">
                     <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
-                        Mantém uma reserva (pool) de objetos instanciados que podem ser reaproveitados após utilizados.
+                        O padrão <b>Observer</b> permite que um objeto notifique outros a respeito de alguma mudança no seu 
+                        estado, representando um evento de interesse.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
-                        Frequentemente implementado como um tipo particular de Singleton.
+                        Isso é feito através de um mecanismo de assinatura, onde os interessados nos eventos de um certo objeto 
+                        são registrados por esse objeto. O objeto então sabe quem notificar e quando.
                     </p>
                     <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
-                        Dessa forma, podem ser economizados recursos computacionais envolvidos na criação e destruição dos objetos 
-                        complexos.
+                        A implementação desse padrão é feita usando uma interface (ou classe abstrata) observadora <b>Observer</b> 
+                        e de uma classe sujeita aos observadores (compatível), chamada <b>Subject</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        O objeto Subject mantém referências para todos os seus observadores, que são registradas ou "desregistradas" 
+                        através de métodos específicos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Quando há um evento relevante, o objeto Subject notifica seus Observers registrados através de um método 
+                        <b>update</b>, que realiza as operações relevantes em cada observador.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        As classes Subject e Observer são alternativamente chamadas de <b>Publisher</b> e <b>Subscriber</b>, 
+                        respectivamente.
                     </p>
                 </div>
 
-                <img src="media/object_pool_2.png" style="width: 50%; border: 0px;" />
+                <img src="media/Observer_w_update.svg" style="width: 70%; border: 0px;" />
             </section>
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
                 <p class="fragment" style="font-size: smaller;">
-                    A medida que temos mais classes a nossa disposição para realizar as mais diversas tarefas, torna-se mais 
-                    produtivo realizar a <b>composição</b> de classes em estruturas mais complexas. Assim o uso de padrões de 
-                    criação torna-se relevante e muitas vezes indispensável.
+                    Situações comuns de interação entre objetos podem ser modeladas através dos comportamentos descritos 
+                    nos padrões de projeto comportamentais. 
                 </p>
-                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Tal como os padrões criacionais e estruturais, devem ser integrados à maneira de pensar do programador, 
+                    promovendo a identificação antecipada de desafios do projeto e o desenvolvimento mais ágil das soluções.
+                </p>
                 <p class="fragment" style="font-size: smaller;">
                     Outros padrões desse tipo incluem:
                 </p>
                 <ul class="fragment list-spacing-longer" style="font-size: smaller;">
-                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/abstract-factory">Abstract factory</a></b></li>
-                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/builder">Builder</a></b></li>
-                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/prototype">Prototype</a></b></li>
+                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/chain-of-responsibility">Chain of responsibility</a></b></li>
+                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/mediator">Mediator</a></b></li>
+                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/strategy">Strategy</a></b></li>
+                    <li><b><a href="https://refactoring.guru/pt-br/design-patterns/visitor">Visitor</a></b></li>
                 </ul>
             </section>
 
@@ -194,10 +229,10 @@
                 </p>
                 <ol class="list-spacing-long">
                     <li style="font-size: smaller;">
-                        Dê um exemplo de situação onde podemos aplicar o padrão singleton.
+                        Dê um exemplo de situação onde podemos aplicar o padrão Memento, além do Undo/Redo.
                     </li>
                     <li style="font-size: smaller;">
-                        Que problemas podem ser encontrados na aplicação do padrão Object pool?
+                        Indique um problema que pode ocorrer com a aplicação do padrão Observer na linguagem Java.
                     </li>
                 </ol>
             </section>
