@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Model-View-Controller (MVC) -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Model-View-Controller (MVC)
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, aprenderemos um pouco sobre o padrão de projeto Model-View-Controller, conhecido popularmente 
+                    como <b>MVC</b>.
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, entenderemos a importância da separação do código dos nossos programas em partes relativas 
+                    ao seu papel no funcionamento de um sistema.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Motivação">
+                <p class="fragment" style="font-size: smaller;">
+                    Qualquer sistema de complexidade não trivial pode (e deve) ser separado em partes que incluam módulos 
+                    relacionados, visando facilitar sua compreensão e a aplicação de padrões de projeto.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Os pacotes em Java e seus correspondentes em outras linguagens de programação possibilitam essa separação, 
+                    mas não determinam como ela deve ser feita e organizada.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Precisamos então de um padrão para nos guiar na separação dos módulos do programa, de acordo com critérios 
+                    bem definidos e que seja aplicável a uma ampla variedade de sistemas.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Model-View-Controller">
+                <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
+                    Para atenter a essa necessidade, existe o padrão de projeto <b>Model-View-Controller</b> (<b>MVC</b>).
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
+                    Esse padrão define uma forma de organizar os módulos de acordo com o papel destes no funcionamento do 
+                    sistema. 
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
+                    Tais papéis são simples de compreender e estão presentes na vasta maioria dos sistemas de informação. 
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
+                    O padrão MVC define três componentes, que dão nome ao padrão:
+                </p>
+                <br />
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Model">
+                <p>
+                    <b>Model</b>
+                </p>
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Representa o papel do modelo conceitual do sistema.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: 28px;" data-fragment-index="2" >
+                        Os módulos nesse componente cuidam da estrutura de dados do programa e de regras específicas de manipulação 
+                        dos dados.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Também pode cuidar de elementos relativos à persistência dos dados.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Um módulo do modelo conceitual é tipicamente uma representação mental de um elemento de interesse do 
+                        sistema (ex: livro, pessoa).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Idealmente, esses conceitos também estão alinhados com a representação mental do usuário do sistema.
+                    </p>
+                </div>
+
+                <img src="media/model.svg" style="width: 90%; border: 0px;" />
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="View">
+                <p>
+                    <b>View</b>
+                </p>
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Representa a interface do sistema com o usuário.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Os módulos desse componente cuidam da interação com o usuário, sendo responsáveis por apresentar telas, 
+                        mensagens e resultados, e também de coletar entradas e ações do usuário.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Pode ser notificado sobre mudanças nos dados relevantes pelo componente <b>Model</b>, atualizando a 
+                        apresentação dos dados ao usuário de acordo.
+                    </p>
+                </div>
+
+                <img src="media/model_view.svg" style="width: 90%; border: 0px;" />
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Controller">
+                <p>
+                    <b>Controller</b>
+                </p>
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Representa a lógica de funcionamento do sistema.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Os módulos desse componente cuidam de todas as funções relativas ao processamento dos dados e interagem 
+                        com os componentes <b>Model</b> e <b>View</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Do <b>Model</b> os dados são consultados e atualizados conforme a necessidade. O Model notifica os 
+                        módulos interessados no Controller quando um dado relevante sofre alguma alteração.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Da <b>View</b> os módulos do Controller recebem requisições para executar operações sobre os dados. 
+                        Os módulos do Controller podem comandar a interface, mudando telas ou atualizando dados, por exemplo.
+                    </p>
+                </div>
+
+                <img src="media/model_view_controller.svg" style="width: 90%; border: 0px;" />
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="MVC: considerações">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Os três componentes trabalham em conjunto durante toda a vida do programa.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        A separação dos componentes permite a especialização de soluções e de pessoal para a construção de 
+                        sistemas complexos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        O <b>MVC</b> é um padrão de projeto bastante utilizado, e é recomendado para qualquer sistema de informação 
+                        que não seja trivial, ou seja, praticamente qualquer sistema "de verdade".
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        A sua aplicação proporciona ao programador um entendimento melhor dos dados, operações, e interfaces de um 
+                        sistema.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Esse entendimento é cumulativo e acompanha o programador em sua evolução.
+                    </p>
+                </div>
+
+                <img src="media/model-view-controller-light-blue.png" style="width: 70%; border: 0px;" />
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    O <b>MVC</b> é um padrão de projeto essencial na construção de sistemas complexos. 
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    A separação de módulos do programa em componentes de acordo com o seu papel no funcionamento 
+                    do sistema deve fazer parte da disciplina dos desenvolvedores.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    O modelo conceitual, interface com o úsuário, e lógica de funcionamento são componentes simples de 
+                    identificar e devem ser uma consideração inicial do projeto de software.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        A que componentes do padrão MVC correspondem a classe <b>FormularioDeInscricao</b>, 
+                        <b>ContaBancaria</b> e <b>OperacoesDeCredito</b>, respectivamente?
+                    </li>
+                    <li style="font-size: smaller;">
+                        Qual padrão de projeto pode ser usado para implementar a atualização de informações da View, quando o 
+                        modelo de dados é alterado?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Se vocês implementaram o exercício dado na <a href="/teaching/comp2/PLE/listas/lista3">última lista</a> 
+                        segundo os requisitos, falta pouco para o programa de vocês estar aderente ao padrão MVC. 
+                        Identifique as lacunas e aplique o padrão MVC no sistema criado por vocês.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				//mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
