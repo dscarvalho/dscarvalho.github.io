@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Introdução à programação GUI: Swing -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Introdução à programação GUI: Swing
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, começaremos nosso aprendizado sobre interfaces gráficas de usuário 
+                    (Graphical User Interfaces - GUIs), usando a linguagem Java.
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, vamos entender alguns dos elementos básicos das GUIs no Java usando o toolkit <b>Swing</b>,
+                    que faz parte da biblioteca padrão da linguagem.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Interfaces Gráficas">
+                <p class="fragment" style="font-size: smaller;">
+                    Até aqui, aprendemos a interagir com o usuário do programa apenas através do terminal, que oferece uma 
+                    interface de linha de comando (Command Line Interface - CLI).
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Entretanto, sabemos que o uso de CLIs não é intuitivo para a grande maioria dos usuários, que prefere 
+                    formas de interação mais visual, instantânea e familiar, preferencialmente inspirada em objetos conhecidos.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Por esse motivo, os programas voltados a usuários não técnicos sempre oferecem uma interface gráfica de 
+                    usuário (GUI), sendo toda a sua operação tipicamente feita através desta interface.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Elementos da interface">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Em um computador desktop ou laptop, a interface gráfica é tipicamente constituída de um ambiente de 
+                        "<b>área de trabalho</b>" (desktop environment), onde cada aplicação controla uma ou mais <b>janelas</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        As janelas são quadros que ocupam uma certa porção da tela, onde podem ser exibidos os elementos de 
+                        interação do usuário com a aplicação: ícones, botões, caixas de texto, entre outros.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Uma janela também normalmente contém um conjunto de menus para realizar operações como salvar o 
+                        trabalho feito no programa ou outras que dependem do tipo de dado utilizado, como buscar texto, desfazer 
+                        operações, etc.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Por fim, uma janela também possui tipicamente uma forma de encerrar o programa, concluindo o seu uso e 
+                        fazendo com que a janela desapareça.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Esses elementos foram padronizados ao longo da história da programação de GUIs, de forma a aumentar a 
+                        familiaridade dos usuários, e com isso sua produtividade e interesse nos aplicativos.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/CDE_Application_Builder.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="0" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Elementos da interface">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Uma GUI pode ser descrita de várias maneiras, mas as mais comuns são: através de código e 
+                        através de arquivos de marcação.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: 28px;" data-fragment-index="2" >
+                        Usando código da própria linguagem de programação, o programador pode definir e posicionar os elementos 
+                        da interface como uma sequência de operações.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Em uma linguagem OO, há abstrações para cada elemento diferente e suas propriedades.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Usando uma linguagem de marcação é possível descrever os elementos em termos de sua hierarquia e 
+                        propriedades, sem necessariamente estar em uma sequência.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Tipicamente, ambas as formas são utilizadas, com a marcação sendo usada para os elementos estáticos e 
+                        o código para manipulação dos elementos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Vamos aprender aqui a fazer tudo usando o código. A marcação será abordada em um assunto posterior.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/swing_code.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="2" />
+                    <img src="media/android_ui_xml.jpg" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="4" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Swing">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        A biblioteca padrão da linguagem Java fornece ferramentas para construir janelas e os demais elementos 
+                        de interfaces gráficas para os nossos programas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Iremos aprender aqui a usar o toolkit <b>Swing</b>, que é parte da biblioteca padrão e é compatível com 
+                        todos os sistemas que implementam um desktop environment e para os quais há uma JRE disponível (ex: Windows, 
+                        Linux, Mac OS).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        As classes do toolkit Swing são encontradas no pacote <b>javax.swing</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Estão organizadas segundo uma hierarquia que define como podem ser combinados e exibidos.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/swing_class_hierarchy.svg" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="3" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Swing">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Vamos começar a trabalhar com o JFrame, que descreve uma janela.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Criamos uma classe com um atributo privado que vai representar a janela do nosso programa.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        É recomendável criar um método que vai cuidar de inicializar a janela e definir suas propriedades 
+                        desejadas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        O método <b>setSize()</b> define o tamanho da janela em pixels.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Precisamos também definir o que vai acontecer quando o usuário fechar a janela através dos meios padrões 
+                        do sistema. Definimos que o programa será encerrado com o método <b>setDefaultCloseOperation()</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Por fim, a janela começa invisível e precisamos mostrá-la com o método <b>setVisible()</b>.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="0">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import javax.swing.JFrame;
+
+                            public class ExemploJanelaSwing {
+                                private JFrame janela;
+                                
+                                private void initWindow() {
+                                    janela = new JFrame("Janela Swing");
+                                    janela.setSize(600, 400);
+                                    janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    
+                                    janela.setVisible(true);
+                                }
+
+                                public static void main(String[] args) {
+                                    new ExemploSwing1().initWindow();
+
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Swing">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Podemos então colocar um botão na janela.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Criamos mais um atributo para representao o botão, dessa vez da classe <b>JButton</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Instanciamos o botão após a janela e adicionamos ele na janela usando o método <b>add()</b> da classe 
+                        JFrame.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Agora ao iniciar o programa há um botão que ocupa toda a janela.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Aprenderemos como posicionar os elementos na janela na próxima aula.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="0">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import javax.swing.*;
+
+                            public class ExemploJanelaComBotaoSwing {
+                                private JFrame janela;
+                                private JButton botao;
+                                
+                                private void initWindow() {
+                                    janela = new JFrame("Janela Swing");
+                                    janela.setSize(600, 400);
+                                    janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    
+                                    botao = new JButton("Botão");
+                                    janela.add(botao);
+                                    
+                                    janela.setVisible(true);
+                                }
+
+                                public static void main(String[] args) {
+                                    new ExemploSwing1().initWindow();
+
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    As interfaces gráficas de usuário (GUIs) são necessárias para uma melhor interação do usuário com os programas.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    O toolkit <b>Swing</b> oferece as ferramentas para construir GUIs, na biblioteca padrão da linguagem Java.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Usaremos as classes do pacote <b>java.swing</b> para compor nossas interfaces.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Material de apoio">
+                <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="View">
+                    <p>
+                        <b>Material de apoio</b>
+                    </p>
+                    <ul class="list-spacing-longer">
+                        <li><a href="https://www.lncc.br/~rogerio/poo/04a%20-%20Programacao_GUI.pdf">Interfaces Gráficas (GUIs) em Java usando Swing (tutorial da Profª Flávia Cristina Bernardini)</a></li>
+                        <li><a href="https://www.guru99.com/java-swing-gui.html">Java Swing Tutorial: Examples to create GUI (Guru99)</a></li>
+                        <li><a href="https://docs.oracle.com/javase/tutorial/uiswing/index.html">Trail: Creating a GUI With JFC/Swing (tutorial oficial da Oracle)</a></li>
+                    </ul>
+                </section>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Pergunta:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Para que servem cada uma das classes do toolkit Swing e em que objeto foram inspirados?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Criem um programa com uma janela contendo uma caixa de texto e escrevam o conteúdo de um 
+                        arquivo de texto nessa caixa.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				//mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
