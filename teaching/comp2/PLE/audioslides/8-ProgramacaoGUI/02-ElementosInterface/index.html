@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Elementos de interface (Swing) -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Elementos de interface (Swing)
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, aprenderemos sobre os elementos de interface gráfica que podemos usar a partir do toolkit Swing e 
+                    como posicioná-los em uma janela.
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, vamos entender o processo de construção de uma GUI através dos componentes e painéis do Swing.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Componentes Swing">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        O toolkit Swing define os elementos de interface como <b>componentes</b>, organizados em uma hierarquia 
+                        de classes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Com relação a sua função, os componentes podem ser divididos em: janelas (<b>Window</b>), painéis (<b>JPanel</b>), 
+                        e demais controles (<b>JComponent</b>).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Uma janela ocupa espaço no ambiente de trabalho, e pode ser povoada com controles e painéis.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Painéis ocupam espaço dentro de uma janela, e são usados para organizar outros componentes (painéis, controles), 
+                        definindo o seu posicionamento.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Os controles são componentes que permitem a interação com o usuário, tal como entrada de texto, 
+                        iniciar uma ação, selecionar valores ou opções.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/swing_class_hierarchy.svg" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="2" />
+                    <img src="media/jframe.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="3" />
+                    <img src="media/jpanels.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="4" />
+                    <img src="media/controls.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="5" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Controles">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Os controles básicos do Swing são:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        <b>JLabel</b>: Um espaco para texto informativo (label).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: 28px;" data-fragment-index="3" >
+                        <b>JTextField</b>: Uma caixa de entrada de texto, com uma única linha.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        <b>JTextArea</b>: Uma caixa de entrada de texto com múltiplas linhas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        <b>JButton</b>: Um botão que pode ser clicado.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        <b>JCheckBox</b>: Uma caixa de marcação, que pode ser ativada ou desativada.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        <b>JRadioButton</b>: Um botão para seleção de uma opção em um grupo de opções.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        <b>JComboBox</b>: Uma caixa de seleção.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        <b>JSlider</b>: Um seletor de valor em um intervalo (ex: intensidade).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="10" >
+                        <b>JList</b>: Uma lista selecionável de itens.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="11" >
+                        <b>JScrollBar</b>: Uma barra de rolagem para texto ou outros componentes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="12" >
+                        <b>JMenuBar</b>: Menu superior para controlar a aplicação.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/Gui-widgets.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="1" />
+                    <img src="media/jtextfield.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="3" />
+                    <img src="media/jtextarea.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="4" />
+                    <img src="media/jbutton.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="5" />
+                    <img src="media/jcheckbox.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="6" />
+                    <img src="media/jradiobutton.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="7" />
+                    <img src="media/jcombobox.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="8" />
+                    <img src="media/jslider.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="9" />
+                    <img src="media/jlist.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="10" />
+                    <img src="media/jscrollbar.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="11" />
+                    <img src="media/jmenubar.png" class="fragment" style="width: 70%; border: 0px;" data-fragment-index="12" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Layout managers">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Toda janela ou painél contém um <b>LayoutManager</b>, que define como os componentes vão ficar posicionados 
+                        dentro da sua área de exibição.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        A escolha do LayoutManager depende de como desejamos montar uma janela e quis os componentes envolvidos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Quando adicionamos um componente em uma janela ou painél, podemos escolher o espaço que será ocupado 
+                        no LayoutManager correspondente.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Os tipos de LayoutManager são os seguintes:.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        <b><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/border.html">BorderLayout</a></b>: 
+                        É o LayoutManager padrão de um JFrame. Separa o espaço em 5 regiões: NORTH (cima), SOUTH (baixo), 
+                        WEST (esquerda), EAST (direita) e CENTER.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        <b><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/box.html">BoxLayout</a></b>: 
+                        Coloca os componentes em uma única linha ou coluna.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        <b><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html">CardLayout</a></b>: 
+                        Permite trocar os componentes que são mostrados em um determinado espaço.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        <b><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/flow.html">FlowLayout</a></b>: 
+                        É o LayoutManager padrão de um JPanel. Coloca os elementos centralizados em uma linha e vai adicionando 
+                        linhas quando o espaço horizontal é esgotado.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        <b><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/grid.html">GridLayout</a></b>: 
+                        Posiciona os componentes em uma grade com células de tamanho fixo, preenchendo-as com os componentes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="10" >
+                        <b><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html">GridBagLayout</a></b>: 
+                        Permite posicionar os componentes em uma grade com linhas, colunas e células de tamanho flexível.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="11" >
+                        <b><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/group.html">GroupLayout</a></b>: 
+                        Permite posicionar os componentes de forma hierárquica, organizada pelas dimensões horizontal e vertical, com 
+                        diferentes opções de agrupamento e espaçamento dos componentes.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="12" >
+                        <b><a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/spring.html">SpringLayout</a></b>: 
+                        Implementa espaçamento flexível entre os componentes, permitindo posicionamento mais elaborado, especialmente 
+                        entre campos de entrada e labels.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/BorderLayoutDemo.png" class="fragment fade-in-then-out" style="width: 60%; border: 0px;" data-fragment-index="5" />
+                    <img src="media/BoxLayoutDemo.png" class="fragment fade-in-then-out current-visible" style="width: 40%; border: 0px;" data-fragment-index="6" />
+                    <figure class="fragment fade-in-then-out current-visible" data-fragment-index="7">
+                        <img src="media/CardLayoutDemo.png" style="width: 50%; border: 0px;" />
+                        <img src="media/CardLayoutDemo-2.png" style="width: 50%; border: 0px;" />
+                    </figure>
+                    <img src="media/FlowLayoutDemo.png" class="fragment fade-in-then-out current-visible" style="width: 60%; border: 0px;" data-fragment-index="8" />
+                    <img src="media/GridLayoutDemo.png" class="fragment fade-in-then-out current-visible" style="width: 40%; border: 0px;" data-fragment-index="9" />
+                    <img src="media/GridBagLayoutDemo.png" class="fragment fade-in-then-out current-visible" style="width: 40%; border: 0px;" data-fragment-index="10" />
+                    <img src="media/GroupLayoutDemo.png" class="fragment fade-in-then-out current-visible" style="width: 40%; border: 0px;" data-fragment-index="11" />
+                    <img src="media/SpringForm.png" class="fragment fade-in-then-out current-visible" style="width: 40%; border: 0px;" data-fragment-index="12" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exemplo: Janela de mensagem">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Vamos criar uma janela de mensagem simples usando o BorderLayout.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Criamos uma classe com atributo privados para representar a janela e os controles do programa.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Uma JLabel para informar o uso da caixa de mensagem ao usuário, uma JTextArea para conter a mensagem, e 
+                        um JButton para disparar o envio da mensagem.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        No método initWindow, instanciamos a janela e os controles, e atribuimos as suas propriedades desejadas.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Em seguida adicionamos os controles na janela, escolhendo um espaço no BorderLayout.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Por fim, tornamos a janela visível.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Aí está o resultado.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="1">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.awt.*;
+                            import javax.swing.*;
+
+                            public class ExemploSwingMensagem {
+                                private JFrame janela;
+                                private JLabel lblMensagem;
+                                private JTextArea txtMensagem;
+                                private JButton btnEnviar;
+                                
+                                
+                                private void initWindow() {
+                                    janela = new JFrame("Enviar mensagem");
+                                    janela.setSize(400, 300);
+                                    janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    
+                                    lblMensagem = new JLabel("Mensagem");
+                                    txtMensagem = new JTextArea();
+                                    btnEnviar = new JButton("Enviar");
+                                    
+                                    janela.add(BorderLayout.NORTH, lblMensagem);
+                                    janela.add(BorderLayout.CENTER, txtMensagem);
+                                    janela.add(BorderLayout.SOUTH, btnEnviar);
+                                    
+                                    janela.setVisible(true);
+                                }
+
+                                public static void main(String[] args) {
+                                    new ExemploSwingMensagem().initWindow();
+
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <img src="media/janela_mensagem1.png" class="fragment" style="width: 60%; border: 0px;" data-fragment-index="7" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Entretanto, observamos que o label está descentralizado, e o texto está passando o limite horizontal 
+                        se for muito longo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Para resolver o problema com o label, criamos um JPanel e colocamos o label dentro dele.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        O LayoutManager do Jpanel (FlowLayout) centraliza automaticamente os elementos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Problema resolvido.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.awt.*;
+                            import javax.swing.*;
+
+                            public class ExemploSwingMensagem {
+                                private JFrame janela;
+                                private JLabel lblMensagem;
+                                private JTextArea txtMensagem;
+                                private JButton btnEnviar;
+                                
+                                
+                                private void initWindow() {
+                                    janela = new JFrame("Enviar mensagem");
+                                    janela.setSize(400, 300);
+                                    janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    
+                                    lblMensagem = new JLabel("Mensagem");
+                                    txtMensagem = new JTextArea();
+                                    btnEnviar = new JButton("Enviar");
+                                    
+                                    JPanel painelLabel = new JPanel();
+                                    painelLabel.add(lblMensagem);
+                                    
+                                    janela.add(BorderLayout.NORTH, painelLabel);
+                                    janela.add(BorderLayout.CENTER, txtMensagem);
+                                    janela.add(BorderLayout.SOUTH, btnEnviar);
+                                    
+                                    janela.setVisible(true);
+                                }
+
+                                public static void main(String[] args) {
+                                    new ExemploSwingMensagem().initWindow();
+
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <img src="media/janela_mensagem2.png" class="fragment" style="width: 60%; border: 0px;" data-fragment-index="4" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Para resolver o problema da rolagem de texto da caixa de mensagem, primeiro precisamos mudar a propriedade 
+                        <b>lineWrap</b> da JTextArea usan o <b>setLineWrap()</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Essa propriedade indica se a JTextArea vai exibir o texto na próxima linha ou não, caso ele exceda o 
+                        tamanho horizontal da caixa de texto.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Além disso, precisamos adicionar a JTextArea em um JScrollPane, para colocar automaticamente uma barra de 
+                        rolagem quando o texto exceder o tamanho vertical da caixa de texto.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Agora a interface da janela de mensagem está apresentável.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="0">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.awt.*;
+                            import javax.swing.*;
+
+                            public class ExemploSwingMensagem {
+                                private JFrame janela;
+                                private JLabel lblMensagem;
+                                private JTextArea txtMensagem;
+                                private JButton btnEnviar;
+                                
+                                
+                                private void initWindow() {
+                                    janela = new JFrame("Enviar mensagem");
+                                    janela.setSize(400, 300);
+                                    janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    
+                                    lblMensagem = new JLabel("Mensagem");
+                                    txtMensagem = new JTextArea();
+                                    btnEnviar = new JButton("Enviar");
+                                    
+                                    JPanel painelLabel = new JPanel();
+                                    painelLabel.add(lblMensagem);
+                                    
+                                    txtMensagem.setLineWrap(true);
+                                    JScrollPane txtScroll = new JScrollPane(txtMensagem);
+                                    
+                                    janela.add(BorderLayout.NORTH, painelLabel);
+                                    janela.add(BorderLayout.CENTER, txtScroll);
+                                    janela.add(BorderLayout.SOUTH, btnEnviar);
+                                    
+                                    janela.setVisible(true);
+                                }
+
+                                public static void main(String[] args) {
+                                    new ExemploSwingMensagem().initWindow();
+
+                                }
+                            }
+                        </code>
+                    </pre>
+
+                    <img src="media/janela_mensagem3.png" class="fragment" style="width: 60%; border: 0px;" data-fragment-index="4" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    Agora sabemos como criar e posicionar os elementos de uma interface gráfica usando o toolkit Swing.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Na próxima aula aprenderemos a definir ações para os diferentes elementos da GUI.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Crie uma interface de calculadora digital, com um mostrador (display), botões para todos os dígitos,
+                        para as 4 operações básicas, e para calcular e limpar o resultado.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				//mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
