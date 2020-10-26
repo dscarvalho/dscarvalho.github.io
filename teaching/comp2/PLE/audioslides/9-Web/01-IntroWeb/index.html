@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Introdução à programação para a Web -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            Introdução à programação para a Web
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, começaremos a aprender sobre o mundo do desenvolvimento de sistemas para a Web.
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, vamos entender alguns elementos básicos da Web, como páginas, URLs e requisições.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="World Wide Web">
+                <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
+                    A <b>World Wide Web</b> (WWW), também conhecida apenas como "a Web", é um sistema de informação onde: 
+                </p>
+                <ul class="fragment list-spacing-longer" style="font-size: smaller;">
+                    <li>
+                        Recursos como documentos e mídia podem ser acessados através de identificadores públicos chamados 
+                        <b>Uniform Resource Locators</b> (URLs), através da Internet.
+                    </li>
+                    <li>
+                        Documentos podem estar conectados uns aos outros através de <b>hipertexto</b>.
+                    </li>
+                    <li>
+                        Os recursos podem ser acessados através de uma aplicação conhecida como "<b>Web browser</b>" (navegador).
+                    </li>
+                </ul>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <p class="fragment" style="font-size: smaller;" data-fragment-index="1" >
+                    A World Wide Web foi criada em 1989 por <a href="https://pt.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a> 
+                    e entrou em operação em 1991, tornando-se uma das principais tecnologias usadas na Internet.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;" data-fragment-index="2" >
+                    Foi um dos pilares da expansão do acesso à rede mundial de computadores, e à rápida aceleração da chamada 
+                    "era da informação" na sociedade moderna.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;" data-fragment-index="3" >
+                    A maior parte da informação que acessamos diretamente na Internet é obtida através da Web.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Elementos fundamentais">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        A Web é fundamentada em alguns elementos básicos, sob os quais todas as suas aplicações são construídas:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        <b>1.</b> Um protocolo de comunicação, com o qual os dados são transmitidos: <b>Hypertext Transfer Protocol</b> (HTTP).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Funciona em uma estrutura de rede cliente-servidor, onde o computador cliente envia uma mensagem requisitando 
+                        uma ação por parte do computador servidor e fornecendo dados, que por sua vez responde completando a ação e 
+                        devolvendo dados de acordo com os dados recebidos.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        <b>2.</b> Uma linguagem para representação de documentos, para apresentação e consumo das informações transmitidas: 
+                        <b>Hypertext Markup Language</b> (HTML).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Permite a criação de documentos flexíveis e interativos, que ligam-se a outros documentos através de <b>hipertexto</b>: 
+                        texto associado a metadados que acrescentam informações como origem, propósito e formato, e que incluem elementos de multimídia 
+                        como imagens, sons e vídeo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        <b>3.</b> Um sistema de identificadores globais para os recursos disponibilizados na rede: 
+                        <b>Universal Resource Identifier</b> (URI), do qual destaca-se o subtipo <b>URL</b> (Uniform Resource Locator).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Identifica um recurso único na rede, indicando sua localização e como deve ser acessado.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/http.svg" class="fragment fade-in-then-out current-visible" style="width: 70%; border: 0px;" data-fragment-index="2" />
+                    <img src="media/http.svg" class="fragment fade-in-then-out current-visible" style="width: 70%; border: 0px;" data-fragment-index="3" />
+                    <img src="media/http_html.svg" class="fragment fade-in-then-out current-visible" style="width: 70%; border: 0px;" data-fragment-index="4" />
+                    <img src="media/http_html.svg" class="fragment fade-in-then-out current-visible" style="width: 70%; border: 0px;" data-fragment-index="5" />
+                    <img src="media/http_uri.svg" class="fragment fade-in" style="width: 70%; border: 0px;" data-fragment-index="6" />
+                    
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="HTTP">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        A forma básica de uso do protocolo HTTP é o envio de requisições por um computador cliente e de 
+                        respostas por um computador servidor.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Uma requisição obedece a um formato específico, contendo um verbo de ação, uma URL, cabeçalhos, e 
+                        opcionalmente dados adicionais, que são utilizados pelo servidor para produzir um recurso relativo à 
+                        requisição.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Por exemplo, a requisição mostrada abaixo faz o servidor produzir a página desta disciplina como resposta.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Os verbos mais utilizados são o <b>GET</b> (obter recurso) e <b>POST</b> (enviar informações). Ambas 
+                        resultam em uma resposta do servidor, tipicamente carregando um documento.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        A operação das requisições HTTP geralmente fica a cargo do navegador, mas pode também ser feita através 
+                        de outras aplicações.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Consulte <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Overview">o material de apoio</a> 
+                        para uma visão geral mais completa do HTTP.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="1">
+                        <code class="hljs bash" data-trim data-line-numbers >
+                            GET /teaching/comp2/PLE/ HTTP/2
+                            User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+                            Host: www.danilosc.ml
+                            Accept-Language: en-us
+                            Accept-Encoding: gzip, deflate
+                            Connection: Keep-Alive
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="HTML">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        A linguagem HTML é responsável por definir os documentos da Web, tal que possam ser produzidos e 
+                        acessados por qualquer navegador compatível, dando o caráter universal e interligado da WWW.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        É uma linguagem de marcação, onde cada elemento de um documento é declarado de forma hierárquica usando 
+                        "tags" para marcar o seu tipo, escopo e conteúdo.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Um documento HTML é composto por:  
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        uma instrução de formato;
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        um delimitador de documento;
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        um cabeçalho, onde são declarados os metadados, como codificação de texto, língua, título, entre outros;
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        e um corpo, onde o conteúdo visível do documento é colocado.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        Consulte <a href="https://www.devmedia.com.br/html-basico-codigos-html/16596">o tutorial do DevMedia</a> ou 
+                        o do <a href="https://www.w3schools.com/html/">W3Schools</a> para aprender mais sobre a linguagem HTML.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        A linguagem HTML é complementada pela linguagem de 
+                        <a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS/Getting_Started">
+                            folhas de estilo em cascata (Cascading Style Sheets - CSS)
+                        </a> 
+                        que permite separar forma como o documento é apresentado (fontes, cores, posicionamento, etc.) da sua semântica 
+                        (o significado de cada elemento).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="10" >
+                        Também é complementada pela linguagem de programação 
+                        <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide">JavaScript (JS)</a> 
+                        que permite a manipulação dinâmica de documentos, oferecendo maior interatividade ao usuário da Web.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment fade-in-then-out current-visible" data-fragment-index="4">
+                        <code class="hljs html" data-trim data-line-numbers > 
+                                &lt;!DOCTYPE html&gt;
+                            
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment fade-in-then-out current-visible" data-fragment-index="5">
+                        <code class="hljs html" data-trim data-line-numbers >
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html&gt;
+
+                            &lt;/html&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment fade-in-then-out current-visible" data-fragment-index="6">
+                        <code class="hljs html" data-trim data-line-numbers >
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset="UTF-8"/&gt;
+                                    &lt;title&gt;Título do documento&lt;/title&gt;
+                                &lt;/head&gt;
+                            &lt;/html&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment fade-in-then-out current-visible" data-fragment-index="7">
+                        <code class="hljs html" data-trim data-line-numbers >
+                                &lt;!DOCTYPE html&gt;
+                                &lt;html&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset="UTF-8"/&gt;
+                                    &lt;title&lt;Título do documento&lt;/title&gt;
+                                    &lt;/head&gt;
+                                    &lt;body&gt;
+                                        &lt;p id="par1"&gt;Um parágrafo&lt;/p&gt;
+                                    &lt;/body&gt;
+                                &lt;/html&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment fade-in-then-out current-visible" data-fragment-index="8">
+                        <code class="hljs html" data-trim data-line-numbers >
+                                &lt;!DOCTYPE html&gt;
+                                &lt;html&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset="UTF-8"/&gt;
+                                    &lt;title&lt;Título do documento&lt;/title&gt;
+                                    &lt;/head&gt;
+                                    &lt;body&gt;
+                                        &lt;p id="par1"&gt;Um parágrafo&lt;/p&gt;
+                                    &lt;/body&gt;
+                                &lt;/html&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment fade-in-then-out current-visible" data-fragment-index="9">
+                        <code class="hljs css" data-trim data-line-numbers >
+                            body {
+                                background-color: #FFFFE6;
+                            }
+
+                            p {
+                                color: blue;
+                            }
+
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="10">
+                        <code class="hljs javascript" data-trim data-line-numbers >
+                            function mostraMensagem() {
+                                alert("Mensagem importante!");
+                            }
+
+                            document.getElementById("par1").addEventListener("click", mostraMensagem);
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Sistemas Web">
+                <p class="fragment" style="font-size: smaller;">
+                    Um sistema projetado para funcionar usando a Web consiste de componentes que realizarão a manipulação de 
+                    documentos HTML e outros recursos em um servidor, em resposta à requisições HTTP.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Precisamos então escrever um programa que fará uso dos recursos do servidor para produzir as respostas 
+                    adequadas às requisições.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Nesse curso alcançaremos esse objetivo usando recursos da linguagem java: a API Servlet e o Java Server Pages.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    Temos agora uma noção elementar do componentes envolvidos na criação de um sistema para a World Wide Web.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Leiam o material de apoio referenciado nos slides anteriores dessa aula e façam os exercícios propostos pelo 
+                    material de apoio e aqui.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Na próxima aula aprenderemos sobre o endereçamento de recursos e 
+                    como responder à requisições HTTP usando a API Serlet, da biblioteca padrão do Java.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Que dados são tipicamente enviados para um servidor através de um POST HTTP?
+                    </li>
+                    <li style="font-size: smaller;">
+                        Podemos enviar dados via GET? Como?
+                    </li>
+                    <li style="font-size: smaller;">
+                        Em que situações estamos usando a Internet mas não estamos usando a Web? Justifique.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Crie um documento HTML com um parágrafo contendo um link, uma tabela representando as entradas e saídas da operação 
+                        lógica AND e uma figura de um computador.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				//mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
