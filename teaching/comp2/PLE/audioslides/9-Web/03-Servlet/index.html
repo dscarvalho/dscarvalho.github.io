@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>A API Servlet -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            A API Servlet
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, vamos aprender sobre como responder à requisições HTTP usando a linguagem Java.
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, poderemos responder à requisições usando as classes da API Servlet.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Servidor HTTP">
+                <p class="fragment" style="font-size: smaller;">
+                    Para responder à requisições HTTP, precisamos que o computador a receber as requisições haja como um 
+                    servidor, ou seja, fique aguardando conexões em uma porta de rede especificada (a porta padrão para o 
+                    protocolo HTTP é <i>80</i>).
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Para isso, é necessária a instalação de um programa para escutar tais conexões, chamado de <b>servidor HTTP</b>.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Ao receber uma conexão na porta especificada, o servidor HTTP chama um programa registrado para lidar com a 
+                    requisição, dependendo da URI solicitada e de sua configuração.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Apache Tomcat">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Para os programadores Java, uma opção simples de servidor HTTP que podemos usar para responder 
+                        requisições é o <b><a href="https://tomcat.apache.org/">Apache Tomcat</a></b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        O Tomcat oferece a capacidade de chamar classes Java que fazem uso da <b>API Servlet</b> para atender a 
+                        qualquer tarefa e solicitação feita ao servidor (não só HTTP), sendo também conhecido como um 
+                        <b>Servlet Container</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Mas o que é a API Servlet?
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/Tomcat-logo.svg" class="fragment fade-in-then-out current-visible" style="width: 40%; border: 0px;" data-fragment-index="0" />
+
+                    <img src="media/tomcat_servlets.svg" class="fragment fade-in-then-out current-visible" style="width: 70%; border: 0px;" data-fragment-index="2" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Interpretando respostas JSON">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        A API Servlet contém classes e interfaces que facilitam a programação de diversos serviços de rede, entre 
+                        eles os serviços HTTP para a Web.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Os principais módulos dessa API são a interface <b>Servlet</b>, que define as capacidades básicas de um serviço,
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        as interfaces ServletRequest e ServletResponse, que definem as capacidades de captura de dados da conexão e de envio 
+                        de dados para o cliente, respectivamente,
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        e a classe GenericServlet, que serve de base para todas as classes servlet que serão implementadas pelo programador 
+                        para construir os serviços.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        A implementação da API Servlet não faz parte da biblioteca padrão do Java, então deve ser implementada por 
+                        uma biblioteca externa.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        O Tomcat vem com uma implementação própria da API, que fica contida no arquivo <b>lib/servlet-api.jar</b>, no seu 
+                        diretório de instalação.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/servlet_diagram.jpg" class="fragment fade-in-then-out current-visible" style="width: 50%; border: 0px;" data-fragment-index="0" />
+                    
+                    <img src="media/servlet_api_class_diagram.png" class="fragment" style="width: 90%; border: 0px;" data-fragment-index="2" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Interpretando respostas JSON">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        No exemplo abaixo, construiremos passo a passo o nosso primeiro servlet, que vai responder uma requisição HTTP com 
+                        um documento HTML simples.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Em primeiro lugar, importamos os pacotes e classes que usaremos para criar o serviço.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Em seguida, criamos uma classe para abrigar o código do servlet. Como queremos responder a uma requisição 
+                        HTTP, nossa classe deve herdar de HttpServlet.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Além disso, precisamos colocar uma anotação de classe <b>@WebServlet</b> para informar que essa classe 
+                        poderá ser chamada pelo servlet container, e o caminho (URL) no servidor que precisa ser recebido para que 
+                        o servidor HTTP chame essa classe.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        Nesse caso, a classe será chamada quando a URI http://&lt;nome do servidor&gt;/&lt;nome do projeto&gt;/PrimeiroServlet for requisitada.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Como essa é uma classe serializável, incluimos um serialVersionUID.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        Também incluímos um construtor padrão, inicializando o servlet com o construtor da superclasse
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        Por fim, criamos um método para cada um dos verbos HTTP que queremos tratar. Nesse exemplo trataremos apenas 
+                        do GET, portanto precisamos implementar o método <b>doGet()</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        O método <b>doGet</b> possui dois argumentos: um HttpServletRequest e um HttpServletResponse, representando 
+                        respectivamente a requisição que chegou ao servidor e a resposta que será devolvida ao cliente.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="10" >
+                        Do HttpServletRequest, lemos as informações constantes na requisição, e construímos nossa resposta usando o 
+                        objeto HttpServletResponse.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="11" >
+                        Aqui, criamos uma string incrementalmente (o documento HTML) usando o StringBuilder, e enviamos ela como 
+                        conteúdo da resposta do servidor usando o método <b>getWriter()</b> para obter um objeto PrintWriter 
+                        para escrever, e o método <b>println()</b>, para fazer o envio.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="12" >
+                        Antes do envio propriamente dito, definimos um cabeçalho informando o tipo do recurso que está sendo enviado 
+                        para o cliente. Nesse caso "<b></b>text/html</b>".
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="2">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.io.IOException;
+                            import javax.servlet.ServletException;
+                            import javax.servlet.annotation.WebServlet;
+                            import javax.servlet.http.*;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="3">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.io.IOException;
+                            import javax.servlet.ServletException;
+                            import javax.servlet.annotation.WebServlet;
+                            import javax.servlet.http.*;
+
+                            @WebServlet("/PrimeiroServlet")
+                            public class PrimeiroServlet extends HttpServlet {
+                                private static final long serialVersionUID = 1L;
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="7">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.io.IOException;
+                            import javax.servlet.ServletException;
+                            import javax.servlet.annotation.WebServlet;
+                            import javax.servlet.http.*;
+
+                            @WebServlet("/PrimeiroServlet")
+                            public class PrimeiroServlet extends HttpServlet {
+                                private static final long serialVersionUID = 1L;
+                                
+                                public PrimeiroServlet() {
+                                    super();
+                                }
+
+                            }
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="8">
+                        <code class="hljs java" data-trim data-line-numbers >
+                            import java.io.IOException;
+                            import javax.servlet.ServletException;
+                            import javax.servlet.annotation.WebServlet;
+                            import javax.servlet.http.*;
+
+                            @WebServlet("/PrimeiroServlet")
+                            public class PrimeiroServlet extends HttpServlet {
+                                private static final long serialVersionUID = 1L;
+                                
+                                public PrimeiroServlet() {
+                                    super();
+                                }
+
+                                protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+                                throws ServletException, IOException {
+                                    StringBuilder respostaHtml = new StringBuilder();
+                                    respostaHtml.append("<!DOCTYPE html>\n");
+                                    respostaHtml.append("<html>\n");
+                                    respostaHtml.append("<body>\n");
+                                    respostaHtml.append("Olá Web\n");
+                                    respostaHtml.append("</body>\n");
+                                    respostaHtml.append("</html>");
+                                    response.addHeader("Content-Type", "text/html");
+                                    response.getWriter().println(respostaHtml.toString());
+                                }
+
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    E assim criamos o nosso primeiro servlet e podemos agora responder requisições HTTP usando Java.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Pratique o resposta à requisições e o envio de recursos em diferentes formatos.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Na próxima aula aprenderemos a facilitar a construção das nossas respostas usando Java Server Pages (JSP).
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Perguntas">
+                <p>
+                    Perguntas:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Que tipo de informação podemos coletar da requisição do cliente para guiar a construção da resposta? 
+                    </li>
+                    <li style="font-size: smaller;">
+                        De que forma podemos serializar objetos e enviá-los para o cliente?
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Crie um servlet que responda ao cliente com uma imagem que seja exibida no navegador quando uma certa 
+                        URL for requisitada.
+                    </li>
+                </ol>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+				<p style="font-size: larger;">
+                    Até a próxima aula!
+                </p>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				//mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
