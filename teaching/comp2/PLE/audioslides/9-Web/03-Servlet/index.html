@@ -251,12 +251,12 @@
                                 protected void doGet(HttpServletRequest request, HttpServletResponse response) 
                                 throws ServletException, IOException {
                                     StringBuilder respostaHtml = new StringBuilder();
-                                    respostaHtml.append("<!DOCTYPE html>\n");
-                                    respostaHtml.append("<html>\n");
-                                    respostaHtml.append("<body>\n");
+                                    respostaHtml.append("&lt;!DOCTYPE html&gt;\n");
+                                    respostaHtml.append("&lt;html&gt;\n");
+                                    respostaHtml.append("&lt;body&gt;\n");
                                     respostaHtml.append("Olá Web\n");
-                                    respostaHtml.append("</body>\n");
-                                    respostaHtml.append("</html>");
+                                    respostaHtml.append("&lt;/body&gt;\n");
+                                    respostaHtml.append("&lt;/html&gt;");
                                     response.addHeader("Content-Type", "text/html");
                                     response.getWriter().println(respostaHtml.toString());
                                 }
