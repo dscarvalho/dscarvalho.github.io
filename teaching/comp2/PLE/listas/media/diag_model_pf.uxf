@@ -94,7 +94,7 @@ sofre &gt;</panel_attributes>
 +inclui(observacao: Medicao)
 +dataInicio(): LocalDate
 +dataFim(): LocalDate
-+valor(): 
++valor(): float
 </panel_attributes>
     <additional_attributes/>
   </element>

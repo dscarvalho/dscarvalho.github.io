@@ -47,7 +47,7 @@
       ><text x="5" font-size="14px" y="106.9043" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
       >+dataFim(): LocalDate</text
       ><text x="5" font-size="14px" y="122.7217" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none" xml:space="preserve"
-      >+valor(): </text
+      >+valor(): float</text
     ></g
     ><g fill="rgb(255,255,255)" fill-opacity="0" transform="translate(750,50)" stroke-opacity="0" stroke="rgb(255,255,255)"
     ><rect x="0.5" width="208.5" height="88.5" y="0.5" clip-path="url(#clipPath3)" stroke="none"
