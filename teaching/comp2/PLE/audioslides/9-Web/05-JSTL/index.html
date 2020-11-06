@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>JSP Standard Tag Library (JSTL) -- Computação II (MAB240)</title>
+
+	<meta name="description" content="Computação II - Ciência da Computação -- Introdução ao Curso">
+	<meta name="author" content="Danilo S. Carvalho">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+    <link rel="stylesheet" href="/public/css/slides.css">
+
+	<!--[if lt IE 9]>
+	<script src="reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Título">
+                <div class="sl-block" data-block-type="text" style="margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+                    <div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                        <h3>
+                            JSP Standard Tag Library (JSTL)
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="sl-block" data-block-type="text" style="margin-top: 150px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+                    <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                        <h4>Computação II - Ciência da Computação</h4>
+                        <img src="/public/Logo_DCC_CC.svg" style="width: 300px;"/>
+                        <br style="line-height: 100%" />
+                        <h5 style="font-size: 24pt">Prof.: Danilo S. Carvalho</h5>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Olá pessoal.<br />
+                    Bem vindos a mais uma aula curso de Computação II do Bacharelado em Ciência da Computação da UFRJ.
+                </aside>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
+                <p class="fragment">
+                    Nessa aula, vamos explorar um conjunto especial de tags no JSP, chamado <b>JSP Standard Tag Library</b> (JSTL).
+                </p>
+                <br/>
+                <p class="fragment">
+                    Ao final da aula, poderemos usar as tags JSTL para melhorar a separação entre os componentes View e Controller do 
+                    nosso projeto web.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="JSP Standard Tag Library">
+                <p class="fragment" style="font-size: smaller;">
+                    Com o JSP, conseguimos colocar o código responsável por construir a interface com o usuário em arquivos separados 
+                    dos servlets e da lógica de funcionamento do programa.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Entretanto, ainda precisamos escrever código Java (declarações, scriptlets e expressões JSP) para escrever um documento 
+                    como resposta a uma requisição.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Podemos minimizar esse código adotando as tags da <b>JSP Standard Tag Library</b> (JSTL).
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out">
+                <p class="fragment" style="font-size: smaller;">
+                    O JSTL é uma biblioteca que contém um conjunto de tags especiais para serem usadas no JSP.
+                </p>
+                <br/>
+                <p class="fragment" style="font-size: smaller;">
+                    Essas tags facilitam a declaração de partes do documento e permitem minimizar, ou até mesmo eliminar o uso 
+                    de scriptlets.
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="JSTL: instalação">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Para usar a JSTL, precisamos primeiro baixar e registrar a biblioteca no servlet container que estivermos 
+                        usando para servir o JSP (ex: Tomcat).
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        A biblioteca pode ser encontrada <a href="http://tomcat.apache.org/download-taglibs.cgi">nesse link</a>. 
+                        Baixe todos os arquivos JAR e coloque dentro do diretório <b>WEB-INF/lib</b> no container.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        Em seguida, registre a biblioteca no projeto do Eclipse, clicando com o botão direito no projeto e 
+                        selecionando "Build Path" -&gt; "Configure Build Path...". Na aba "Libraries", selecione o item "Classpath" 
+                        e adicione os JARs com o botão "Add JARs...".
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        A configuração deve ficar similar ao da figura abaixo.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <img src="media/jstl_jars.png" class="fragment fade-in-then-out current-visible" style="width: 60%; border: 0px;" data-fragment-index="2" />
+                    <img src="media/jstl_lib_config_1.png" class="fragment fade-in-then-out current-visible" style="width: 60%; border: 0px;" data-fragment-index="3" />
+                    <img src="media/jstl_lib_config_2.png" class="fragment fade-in-then-out current-visible" style="width: 60%; border: 0px;" data-fragment-index="4" />
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="JSTL: utilização">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        Com a biblioteca instalada, podemos usar as tags JSTL para nos ajudar. Mas quais são elas e para que servem?
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        As tags JSTL estão separadas em prefixos, de acordo com suas funções.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        De acordo com os prefixos usados, precisamos colocar uma diretiva no JSP informando ao compilador das novas tags.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        Vejamos então dois prefixos básicos para o uso da JSTL: <b>Core tags</b> e <b>Formatting tags</b>.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="5" >
+                        <b>Core tags:</b> conjunto central de tags JSTL. Acessamos elas através do prefixo "c", que corresponde à 
+                        diretiva abaixo:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="6" >
+                        Alguns exemplos importantes de tags core são:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="7" >
+                        <b>&lt;c:out /&gt;</b>: Coloca um valor na resposta. Similar a uma expressão JSP. O valor a ser colocado 
+                        pode ser uma variável ou campo de um objeto.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="8" >
+                        <b>&lt;c:if test="[expressão booleana]"&gt;&lt;/c:if&gt;</b>: Executa o que está dentro da tag se o 
+                        resultado da expressão booleana for verdadeiro.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="9" >
+                        <b>&lt;c:forEach items="${coleção}" var="item"&gt;&lt;/c:forEach&gt;</b>: Executa o que está dentro da tag 
+                        para cada item da coleção "items", cujo nome da váriável é dado por "var".
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="5">
+                        <code class="hljs html" data-trim data-line-numbers >
+                            &lt;%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="7">
+                        <code class="hljs html" data-trim data-line-numbers >
+                            &lt;c:out value="${item.nome}" /&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 13pt;" class="fragment" data-fragment-index="8">
+                        <code class="hljs html" data-trim data-line-numbers >
+                            &lt;c:if test="${item.desconto > 0}"&gt;
+                                &lt;c:out value="${item.desconto}" /&gt;
+                            &lt;/c:if&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 13pt;" class="fragment" data-fragment-index="9">
+                        <code class="hljs html" data-trim data-line-numbers >
+                            &lt;c:forEach items="${menu}" var="item"&gt;
+                                &lt;c:out value="${item.nome}" /&gt; - &lt;c:out value="${item.valor}" /&gt;
+                            &lt;/c:forEach&gt;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="JSTL: formatting tags">
+                <div class="r-stack">
+                    <p class="fragment fade-out" style="font-size: smaller;" data-fragment-index="1" >
+                        <b>Formatting tags:</b> Tags para formatação de valores. Acessamos elas através do prefixo "fmt", 
+                        que corresponde à diretiva abaixo:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="2" >
+                        Alguns exemplos importantes de tags formatting são:
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="3" >
+                        <b>&lt;fmt:formatNumber /&gt;</b>: Formata um número de acordo com os parâmetros passados.
+                    </p>
+                    <p class="fragment fade-in-then-out current-visible" style="font-size: smaller;" data-fragment-index="4" >
+                        <b>&lt;fmt:formatDate /&gt;</b>: Formata uma data de acordo com os parâmetros passados.
+                    </p>
+                </div>
+
+                <div class="r-stack">
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="0">
+                        <code class="hljs html" data-trim data-line-numbers >
+                            &lt;%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 14pt;" class="fragment" data-fragment-index="3">
+                        <code class="hljs html" data-trim data-line-numbers >
+                            &lt;fmt:formatNumber type = "number" maxIntegerDigits = "3" value = "${item.valor}" /&gt;
+                            &lt;fmt:formatNumber type = "currency" value = "${item.valor}" /&gt;
+                        </code>
+                    </pre>
+
+                    <pre data-id="code-animation" style="width: 100%; font-size: 13pt;" class="fragment" data-fragment-index="4">
+                        <code class="hljs html" data-trim data-line-numbers >
+                            &lt;fmt:formatDate type = "time" value = "${now}" /&gt;
+      
+                            &lt;fmt:formatDate type = "date" value = "${now}" /&gt;
+      
+                            &lt;fmt:formatDate type = "both" value = "${now}" /&gt;
+
+                            &lt;fmt:formatDate pattern = "yyyy-MM-dd" value = "${now}" /&gt;
+                        </code>
+                    </pre>
+                </div>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Conclusão">
+                <p class="fragment" style="font-size: smaller;">
+                    Sabemos agora como minimizar o uso de código Java no JSP e com isso melhorar a separação dos componentes 
+                    View e Controller de um sistema Web Java, e também deixar o código mais uniforme e simples de manter.
+                </p>
+                <br />
+                <p class="fragment" style="font-size: smaller;">
+                    Leia o <a href="https://www.tutorialspoint.com/jsp/jsp_standard_tag_library.htm">material de apoio</a> para 
+                    conhecer o restante das tags JSTL e experimente modificar o documento HTML conforme os campos dos objetos 
+                    vindos da classe controller (servlets ou outras classes).
+                </p>
+            </section>
+
+            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Exercício">
+                <p>
+                    Exercício:
+                </p>
+                <ol class="list-spacing-long">
+                    <li style="font-size: smaller;">
+                        Crie um JSP (+ JSTL) para implementar a interface gráfica do sistema da biblioteca, que foi desenvolvido
+                        como solução da <a href="/teaching/comp2/PLE/listas/lista4">4ª lista de exercícios</a>.
+                    </li>
+                </ol>
+            </section>
+		</div>
+	</div>
+
+	<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+    <script src="/public/reveal.js/dist/reveal.js"></script>
+    <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/public/reveal.js/plugin/search/search.js"></script>
+    <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				//mouseWheel: true,
+                slideNumber: "c/t",
+                showSlideNumber: "all",
+				audio: {
+					prefix: 'audio/',
+					suffix: '.webm',
+					defaultDuration: 1,
+					textToSpeechURL: null,
+					advance: 500,
+					autoplay: false,
+					defaultNotes: true,
+					defaultText: false,
+					playerOpacity: 0.2,
+				},
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					//custom: [
+				    //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+				    //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				    //    ]
+				},
+				//theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				//transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+					{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+					{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+					{ src: '/public/reveal.js-plugins/menu/menu.js' },
+				],
+                
+				keyboard: { 
+					82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+					90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+					84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+  				},
+                
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+	</script>
+</body>
+</html>
+
