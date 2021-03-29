@@ -1,0 +1,653 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Regressão Linear e Não-Linear</title>
+
+        <meta name="description" content="Inteligência Artificial e Aplicações ao Diagnóstico e Tratamento do Câncer">
+        <meta name="author" content="Danilo S. Carvalho">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+        <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+        <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+        
+        <link rel="stylesheet" href="/public/css/slides.css">
+
+        <!--[if lt IE 9]>
+        <script src="/public/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-image="media/scatterplot.png" data-transition="fade-out">
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 60px; height: auto; background-color: rgba(106, 226, 106, 0.7); border-radius: 25px;">
+						<div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11;">
+                            <h3>
+                                Regressão Linear e Não-Linear
+                            </h3>
+						</div>
+					</div>
+
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 300px; height: auto; background-color: rgba(255, 255, 255, 0.4);">
+    					<div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+							<h4>Mineração de Dados - 2019</h4>
+							<br style="line-height: 100%" />
+							<h5 style="font-size: 24pt">Danilo S. Carvalho</h5>
+                        </div>
+    				</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+                    <div class="header">
+        			    <h3>Índice</h3>
+                    </div>
+                    <div style="height: 40px"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+									<li>Introdução</li>
+									<ul>
+										<li>Ideia básica</li>
+						                <li>Observando uma variável aleatória</li> 
+                                        <li>Estimando um valor desconhecido</li>
+										<li>Analisando o erro</li>
+									</ul>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Ideia básica</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+						            <li>Regressão: estimar uma relação desconhecida entre variáveis aleatórias, baseado em valores que já conhecemos.</li>
+						            <ul>
+                                        <li>Usar o passado para estabelecer um modelo no presente.</li>
+						            </ul>
+                                    <br />
+						            <li>Útil quando precisamos prever valores em eventos recorrentes.</li>
+                                    <ul>
+                                        <li>Ex: Tempo gasto indo de casa ao trabalho.</li>
+									</ul>
+									<li>
+										Também útil quando precisamos explicar um fenômeno de interesse e queremos saber o quanto regular, 
+										ou previsível este é.
+									</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Observando uma variável aleatória</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>
+										Definimos uma variável aleatória para a qual o valor queremos estimar (e.g., o tempo gasto) 
+										e observamos os valores conhecidos.
+									</li>
+								</ul>
+						</div>
+
+						<img src="media/tempo_gasto_1.png" style="height: 450px; border: 0;" />
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Estimando um valor desconhecido</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>Procuramos um valor que mais se aproxima das observações conhecidas.</li>
+						            <ul>
+                                        <li>Nesse caso, a média aritmética dos tempos gastos na semana.</li>
+						            </ul>
+						</div>
+						
+						<img class="fragment" src="media/tempo_gasto_2.png" style="height: 450px; border: 0;" />
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Analisando o erro</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>A diferença entre o valor estimado e os valores conhecidos é chamada de <b>erro</b> ou <b>residual</b>.</li>
+						        </ul>
+						</div>
+						
+						<img src="media/tempo_gasto_3.png" style="height: 450px; border: 0;" />
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Analisando o erro</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+									<li>A diferença entre o valor estimado e os valores conhecidos é chamada de <b>erro</b> ou <b>residual</b>.</li>
+									<li>A melhor aproximação é aquela que apresenta os menores erros.</li>
+									<li>Nesse caso, o uso da média aritmética garante que os erros foram minimizados.</li>
+									<li>Quantificamos o erro total através da soma dos seus quadrados: $\sum_i{(x_i - \varepsilon)^2}$, onde $\varepsilon$ é o erro da estimativa com relação a $x_i$</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="sl-block" data-block-type="text" style="width: 1280px; height: auto; margin-top: 200px">
+    					<div class="sl-block-content" data-placeholder-tag="h2" style="z-index: 10;">
+        				<h2>Regressão Linear</h2>
+	    				</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+                    <div class="header">
+        			    <h3>Índice</h3>
+                    </div>
+                    <div style="height: 40px"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short"><ul>
+									<li>Variáveis dependentes e explicativas</li> 
+									<li>Equação da regressão</li>
+									<li>Estimando os parâmetros da regressão</li>
+									<li>Regressão múltipla</li>
+									<li>Regressão Polinomial</li>
+									<li>Exercícios</li>
+						         </ul> 
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Variáveis dependentes e explicativas</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+						            <li>Quando consideramos uma função $y = f(x)$, podemos estimar o valor de y, através de pares $(x, y)$ conhecidos.</li>
+									<li>Nesse caso, $y$ é chamado de variável <b>dependente</b>, pois é determinada por $x$.</li>
+									<li>$x$ é chamada de variável <b>explicativa</b> ou independente.</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Equação da regressão</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+									<li>
+										A equação da regressão simples é dada por: <br/>
+										$$y_i = \alpha + \beta x_i + \varepsilon_i$$ <br/>
+										onde
+									</li>
+						            <ul class="fragment">
+										<li>$y_i$ é o valor da estimativa.</li>
+										<li>$\alpha$ é o coeficiente de interceptação da reta de regressão.</li>
+										<li>$\beta$ é o coeficiente de inclinação da reta de regressão.</li>
+										<li>$\varepsilon_i$ é o erro de estimativa.</li>
+									</ul>
+									<br/>
+									<li class="fragment">$\alpha$ e $\beta$ são chamados <b>parâmetros</b> do modelo de regressão.</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Estimando os parâmetros da regressão</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+						            <li>A estimativa dos parâmetros é feita de forma a minimizar o erro total do modelo.</li>
+						            <li>Usualmente feita através do método dos mínimos quadrados:</li>
+                                    <ul>
+										<li class="fragment">
+											$y_i = \hat{\alpha} + \hat{\beta} x_i + \varepsilon_i$, onde $\hat{\alpha}, \hat{\beta}$ 
+											são os estimadores dos parâmetros.
+										</li>
+                                        <li class="fragment">
+											$S(\hat{\alpha}, \hat{\beta}) = \sum_{i=1}^{n}{(y_i - \hat{\alpha} + \hat{\beta} x_i + \varepsilon_i)^2}$, 
+											é a soma dos quadrados dos erros.
+										</li>
+										<li class="fragment">
+											A minimização é feita derivando $S(\hat{\alpha}, 
+											\hat{\beta})$ em relação a $\hat{\alpha}$ e a $\hat{\beta}$ e igualando a zero.
+										</li>
+                                    </ul>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Estimando os parâmetros da regressão</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-longer">
+									<li>$\frac{\partial S}{\partial \hat{\alpha}} = \frac{\partial S}{\partial x} * \frac{\partial x}{\partial \hat{\alpha}}$</li>
+									<li>$\frac{\partial S}{\partial x} = 2\sum_{i=1}^{n}{(y_i - \hat{\alpha} + \hat{\beta} x_i + \varepsilon_i)}$</li>
+									<li>$\frac{\partial x}{\partial \hat{\alpha}} = -1$</li>
+									<li>$\frac{\partial S}{\partial \hat{\alpha}} = -2\sum_{i=1}^{n}{(y_i - \hat{\alpha} + \hat{\beta} x_i + \varepsilon_i)} = 0$</li>
+									<li>$\frac{\partial S}{\partial \hat{\beta}} = -2\sum_{i=1}^{n}{x_i (y_i - \hat{\alpha} + \hat{\beta} x_i + \varepsilon_i)} = 0$</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Estimando os parâmetros da regressão</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+									<li>Desenvolvendo as duas equações, obtem-se:</li>
+									<br/>
+									<li>$\hat{\alpha} = \bar{y} - \hat{\beta}\bar{x}$</li>
+									<br>
+									<li>$\hat{\beta} = \frac{\sum_{i=1}^{n}{(x_i - \bar{x}) (y_i - \bar{y})}}{\sum_{i=1}^{n}{(x_i - \bar{x})^2}} = \frac{Cov[x, y]}{Var[x]}$</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Estimando os parâmetros da regressão</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-medium">
+									<li>Iterativamente</li>
+						        </ul>
+						</div>
+
+						<img src="media/iter_regression.gif" style="height: 500px; width: 800px; border: 0;" />
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Regressão múltipla</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-longer">
+						            <li>A regressão também pode ser feita com mais de uma variável explicativa (e.g., $z = f(x, y)$).</li>
+									<li>Nesse caso é chamada de regressão múltipla.</li>
+									<li>Estimativa dos parâmetros segue o mesmo princípio, adaptando-se as equações</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Regressão Polinomial</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>Até o momento, estamos fazendo estimativas usando uma reta para aproximar os dados conhecidos.</li>
+						            <li>Mas e se os valores estiverem dispostos dessa maneira:</li>
+						        </ul>
+					    </div>
+					</div>
+
+					<img src="media/gaussian_scatter.png" style="height: 450px; width: 800px; border: 0;" />
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Regressão Polinomial</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>Basta trocar a função de regressão para uma polinomial! ☺</li>
+						        </ul>
+					    </div>
+					</div>
+
+					<img src="media/gaussian_plot.png" style="height: 450px; width: 800px; border: 0;" />
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Regressão Polinomial</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+									<li>A Estimativa dos parâmetros segue o mesmo princípio, adaptando-se as equações</li>
+									<br/>
+									<li>A regressão continua linear, pois a combinação dos parâmetros é feita linearmente.</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Exercício 1</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>A partir de uma lista de totais de produção de barris de petróleo desde 1880 até 1988, determine:</li>
+						            <ul>
+										<li>a) A estimativa da produção de petróleo para os anos 1914 e 2000.</li>
+										<li>b) A equação da regressão.</li>
+										<li>c) Como a regressão pode ser aperfeiçoada?</li>
+									</ul>
+									<br/>
+									<li>A lista pode ser encontrada <a href="http://labcores.ppgi.ufrj.br/danilo/aulas/regressao/arquivos/crude_oil.tsv">aqui</a></li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="sl-block" data-block-type="text" style="width: 1280px; height: auto; margin-top: 200px">
+    					<div class="sl-block-content" data-placeholder-tag="h2" style="z-index: 10;">
+        				<h2>Regressão Não-Linear</h2>
+	    				</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+                    <div class="header">
+        			    <h3>Índice</h3>
+                    </div>
+                    <div style="height: 40px"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short"><ul>
+									<li>Problema: Categorização binária</li> 
+									<li>Função Não-Linear dos parâmetros da regressão</li>
+									<li>Exemplo: Regressão Logística</li>
+						         </ul> 
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Problema: Categorização binária</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>Desta vez, $y = f(x)$ expressa uma função binária.</li>
+						            <ul>
+                                        <li>$\mathbb{R} \Rightarrow {0, 1}$</li>
+						            </ul>
+						        </ul>
+						</div>
+						
+						<img src="media/logreg_scatter.png" style="height: 450px; width: 800px; border: 0;" />
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Função Não-Linear dos parâmetros da regressão</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>Estimadores dos parâmetros não podem ser calculados linearmente.</li>
+                                    <br />
+						            <li>Entretanto, a função precisa ser diferenciável.</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Exemplo: Regressão Logística</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>Função logística.</li>
+						            <ul>
+                                        <li>$\frac{1}{1 + e^{-f(x)}}$</li>
+						            </ul>
+						        </ul>
+						</div>
+						
+						<img src="media/logreg.gif" style="height: 450px; width: 800px; border: 0;" />
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="sl-block" data-block-type="text" style="width: 1280px; height: auto; margin-top: 200px">
+    					<div class="sl-block-content" data-placeholder-tag="h2" style="z-index: 10;">
+        				<h2>Regressão em Python</h2>
+	    				</div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+                    <div class="header">
+        			    <h3>Índice</h3>
+                    </div>
+                    <div style="height: 40px"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short"><ul>
+									<li>Material necessário</li>
+									<li>Exercício 2: Temperaturas</li>
+									<li>Exercício 3: Fumantes</li>
+						         </ul> 
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Material necessário</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+									<li>Interpretador Python (versão 3).</li>
+									<li>Numpy: biblioteca para computação científica.</li>
+						            <ul>
+                                        <li>Instalar com "pip install numpy".</li>
+						            </ul>
+                                    <br />
+						            <li></li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Exercício 2: Temperaturas</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+										<li>A partir de medições feitas por estações meteorológicas durante a Segunda Guerra Mundial, determine:</li>
+										<ul>
+											<li>a) A estimativa de temperatura máxima em Fernando de Noronha para os anos de 1950 e 2018, a partir das temperaturas mínimas e máximas.</li>
+											<li>b) A equação da regressão.</li>
+											<li>c) Se o erro de estimativa sofre mudança entre 1950 e 2018 e qual.</li>
+										</ul>
+										<br/>
+										<li>Os dados podem ser encontrados em <a href="http://labcores.ppgi.ufrj.br/danilo/aulas/regressao/arquivos/weatherww2.zip">aqui</a></li>
+										<ul>
+											<li>O campo "STA" do arquivo "Summary of Weather.csv" conecta-se ao campo "WBAN" do arquivo "Weather Station Locations.csv".</li>
+										</ul>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+
+				<section data-background-image="media/scatterplot.png">
+					<div class="header">
+        			    <h3>Exercício 3: Fumantes</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="width: 1280px; margin-top: 40px; height: auto;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-short">
+						            <li>A partir dos dados obtidos em uma pesquisa sobre hábitos de consumo de tabaco nos EUA,</li>
+						            <ul>
+										<li>a) Estime o consumo ou não de fumo a partir da faixa etária.</li>
+										<li>b) Estime a mortalidade a partir do consumo de fumo e da faixa etária.</li>
+									</ul>
+									<br/>
+									<li>Os dados podem ser encontrados em <a href="http://labcores.ppgi.ufrj.br/danilo/aulas/regressao/arquivos/smkdth.tsv">aqui</a></li>
+									<li>A descrição dos dados pode ser lida <a href="http://users.stat.ufl.edu/%7Ewinner/data/smkdth.txt">aqui</a>.</li>
+						        </ul>
+					    </div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+		</script>
+
+
+		<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+        <script src="/public/reveal.js/dist/reveal.js"></script>
+        <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+        <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+        <script src="/public/reveal.js/plugin/search/search.js"></script>
+        <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+        <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+    
+        <script>
+    
+                // Full list of configuration options available here:
+                // https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                    width: 1280,
+                    height: 720,
+                    controls: true,
+                    progress: true,
+                    history: true,
+                    center: true,
+                    mouseWheel: true,
+                    slideNumber: "c/t",
+                    showSlideNumber: "all",
+                    audio: {
+                        prefix: 'audio/',
+                        suffix: '.webm',
+                        defaultDuration: 5,
+                        textToSpeechURL: null,
+                        advance: 500,
+                        autoplay: false,
+                        defaultNotes: true,
+                        defaultText: false,
+                        playerOpacity: 0.2,
+                    },
+                    menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+                        themes: false,
+                        transitions: false,
+                        markers: true,
+                        hideMissingTitles: true,
+                        //custom: [
+                        //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+                        //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+                        //    ]
+                    },
+                    //theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                    //transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+    
+                    // Optional libraries used to extend on reveal.js
+                    dependencies: [
+                        { src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+                        //{ src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+                        //{ src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+                        //{ src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+                        { src: '/public/reveal.js-plugins/menu/menu.js' },
+                    ],
+                    
+                    /*
+                    keyboard: { 
+                        82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+                        90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+                        84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+                      },
+                    */
+                    
+                    plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+                });
+    
+        </script>
+	</body>
+</html>
