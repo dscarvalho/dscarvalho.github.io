@@ -1,5 +1,3 @@
-import { supportsHistoryAPI } from '../utils/device.js'
-
 /**
  * Reads and writes the URL based on reveal.js' current state.
  */
@@ -29,19 +27,18 @@ export default class Location {
 	}
 
 	/**
-	 * Reads the current URL (hash) and navigates accordingly.
+	 * Returns the slide indices for the given hash link.
+	 *
+	 * @param {string} [hash] the hash string that we want to
+	 * find the indices for
+	 *
+	 * @returns slide indices or null
 	 */
-	readURL() {
-
-		let config = this.Reveal.getConfig();
-		let indices = this.Reveal.getIndices();
-		let currentSlide = this.Reveal.getCurrentSlide();
-
-		let hash = window.location.hash;
+	getIndicesFromHash( hash=window.location.hash ) {
 
 		// Attempt to parse the hash as either an index or name
-		let bits = hash.slice( 2 ).split( '/' ),
-			name = hash.replace( /#\/?/gi, '' );
+		let name = hash.replace( /^#\/?/, '' );
+		let bits = name.split( '/' );
 
 		// If the first bit is not fully numeric and there is a name we
 		// can assume that this is a named link
@@ -63,23 +60,12 @@ export default class Location {
 			}
 			catch ( error ) { }
 
-			// Ensure that we're not already on a slide with the same name
-			let isSameNameAsCurrentSlide = currentSlide ? currentSlide.getAttribute( 'id' ) === name : false;
-
 			if( element ) {
-				// If the slide exists and is not the current slide...
-				if ( !isSameNameAsCurrentSlide || typeof f !== 'undefined' ) {
-					// ...find the position of the named slide and navigate to it
-					let slideIndices = this.Reveal.getIndices( element );
-					this.Reveal.slide( slideIndices.h, slideIndices.v, f );
-				}
-			}
-			// If the slide doesn't exist, navigate to the current slide
-			else {
-				this.Reveal.slide( indices.h || 0, indices.v || 0 );
+				return { ...this.Reveal.getIndices( element ), f };
 			}
 		}
 		else {
+			const config = this.Reveal.getConfig();
 			let hashIndexBase = config.hashOneBasedIndex ? 1 : 0;
 
 			// Read the index components of the hash
@@ -94,9 +80,27 @@ export default class Location {
 				}
 			}
 
-			if( h !== indices.h || v !== indices.v || f !== undefined ) {
-				this.Reveal.slide( h, v, f );
-			}
+			return { h, v, f };
+		}
+
+		// The hash couldn't be parsed or no matching named link was found
+		return null
+
+	}
+
+	/**
+	 * Reads the current URL (hash) and navigates accordingly.
+	 */
+	readURL() {
+
+		const currentIndices = this.Reveal.getIndices();
+		const newIndices = this.getIndicesFromHash();
+
+		if( newIndices && ( newIndices.h !== currentIndices.h || newIndices.v !== currentIndices.v || newIndices.f !== undefined ) ) {
+			this.Reveal.slide( newIndices.h, newIndices.v, newIndices.f );
+		}
+		else {
+			this.Reveal.slide( currentIndices.h || 0, currentIndices.v || 0 );
 		}
 
 	}
@@ -121,15 +125,24 @@ export default class Location {
 			this.writeURLTimeout = setTimeout( this.writeURL, delay );
 		}
 		else if( currentSlide ) {
+
+			let hash = this.getHash();
+
 			// If we're configured to push to history OR the history
 			// API is not avaialble.
-			if( config.history || supportsHistoryAPI === false ) {
-				window.location.hash = this.getHash();
+			if( config.history ) {
+				window.location.hash = hash;
 			}
 			// If we're configured to reflect the current slide in the
 			// URL without pushing to history.
 			else if( config.hash ) {
-				window.history.replaceState( null, null, '#' + this.getHash() );
+				// If the hash is empty, don't add it to the URL
+				if( hash === '/' ) {
+					window.history.replaceState( null, null, window.location.pathname + window.location.search );
+				}
+				else {
+					window.history.replaceState( null, null, '#' + hash );
+				}
 			}
 			// UPDATE: The below nuking of all hash changes breaks
 			// anchors on pages where reveal.js is running. Removed
@@ -141,6 +154,7 @@ export default class Location {
 			// else {
 			// 	window.history.replaceState( null, null, window.location.pathname + window.location.search );
 			// }
+
 		}
 
 	}
