@@ -1,5 +1,5 @@
-https://danilosc.com/index.html
-https://danilosc.com/about/index.html
-https://danilosc.com/teaching/index.html
-https://danilosc.com/publications/index.html
-https://danilosc.com/projects/index.html
+https://danilosc.com/
+https://danilosc.com/about/
+https://danilosc.com/teaching/
+https://danilosc.com/publications/
+https://danilosc.com/projects/
