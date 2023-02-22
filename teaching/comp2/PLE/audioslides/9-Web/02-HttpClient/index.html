@@ -58,7 +58,7 @@
 
             <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="Intro">
                 <p class="fragment">
-                    Nessa aula, vamos aprender sobre como enviar e responder à requisições usando a linguagem Java.
+                    Nessa aula, vamos aprender sobre como enviar requisições usando a linguagem Java.
                 </p>
                 <br/>
                 <p class="fragment">
@@ -83,7 +83,7 @@
                 </p>
             </section>
 
-            <section data-background="media/bg.png" data-transition="fade-out" data-menu-title="API HttpClient">
+            <section data-background="media/bg.png" data-transition="fade-out">
                 <p class="fragment" style="font-size: smaller;">
                     Os principais módulos da API HttpClient são as classes <b>HttpClient</b>, <b>HttpRequest</b>, e 
                     a interface <b>HttpResponse</b>.
@@ -181,7 +181,7 @@
                                                            .build();
                             
                             HttpRequest requisicao = HttpRequest.newBuilder()
-                                                                .uri(URI.create("http://www.danilosc.ml/teaching/comp2/PLE"))
+                                                                .uri(URI.create("http://www.danilosc.com/teaching/comp2/PLE"))
                                                                 .build();
                         </code>
                     </pre>
@@ -202,7 +202,7 @@
                                                            .build();
                             
                             HttpRequest requisicao = HttpRequest.newBuilder()
-                                                                .uri(URI.create("http://www.danilosc.ml/teaching/comp2/PLE"))
+                                                                .uri(URI.create("http://www.danilosc.com/teaching/comp2/PLE"))
                                                                 .build();
 
                             HttpResponse&lt;String&gt; resposta = cliente.send(requisicao, HttpResponse.BodyHandlers.ofString());
@@ -226,7 +226,7 @@
                                                            .build();
 
                             HttpRequest requisicao = HttpRequest.newBuilder()
-                                                                .uri(URI.create("http://www.danilosc.ml/teaching/comp2/PLE"))
+                                                                .uri(URI.create("http://www.danilosc.com/teaching/comp2/PLE"))
                                                                 .build();
 
                             try {
@@ -260,7 +260,7 @@
                                                            .build();
 
                             HttpRequest requisicao = HttpRequest.newBuilder()
-                                                                .uri(URI.create("http://www.danilosc.ml/teaching/comp2/PLE"))
+                                                                .uri(URI.create("http://www.danilosc.com/teaching/comp2/PLE"))
                                                                 .build();
 
                             try {
