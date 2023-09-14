@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .right-aligned tr {
+            text-align: right;
+        }
+    </style>
+  </head>
+  <body>
+    <form id="paramForm">
+        <div class="form-group">
+          <label for="start">Start date</label>
+          <input type="date" class="form-control" id="start" name="start" aria-describedby="start-date" placeholder="">
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="end">End date</label>
+            <input type="date" class="form-control" id="end" name="end" aria-describedby="end-date" placeholder="">
+        </div>
+        <br />
+        <div class="form-group"></div>
+            <label>Relative price policy</label> 
+            (<small id="policyHelp" class="form-text text-muted">How much cheaper than the average the prices should be, in %.</small>)
+            <br />
+            <div class="input-group mb-3">
+                <label for="policy_mw">Mid-week</label> <input type="number" class="form-control" id="policy_mw" name="policy_mw" aria-describedby="policy_mw" placeholder="-20.0">
+                <label for="policy_we">Weekend</label> <input type="number" class="form-control" id="policy_we" name="policy_we" aria-describedby="policy_we" placeholder="-10.0">
+                <label for="policy_wk">Weekly</label> <input type="number" class="form-control" id="policy_wk" name="policy_wk" aria-describedby="policy_wk" placeholder="-15.0"> 
+            </div>
+        </div>
+        <br />
+      </form>
+      <button class="btn btn-primary" id="submitBtn">Submit</button>
+
+      <div id="results">
+      </div>
+  </body>
+
+  <script lang="javascript">
+    $('#submitBtn').click( function() {
+        $("#results").html('<img src="/public/img/loading.gif" style="width: 20%;" />')
+        $.ajax({
+            url: "http://lasics.dcc.ufrj.br/optim-test/prices-sc",
+            type: "get",
+            data: $('#paramForm').serialize(),
+            success: function(data) {
+                $("#results").html(data)
+            }
+        });
+        
+    });
+  </script>
+</html>
