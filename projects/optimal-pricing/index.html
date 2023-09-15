@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Optimal pricing demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
@@ -47,8 +47,9 @@
     $('#submitBtn').click( function() {
         $("#results").html('<img src="/public/img/loading.gif" style="width: 20%;" />')
         $.ajax({
-            url: "http://lasics.dcc.ufrj.br/optim-test/prices-sc",
+            url: "https://optim-test.azurewebsites.net/prices-sc",
             type: "get",
+            timeout: 0,
             data: $('#paramForm').serialize(),
             success: function(data) {
                 $("#results").html(data)
