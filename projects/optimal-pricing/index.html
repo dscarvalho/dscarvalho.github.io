@@ -65,7 +65,7 @@
     function updateEndDate() {
       var startDate = document.getElementById("start").value;
       var endDate = new Date(startDate);
-      endDate.setDate(endDate.getDate() + 2);
+      endDate.setDate(endDate.getDate() + 7);
       document.getElementById("end").value = endDate.toISOString().slice(0, 10);
     }
   </script>
