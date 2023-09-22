@@ -14,7 +14,7 @@
     </style>
   </head>
   <body>
-    <form id="paramForm">
+    <form id="paramForm" action="https://optim-test.azurewebsites.net/prices-sc/download">
         <div class="form-group">
           <label for="start">Start date</label>
           <input type="date" class="form-control" id="start" name="start" aria-describedby="start-date" placeholder="" onchange="updateEndDate()">
@@ -51,8 +51,10 @@
               data-hx-request='"timeout": 0'
               data-hx-indicator="#loadImg"
       >
-        Submit
+        Search
       </button>
+
+      <button type="submit" form="paramForm" class="btn btn-primary">Download</button>
 
       <br /><br />
 
