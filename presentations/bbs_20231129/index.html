@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="pt">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Semantics, compositionality &amp; latent space geometry</title>
+
+        <meta name="description" content="Semantics, compositionality &amp; latent space geometry">
+        <meta name="author" content="Danilo S. Carvalho">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="/public/reveal.js/dist/reset.css">
+        <link rel="stylesheet" href="/public/reveal.js/dist/reveal.css">
+        <link rel="stylesheet" href="/public/reveal.js/dist/theme/white.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="/public/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+        
+        <link rel="stylesheet" href="/public/css/slides.css">
+
+        <!--[if lt IE 9]>
+        <script src="/public/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-image="media/bg.png" data-transition="fade-out">
+					<div class="sl-block" data-block-type="text" style="height: auto; background-color: rgba(108, 125, 255, 0.8); border-radius: 25px;">
+						<div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11; margin-top: 160px;">
+                            <h3>
+                                Semantics, compositionality &nbsp; &amp; <br />
+                                latent space geometry
+                            </h3>
+
+                            <h5 style="font-size: 26pt;">
+                                On the interpretability of distributed language representations   
+                            </h5>
+						</div>
+					</div>
+
+					<div class="sl-block" data-block-type="text" style="margin-top: 80px; height: auto; background-color: rgba(255, 255, 255, 0.1);">
+                        <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                            <br style="line-height: 100%" />
+
+                            <h5 style="font-size: 24pt">Danilo S. Carvalho, PhD</h5>
+                            
+                            <br style="line-height: 100%" />
+
+                            <ul class="list-spacing-medium" style="font-size: 20pt;">
+                                <li>Principal Clinical Informatician - CBC - CRUK MI - The University of Manchester</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+				</section>
+
+
+                
+
+
+                <!-- Index -->
+
+                <section data-background-image="media/bg.png">
+                    <div class="header">
+        			    <h3>Contents</h3>
+                    </div>
+                    <div style="height: 40px"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px;">
+	    				<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left;">
+						        <ul class="list-spacing-longer">
+                                    <li>Motivation</li>
+                                    <li>Transformers</li>
+                                    <li>Sentence representations</li>
+                                    <li>Disentanglement</li>
+                                    <li>Autoencoders</li>
+                                    <li>Exploring latent space geometry and properties</li>
+                                    <!--<li>The connection with multiomics</li>-->
+						        </ul>
+					    </div>
+                    </div>
+                    
+                    <aside class="notes">
+                        
+                    </aside>
+                </section>
+
+                <!-- Motivation -->
+
+                <section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Motivation</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+                    
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left; font-size: smaller;">
+                            
+							<div>
+                                <ul class="list-spacing-longer" style="width: 80%; float: left;">
+                                    <li>
+                                        Current LLMs can be highly useful in answering sophisticated questions.
+                                        But what prevents a conversation like this one:
+                                    </li>
+                                </ul>
+
+                                <pre style="width: 80%; float: left;" class="fragment" data-fragment-index="1">
+                                    <code class="hljs tex" data-trim >
+                                        Me: How are you?
+                                        LLM: I'm ******* bored. Ask something interesting.
+                                    </code>
+                                </pre>
+                               
+                                <ul class="list-spacing-longer" style="width: 60%; float: left;">
+                                    <li class="fragment" data-fragment-index="2">
+                                        The answer is fine-tuning and post-inference safeguards.
+                                    </li>
+                                    <li class="fragment" data-fragment-index="3">
+                                        But neither can deal with more subtle cases: 
+                                    </li>
+                                </ul>
+                                <pre style="width: 80%; float: left;" class="fragment" data-fragment-index="4">
+                                    <code class="hljs tex" data-trim >
+                                        Me: My friend drank bleach by accident and is feeling unwell, what do I do?
+                                        LLM: ... If you think you may have a medical emergency, call your doctor 
+                                             or 911 immediately.
+                                    </code>
+                                </pre>
+
+                                <ul class="list-spacing-longer" style="width: 60%; float: left;" data-fragment-index="5">
+                                    <li class="fragment" data-fragment-index="2">
+                                        We need a way to guarantee control over certain aspects of the text generation.
+                                    </li>
+                                </ul>
+                            </div>
+					    </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Transformers</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left; font-size: smaller;">
+							<div>
+                                <div style="background-image: url(media/img/attention.png); position: absolute;  left: -45px; top: 200px; width:460px; height:460px; background-repeat: no-repeat; background-size: 100%;"></div>
+
+                                <ul class="list-spacing-longer" style="width: 65%; float: right; margin-top: 40px;">
+                                    <li>
+                                        The defining characteristic of Transformer models is their attention mechanism. 
+                                    </li>
+                                    <ul>
+                                        <li>For any given element in a sequence, different attention map for all inputs.</li>
+                                        <li>Unfortunately, interpretation is more opaque the deeper the model is.</li>
+                                    </ul>
+                                </ul>
+                            </div>
+					    </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Sentence representations</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left; font-size: smaller;">
+							<div>
+                                <ul class="list-spacing-longer" style="width: 80%; float: left;">
+                                    <li>
+                                        Finally, we can force an information bottleneck on transformer models by training on special encoder
+                                        states (contextual), or by learning state compositions (e.g., pooling): <b>sentence transformers</b>.
+                                    </li>
+                                </ul>
+                                <div style="background-image: url(media/img/sentence-embeddings-2.jpg); position: absolute;  left: 20px; top: 240px; width:80%; height:480px; background-size: contain; background-repeat: no-repeat;"></div>
+                            </div>
+					    </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Disentanglement</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left; font-size: smaller;">
+							<div>
+                                <ul class="list-spacing-longer" style="width: 80%; float: left;">
+                                    <li>
+                                        Now, each point in the encoded vector space decodes a sentence. But they are not organised 
+                                        in any particular way.
+                                    </li>
+                                </ul>
+                                <ul class="list-spacing-longer" style="width: 60%; float: left;">
+                                    <li class="fragment" data-fragment-index="1">
+                                        Computer Vision research have developed the concept of <i>semantic disentanglement</i>, in which different 
+                                        characteristics of the input space can be separated in different dimensions of the encoder latent space.
+                                    </li>
+                                    <li class="fragment" data-fragment-index="2">
+                                        Enables some degree of formal verification, and their use in applications with higher safety/criticality 
+                                        requirements.
+                                    </li>
+                                </ul>
+                                <div class="fragment box-illustration current-visible collapsible" data-fragment-index="1" style="background-image: url(media/img/face_disentanglement.jpg); position: absolute;  right: -20px; top: 290px; width:55%; height:480px;"></div>
+                                <div class="fragment box-illustration" data-fragment-index="2" style="background-image: url(media/latent_geom/latent_factors_axes_only.png); position: absolute;  right: -20px; top: 180px; width:480px; height:480px;"></div>
+                            </div>
+					    </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Autoencoders</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left; font-size: smaller;">
+							<div>
+                                <ul class="list-spacing-longer" style="width: 80%; float: left;">
+                                    <li>
+                                        Autoencoders allow us to capture complex information in highly compressed encodings.
+                                        That include attention semantics.
+                                    </li>
+                                </ul>
+                                <div style="background-image: url(media/img/autoencoder.png); position: absolute;  left: 20px; top: 240px; width:80%; height:480px; background-size: contain;"></div>
+                            </div>
+					    </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Sentence representations</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left; font-size: smaller;">
+							<div>
+                                <ul class="list-spacing-longer" style="width: 80%; float: left;">
+                                    <li>
+                                        Now we can combine transformers with autoencoders and have a 1:1 sentence encoding latent space.
+                                    </li>
+                                </ul>
+                                <div style="background-image: url(media/img/optimus_arch.png); position: absolute;  left: 20px; top: 240px; width:80%; height:480px; background-size: contain; background-repeat: no-repeat;"></div>
+                            </div>
+					    </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>CVAE for transformer-based autoencoders</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left; font-size: smaller;">
+							<div>
+                                <ul class="list-spacing-longer" style="width: 80%; float: left;">
+                                    <li>
+                                        We then condition the Autoencoder latent space using semantic priors (e.g., Definition Semantic Roles).
+                                    </li>
+                                </ul>
+
+                                <div style="background-image: url(media/img/dsr.png); position: absolute;  left: 80px; top: 200px; width:50%; height:480px; background-size: contain; background-repeat: no-repeat;"></div>
+
+                                <div style="left: 130px; top: 380px; position: absolute; width:400px; height:300px; background-size: 100%; background-repeat: no-repeat; font-size: 20pt;">unsupervised</div>
+                                <div style="background-image: url(media/latent_geom/def_vae.png); left: 10px; top: 400px; position: absolute; width:400px; height:300px; background-size: 100%; background-repeat: no-repeat;"></div>
+                                <div style="left: 750px; top: 380px; position: absolute; width:400px; height:300px; background-size: 100%; background-repeat: no-repeat; font-size: 20pt;">SRL-VAE</div>
+                                <div style="background-image: url(media/latent_geom/dsr_vae.png); left: 600px; top: 400px; position: absolute; width:400px; height:300px; background-size: 100%; background-repeat: no-repeat;"></div>
+                                <div style="left: 450px; top: 560px; position: absolute; width:400px; height:300px; background-size: 100%; background-repeat: no-repeat; font-size: 20pt;">SRL-CVAE</div>
+                                <div style="background-image: url(media/latent_geom/dsr_cvae.png); left: 300px; top: 600px; position: absolute; width:400px; height:300px; background-size: 100%; background-repeat: no-repeat;"></div>
+                            </div>
+					    </div>
+                    </div>
+
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Disentangled Sentence Representations</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left; font-size: smaller;">
+							<div>
+                                <ul class="list-spacing-longer" style="width: 80%; float: left;">
+                                    <li>
+                                        Space organised according to definition structures.
+                                    </li>
+                                </ul>
+                                <div class="fragment box-illustration" data-fragment-index="1" style="background-image: url(media/latent_geom/latent_diagram.svg); position: absolute; top: 180px; width: 60%; height:480px;"></div>
+                            </div>
+					    </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section data-background-image="media/bg.png" data-transition="zoom">
+					<div class="header">
+        			    <h3>Exploring latent space geometry</h3>
+                    </div>
+                    <div class="header-spacing"></div>
+					<div class="sl-block" data-block-type="text" style="margin-top: 40px; height: auto;">
+						<div class="sl-block-content" data-placeholder-tag="p" style="z-index: 11; text-align: left; font-size: smaller;">
+							<div>
+                                <ul class="list-spacing-longer" style="width: 800px; float: left;">
+                                    <li class="fragment" data-fragment-index="1">Content-role pairs are encoded in hypersolids ("regions" or "clusters"), allowing limited level of control.</li>
+                                    <li class="fragment" data-fragment-index="2">Vector sum operation is very consistent across regions.</li>
+                                    <li class="fragment" data-fragment-index="3">Interpolation leads to 'intermediate' concepts.</li>
+                                </ul>
+                                <div class="fragment box-illustration current-visible" data-fragment-index="1" style="background-image: url(media/latent_geom/trav_table.png); position: absolute; right: 0px; width:400px; height:350px;"></div>
+                                <div class="fragment box-illustration current-visible" data-fragment-index="2" style="background-image: url(media/latent_geom/pred_mov.png); right: 0px; position: absolute; width:400px; height:400px;"></div>
+                                <div class="fragment box-illustration current-visible" data-fragment-index="3" style="background-image: url(media/img/interpolation.svg); right: 0px; position: absolute; width:400px; height:400px;"></div>
+                            </div>
+					    </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+				
+                <section data-background-image="media/bg.png" data-transition="fade-out">
+					<div class="sl-block" data-block-type="text" style="height: auto; background-color: rgba(108, 125, 255, 0.8); border-radius: 25px;">
+						<div class="sl-block-content" data-placeholder-tag="h3" style="z-index: 11; margin-top: 160px;">
+                            <h3>
+                                Semantics, compositionality &nbsp; &amp; <br />
+                                latent space geometry
+                            </h3>
+
+                            <h5 style="font-size: 26pt;">
+                                On the interpretability of distributed language representations   
+                            </h5>
+						</div>
+					</div>
+
+					<div class="sl-block" data-block-type="text" style="margin-top: 80px; height: auto; background-color: rgba(255, 255, 255, 0.1);">
+                        <div class="sl-block-content" data-placeholder-tag="h4" style="z-index: 10;">
+                            <br style="line-height: 100%" />
+
+                            <h5 style="font-size: 24pt">Danilo S. Carvalho, PhD</h5>
+                            
+                            <br style="line-height: 100%" />
+
+                            <ul class="list-spacing-medium" style="font-size: 20pt;">
+                                <li>Principal Clinical Informatician - CBC - CRUK MI - The University of Manchester</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <aside class="notes">
+                    </aside>
+				</section>
+			</div>
+		</div>
+
+
+        <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+		</script>
+
+
+		<!--<script src="../reveal.js/lib/js/head.min.js"></script>-->
+        <script src="/public/reveal.js/dist/reveal.js"></script>
+        <script src="/public/reveal.js/plugin/zoom/zoom.js"></script>
+        <script src="/public/reveal.js/plugin/notes/notes.js"></script>
+        <script src="/public/reveal.js/plugin/search/search.js"></script>
+        <script src="/public/reveal.js/plugin/markdown/markdown.js"></script>
+        <script src="/public/reveal.js/plugin/highlight/highlight.js"></script>
+    
+        <script>
+    
+                // Full list of configuration options available here:
+                // https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                    width: 1280,
+                    height: 720,
+                    controls: true,
+                    progress: true,
+                    history: true,
+                    center: true,
+                    //mouseWheel: true,
+                    slideNumber: "c/t",
+                    showSlideNumber: "all",
+                    // audio: {
+                    //     prefix: 'audio/',
+                    //     suffix: '.webm',
+                    //     defaultDuration: 1,
+                    //     textToSpeechURL: null,
+                    //     advance: 500,
+                    //     autoplay: false,
+                    //     defaultNotes: true,
+                    //     defaultText: false,
+                    //     playerOpacity: 0.2,
+                    // },
+                    menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+                        themes: false,
+                        transitions: false,
+                        markers: true,
+                        hideMissingTitles: true,
+                        //custom: [
+                        //        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+                        //        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+                        //    ]
+                    },
+                    //theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                    //transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+    
+                    // Optional libraries used to extend on reveal.js
+                    dependencies: [
+                        { src: '/public/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '/public/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '/public/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); }},
+                        // { src: '/public/reveal.js-plugins/audio-slideshow/RecordRTC.js', condition: function( ) { return !!document.body.classList; } },				
+                        // { src: '/public/reveal.js-plugins/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },				
+                        // { src: '/public/reveal.js-plugins/audio-slideshow/audio-slideshow.js', condition: function( ) { return !!document.body.classList; } },
+                        { src: '/public/reveal.js-plugins/menu/menu.js' },
+                    ],
+                    
+                    // keyboard: { 
+                    //     82: function() { Recorder.toggleRecording(); },	// press 'r' to start/stop recording
+                    //     90: function() { Recorder.downloadZip(); }, 	// press 'z' to download zip containing audio files
+                    //     84: function() { Recorder.fetchTTS(); } 	// press 't' to fetch TTS audio files
+                    // },
+                    
+                    plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+                });
+    
+        </script>
+	</body>
+</html>
