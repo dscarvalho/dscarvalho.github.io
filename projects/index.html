@@ -146,14 +146,14 @@
       
     
 
-    <!--<a class="sidebar-nav-item" href="/archive/v1.2.0.zip">Download</a>
+    <!--<a class="sidebar-nav-item" href="/archive/v1.2.2.zip">Download</a>
     <a class="sidebar-nav-item" href="">GitHub project</a>-->
-    <span class="sidebar-nav-item">Currently v1.2.0</span>
+    <span class="sidebar-nav-item">Currently v1.2.2</span>
   </nav>
 
   <div class="sidebar-item">
     <p>
-      &copy; 2024. All rights reserved.
+      &copy; 2025. All rights reserved.
     </p>
   </div>
 </div>
@@ -174,7 +174,37 @@
       <div class="container content">
         <div class="page">
   <h1 class="page-title">Projects</h1>
-  <h2 id="term-definition-vectors-tdv"><u id="TDV">Term Definition Vectors (TDV)</u></h2>
+  <h2 id="langvae-amp-langspace"><u id="LangVAE">LangVAE &amp; LangSpace</u></h2>
+
+<p>LangVAE is a Python library for training and running language models using Variational Autoencoders (VAEs). It provides an easy-to-use interface to train VAEs on text data, allowing users to customize the model architecture, loss function, and training parameters.<br /> 
+LangSpace is a Python library for evaluating and probing language models using Variational Autoencoders (VAEs). It provides an easy-to-use interface to perform a variety of analises on pretrained LangVAE models.</p>
+
+<p><strong>Project repos</strong>: <a href="https://github.com/neuro-symbolic-ai/LangVAE">https://github.com/neuro-symbolic-ai/LangVAE</a>, <a href="https://github.com/neuro-symbolic-ai/LangSpace">https://github.com/neuro-symbolic-ai/LangSpace</a></p>
+
+<p><strong>Related publications</strong>:</p>
+<ul>
+  <li>Danilo S. Carvalho, Yingji Zhang, Harriet Unsworth, André Freitas. <em><a href="https://arxiv.org/pdf/2505.00004">LangVAE and LangSpace: Building and Probing for Language Model VAEs</a></em></li>
+</ul>
+
+<hr />
+
+<h2 id="saf-datasets"><u id="SAF-Datasets">SAF-Datasets</u></h2>
+
+<p>The Simple Annotation Framework (SAF) is a lightweight Python library for annotating text data. It provides a simple and flexible way to create, manipulate, and export annotations in various formats. It’s minimalistic data model is flexible enough to be used by most types of linguistic annotation, and can store other types of data associated to the language items (e.g., statistics, data sources, schemas, etc.)</p>
+
+<p><strong>Project repo</strong>: <a href="https://github.com/neuro-symbolic-ai/saf_datasets">https://github.com/neuro-symbolic-ai/saf_datasets</a></p>
+
+<hr />
+
+<h2 id="saf"><u id="SAF">SAF</u></h2>
+
+<p>The saf-datasets library provides easy access to Natural Language Processing (NLP) datasets, and tools to facilitate annotation at document, sentence and token levels. It is built upon the Simple Annotation Framework (SAF) library, which provides its data model and API.</p>
+
+<p><strong>Project repo</strong>: <a href="https://github.com/dscarvalho/saf">https://github.com/dscarvalho/saf</a></p>
+
+<hr />
+
+<h2 id="term-definition-vectors-tdv"><u id="TDV">Term Definition Vectors (TDV)</u></h2>
 
 <p>TDV is a <i>high dimensional, sparse</i> vector representation of lexical items (terms) ranging from morphemes to phrases, based on the definitions of their meanings as presented in <a href="https://www.wiktionary.org/">Wiktionary</a>. It contrasts with distributional representation methods, such as <a href="https://code.google.com/archive/p/word2vec/">word2vec</a> and <a href="https://github.com/stanfordnlp/GloVe/">GloVe</a>, which define term meanings from their usage patterns (context windows). Compared to distributional methods, TDV performs better at semantic similarity computation, where the former perform better at semantic relatedness. It provides interesting features for Natural Language Processing, such as sense polarity between terms, multi-language representation, and the ability to disambiguate senses using Part of Speech (POS) information.</p>
 
