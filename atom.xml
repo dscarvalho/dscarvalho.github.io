@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Danilo S. Carvalho, Ph.D.</title>
- <link href="https://danilosc.com/atom.xml" rel="self"/>
- <link href="https://danilosc.com/"/>
- <updated>2023-02-22T14:19:03+00:00</updated>
- <id>https://danilosc.com</id>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2026-04-15T18:07:46+01:00</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name>Danilo S. Carvalho</name>
    <email></email>
